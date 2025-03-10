@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
@@ -75,6 +75,84 @@ const techUrls = {
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   
+  const skillCards = useMemo(() => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <SkillCard 
+        title="AI Integration" 
+        icon={<div className="w-6 h-6 bg-blue-500 rounded-full"></div>}
+        color="bg-blue-900/30"
+        id="ai-integration"
+      >
+        <p className="mb-4">Implementing cutting-edge AI solutions to enhance business operations and creative workflows.</p>
+        <div className="flex flex-wrap">
+          <TechChip label="ChatGPT" url={techUrls["ChatGPT"]} />
+          <TechChip label="Anthropic" url={techUrls["Anthropic"]} />
+          <TechChip label="Gemini" url={techUrls["Gemini"]} />
+          <TechChip label="NVIDIA" url={techUrls["NVIDIA"]} />
+          <TechChip label="Runway ML" url={techUrls["Runway ML"]} />
+        </div>
+      </SkillCard>
+      
+      <SkillCard 
+        title="Sales Leadership" 
+        icon={<div className="w-6 h-6 bg-green-500 rounded-full"></div>}
+        color="bg-green-900/30"
+        id="sales-leadership"
+      >
+        <p className="mb-4">Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.</p>
+        <div className="flex flex-wrap">
+          <TechChip label="Projects with Tony Robbins" url={techUrls["Projects with Tony Robbins"]} />
+          <TechChip label="Projects with Jordan Belfort" url={techUrls["Projects with Jordan Belfort"]} />
+          <TechChip label="AI-powered CRM Systems" url={techUrls["AI-powered CRM Systems"]} />
+        </div>
+      </SkillCard>
+      
+      <SkillCard 
+        title="Video Production" 
+        icon={<div className="w-6 h-6 bg-yellow-500 rounded-full"></div>}
+        color="bg-yellow-900/30"
+        id="video-production"
+      >
+        <p className="mb-4">Professional video production services from concept to completion with industry-leading tools.</p>
+        <div className="flex flex-wrap">
+          <TechChip label="DaVinci Resolve" url={techUrls["DaVinci Resolve"]} />
+          <TechChip label="FCP X" url={techUrls["FCP X"]} />
+          <TechChip label="RED" url={techUrls["RED"]} />
+          <TechChip label="ARRI" url={techUrls["ARRI"]} />
+          <TechChip label="4k & 8k workflows" url={techUrls["4k & 8k workflows"]} />
+        </div>
+      </SkillCard>
+      
+      <SkillCard 
+        title="Technical Expertise" 
+        icon={<div className="w-6 h-6 bg-red-500 rounded-full"></div>}
+        color="bg-red-900/30"
+        id="technical-expertise"
+      >
+        <p className="mb-4">Comprehensive technical understanding and implementation of complex systems and workflows.</p>
+        <div className="flex flex-wrap">
+          <TechChip label="Apple Certified T3 Trainer" url={techUrls["Apple Certified T3 Trainer"]} />
+          <TechChip label="System Integration" url={techUrls["System Integration"]} />
+          <TechChip label="Technical Training" url={techUrls["Technical Training"]} />
+        </div>
+      </SkillCard>
+    </div>
+  ), []);
+  
+  const videoCards = useMemo(() => (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {videoData.map((video) => (
+        <VideoCard
+          key={video.id}
+          title={video.title}
+          description={video.description}
+          thumbnail={video.thumbnail}
+          videoUrl={video.videoUrl}
+        />
+      ))}
+    </div>
+  ), []);
+  
   useEffect(() => {
     setIsLoaded(true);
     
@@ -88,6 +166,8 @@ const Index = () => {
       }
     }, 500);
   }, []);
+
+  const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
 
   return (
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
@@ -104,11 +184,11 @@ const Index = () => {
               Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
             </p>
             <div className="flex flex-wrap justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <Link to="/portfolio" className="btn-primary">
-                View Portfolio
+              <Link to="/portfolio" className={buttonStyle}>
+                View Full Portfolio
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <a href="#featured-work" className="btn-outline">
+              <a href="#featured-work" className="px-6 py-3 rounded-full border border-blue-500 text-blue-500 hover:bg-blue-500/10 font-medium transition-all duration-300 flex items-center">
                 Featured Work
               </a>
             </div>
@@ -142,67 +222,7 @@ const Index = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto">Delivering exceptional results across multiple disciplines</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <SkillCard 
-              title="AI Integration" 
-              icon={<div className="w-6 h-6 bg-blue-500 rounded-full"></div>}
-              color="bg-blue-900/30"
-              id="ai-integration"
-            >
-              <p className="mb-4">Implementing cutting-edge AI solutions to enhance business operations and creative workflows.</p>
-              <div className="flex flex-wrap">
-                <TechChip label="ChatGPT" url={techUrls["ChatGPT"]} />
-                <TechChip label="Anthropic" url={techUrls["Anthropic"]} />
-                <TechChip label="Gemini" url={techUrls["Gemini"]} />
-                <TechChip label="NVIDIA" url={techUrls["NVIDIA"]} />
-                <TechChip label="Runway ML" url={techUrls["Runway ML"]} />
-              </div>
-            </SkillCard>
-            
-            <SkillCard 
-              title="Sales Leadership" 
-              icon={<div className="w-6 h-6 bg-green-500 rounded-full"></div>}
-              color="bg-green-900/30"
-              id="sales-leadership"
-            >
-              <p className="mb-4">Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.</p>
-              <div className="flex flex-wrap">
-                <TechChip label="Projects with Tony Robbins" url={techUrls["Projects with Tony Robbins"]} />
-                <TechChip label="Projects with Jordan Belfort" url={techUrls["Projects with Jordan Belfort"]} />
-                <TechChip label="AI-powered CRM Systems" url={techUrls["AI-powered CRM Systems"]} />
-              </div>
-            </SkillCard>
-            
-            <SkillCard 
-              title="Video Production" 
-              icon={<div className="w-6 h-6 bg-yellow-500 rounded-full"></div>}
-              color="bg-yellow-900/30"
-              id="video-production"
-            >
-              <p className="mb-4">Professional video production services from concept to completion with industry-leading tools.</p>
-              <div className="flex flex-wrap">
-                <TechChip label="DaVinci Resolve" url={techUrls["DaVinci Resolve"]} />
-                <TechChip label="FCP X" url={techUrls["FCP X"]} />
-                <TechChip label="RED" url={techUrls["RED"]} />
-                <TechChip label="ARRI" url={techUrls["ARRI"]} />
-                <TechChip label="4k & 8k workflows" url={techUrls["4k & 8k workflows"]} />
-              </div>
-            </SkillCard>
-            
-            <SkillCard 
-              title="Technical Expertise" 
-              icon={<div className="w-6 h-6 bg-red-500 rounded-full"></div>}
-              color="bg-red-900/30"
-              id="technical-expertise"
-            >
-              <p className="mb-4">Comprehensive technical understanding and implementation of complex systems and workflows.</p>
-              <div className="flex flex-wrap">
-                <TechChip label="Apple Certified T3 Trainer" url={techUrls["Apple Certified T3 Trainer"]} />
-                <TechChip label="System Integration" url={techUrls["System Integration"]} />
-                <TechChip label="Technical Training" url={techUrls["Technical Training"]} />
-              </div>
-            </SkillCard>
-          </div>
+          {skillCards}
         </div>
       </section>
       
@@ -222,20 +242,10 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {videoData.map((video) => (
-              <VideoCard
-                key={video.id}
-                title={video.title}
-                description={video.description}
-                thumbnail={video.thumbnail}
-                videoUrl={video.videoUrl}
-              />
-            ))}
-          </div>
+          {videoCards}
           
           <div className="text-center mt-12">
-            <Link to="/portfolio" className="btn-outline">
+            <Link to="/portfolio" className={buttonStyle}>
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -264,8 +274,8 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-12">
-            <Link to="/contact" className="btn-primary">
-              Request a Demo
+            <Link to="/contact" className={buttonStyle}>
+              Request an A.I. Demo
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
