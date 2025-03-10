@@ -26,7 +26,7 @@ const ParticleBackground = () => {
         x: Math.random() * 100,
         y: Math.random() * 100,
         size: Math.random() * 60 + 20,
-        opacity: Math.random() * 0.07 + 0.03,
+        opacity: (Math.random() * 0.07 + 0.03) / 2,
         delay: Math.random() * 5,
         speedX: (Math.random() - 0.5) * 0.08,
         speedY: (Math.random() - 0.5) * 0.08,
