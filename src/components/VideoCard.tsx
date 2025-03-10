@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { Play } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Play, Image as ImageIcon } from 'lucide-react';
 
 interface VideoCardProps {
   title: string;
@@ -11,6 +11,16 @@ interface VideoCardProps {
 
 const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    // Preload image
+    const img = new Image();
+    img.src = thumbnail;
+    img.onload = () => setImageLoaded(true);
+    img.onerror = () => setImageError(true);
+  }, [thumbnail]);
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -30,13 +40,22 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
           />
         </div>
       ) : (
-        <div className="relative w-full h-0 pb-[56.25%] overflow-hidden">
-          <img 
-            src={thumbnail} 
-            alt={title} 
-            className="absolute top-0 left-0 w-full h-full object-cover"
-            loading="lazy"
-          />
+        <div className="relative w-full h-0 pb-[56.25%] overflow-hidden bg-background/30 rounded-2xl">
+          {imageError ? (
+            <div className="absolute inset-0 flex items-center justify-center bg-muted">
+              <ImageIcon className="h-12 w-12 text-muted-foreground" />
+              <span className="sr-only">Thumbnail unavailable</span>
+            </div>
+          ) : (
+            <img 
+              src={thumbnail} 
+              alt={title} 
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              loading="lazy"
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageError(true)}
+            />
+          )}
           <div className="video-card-overlay" />
           <button 
             onClick={handlePlay} 
