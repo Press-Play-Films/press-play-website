@@ -52,13 +52,13 @@ const aiTools = [
     name: "Anthropic", 
     description: "Constitutional AI for safe and ethical artificial intelligence solutions",
     website: "https://www.anthropic.com/",
-    icon: "https://seeklogo.com/images/A/anthropic-logo-9882E29032-seeklogo.com.png"
+    icon: "/lovable-uploads/eb92b588-faee-43c8-b765-6cb751d64c98.png"
   },
   { 
-    name: "Google Gemini", 
+    name: "Google AI Studio", 
     description: "Multimodal AI for advanced reasoning and problem-solving",
-    website: "https://deepmind.google/technologies/gemini/",
-    icon: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini_1.max-1200x1200.png"
+    website: "https://aistudio.google.com/",
+    icon: "/lovable-uploads/505f1125-ecb4-45a9-8f33-1ccb4a587c34.png"
   },
   { 
     name: "NVIDIA AI", 
