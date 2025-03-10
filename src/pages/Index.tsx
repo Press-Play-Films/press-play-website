@@ -42,12 +42,42 @@ const videoData = [
 ];
 
 const aiTools = [
-  { name: "ChatGPT", description: "Advanced language model integration for natural conversations and content generation" },
-  { name: "Anthropic", description: "Constitutional AI for safe and ethical artificial intelligence solutions" },
-  { name: "Google Gemini", description: "Multimodal AI for advanced reasoning and problem-solving" },
-  { name: "NVIDIA AI", description: "GPU-accelerated AI solutions for high-performance computing" },
-  { name: "Runway ML", description: "Creative AI tools for video and content generation" },
-  { name: "DALL-E", description: "AI image generation for creative and commercial applications" },
+  { 
+    name: "ChatGPT", 
+    description: "Advanced language model integration for natural conversations and content generation",
+    website: "https://chat.openai.com/",
+    icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+  },
+  { 
+    name: "Anthropic", 
+    description: "Constitutional AI for safe and ethical artificial intelligence solutions",
+    website: "https://www.anthropic.com/",
+    icon: "https://seeklogo.com/images/A/anthropic-logo-9882E29032-seeklogo.com.png"
+  },
+  { 
+    name: "Google Gemini", 
+    description: "Multimodal AI for advanced reasoning and problem-solving",
+    website: "https://deepmind.google/technologies/gemini/",
+    icon: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini_1.max-1200x1200.png"
+  },
+  { 
+    name: "NVIDIA AI", 
+    description: "GPU-accelerated AI solutions for high-performance computing",
+    website: "https://www.nvidia.com/en-us/ai/",
+    icon: "https://cdn.icon-icons.com/icons2/2699/PNG/512/nvidia_logo_icon_169902.png"
+  },
+  { 
+    name: "Runway ML", 
+    description: "Creative AI tools for video and content generation",
+    website: "https://runwayml.com/",
+    icon: "https://getlogovector.com/wp-content/uploads/2021/08/runway-ml-logo-vector.png"
+  },
+  { 
+    name: "DALL-E", 
+    description: "AI image generation for creative and commercial applications",
+    website: "https://openai.com/dall-e-3",
+    icon: "https://seeklogo.com/images/D/dall-e-logo-1104E7A45A-seeklogo.com.png"
+  },
 ];
 
 const techUrls = {
@@ -269,6 +299,8 @@ const Index = () => {
                 key={index}
                 name={tool.name}
                 description={tool.description}
+                icon={tool.icon}
+                website={tool.website}
               />
             ))}
           </div>
