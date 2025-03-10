@@ -45,20 +45,6 @@ const CoreCompetenciesSection = () => {
       </SkillCard>
       
       <SkillCard 
-        title="Sales Leadership" 
-        icon={<div className="w-6 h-6 bg-green-500 rounded-full"></div>}
-        color="bg-green-900/30"
-        id="sales-leadership"
-      >
-        <p className="mb-4">Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.</p>
-        <div className="flex flex-wrap">
-          <TechChip label="Projects with Tony Robbins" url={techUrls["Projects with Tony Robbins"]} />
-          <TechChip label="Projects with Jordan Belfort" url={techUrls["Projects with Jordan Belfort"]} />
-          <TechChip label="AI-powered CRM Systems" url={techUrls["AI-powered CRM Systems"]} />
-        </div>
-      </SkillCard>
-      
-      <SkillCard 
         title="Video Production" 
         icon={<div className="w-6 h-6 bg-yellow-500 rounded-full"></div>}
         color="bg-yellow-900/30"
@@ -85,6 +71,20 @@ const CoreCompetenciesSection = () => {
           <TechChip label="Apple Certified T3 Trainer" url={techUrls["Apple Certified T3 Trainer"]} />
           <TechChip label="System Integration" url={techUrls["System Integration"]} />
           <TechChip label="Technical Training" url={techUrls["Technical Training"]} />
+        </div>
+      </SkillCard>
+      
+      <SkillCard 
+        title="Sales Leadership" 
+        icon={<div className="w-6 h-6 bg-green-500 rounded-full"></div>}
+        color="bg-green-900/30"
+        id="sales-leadership"
+      >
+        <p className="mb-4">Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.</p>
+        <div className="flex flex-wrap">
+          <TechChip label="Projects with Tony Robbins" url={techUrls["Projects with Tony Robbins"]} />
+          <TechChip label="Projects with Jordan Belfort" url={techUrls["Projects with Jordan Belfort"]} />
+          <TechChip label="AI-powered CRM Systems" url={techUrls["AI-powered CRM Systems"]} />
         </div>
       </SkillCard>
     </div>

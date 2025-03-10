@@ -38,8 +38,8 @@ const Index = () => {
       <CoreCompetenciesSection />
       <FeaturedProjectsSection />
       <AIIntegrationSection />
-      <SalesLeadershipSection />
       <FeatureFilmSection />
+      <SalesLeadershipSection />
       
       <Footer />
     </div>
