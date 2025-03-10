@@ -19,7 +19,7 @@ const HeroSection = () => {
       });
     }, 20);
 
-    // Start fade out after 2 seconds
+    // Start fade out after 3 seconds (increased from 2 seconds)
     const fadeTimeout = setTimeout(() => {
       const fadeOutInterval = setInterval(() => {
         setGlowIntensity(prev => {
@@ -32,7 +32,7 @@ const HeroSection = () => {
       }, 30);
       
       return () => clearInterval(fadeOutInterval);
-    }, 2000);
+    }, 3000); // Changed from 2000 to 3000 ms (1 second longer)
 
     return () => {
       clearInterval(buildUpInterval);

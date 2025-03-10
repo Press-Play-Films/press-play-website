@@ -30,7 +30,7 @@ const Header = () => {
             to="/" 
             className="text-2xl font-medium text-white hover:opacity-80 transition-opacity"
           >
-            Press Play
+            Andrew Freeman
           </Link>
 
           {isMobile ? (
@@ -52,7 +52,7 @@ const Header = () => {
                         className="text-2xl font-medium text-white"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Press Play
+                        Andrew Freeman
                       </Link>
                       <button 
                         onClick={() => setMobileMenuOpen(false)}
