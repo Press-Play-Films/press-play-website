@@ -14,57 +14,79 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  // Extract video ID from various Vimeo URL formats
+  const getVimeoId = (url: string): string | null => {
+    if (!url) return null;
+    
+    // Handle different Vimeo URL formats
+    const patterns = [
+      /vimeo\.com\/(\d+)/,                                // vimeo.com/123456789
+      /player\.vimeo\.com\/video\/(\d+)/,                 // player.vimeo.com/video/123456789
+      /vimeo\.com\/channels\/[a-zA-Z0-9]+\/(\d+)/,        // vimeo.com/channels/staffpicks/123456789
+      /vimeo\.com\/video\/(\d+)/                          // vimeo.com/video/123456789
+    ];
+    
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+    
+    return null;
+  };
+  
+  // Get the Vimeo video ID
+  const vimeoId = getVimeoId(videoUrl);
+  
+  // Generate thumbnail URL from Vimeo video ID
+  const generateThumbnailUrl = (): string => {
+    if (vimeoId) {
+      // Use vumbnail.com as the primary thumbnail source for Vimeo videos
+      return `https://vumbnail.com/${vimeoId}.jpg`;
+    }
+    return thumbnail;
+  };
+
+  const effectiveThumbnail = generateThumbnailUrl();
+
   useEffect(() => {
     // Reset states when thumbnail changes
     setImageLoaded(false);
     setImageError(false);
     
-    // Preload image
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = thumbnail;
-    
-    img.onload = () => {
-      console.log(`Successfully loaded thumbnail: ${thumbnail}`);
-      setImageLoaded(true);
-    };
-    
-    img.onerror = (e) => {
-      console.error(`Failed to load thumbnail: ${thumbnail}`, e);
+    // Preload image only if we have a thumbnail
+    if (effectiveThumbnail) {
+      const img = new Image();
+      img.src = effectiveThumbnail;
+      
+      img.onload = () => {
+        console.log(`Successfully loaded thumbnail: ${effectiveThumbnail}`);
+        setImageLoaded(true);
+      };
+      
+      img.onerror = (e) => {
+        console.error(`Failed to load thumbnail: ${effectiveThumbnail}`, e);
+        setImageError(true);
+      };
+      
+      // Log for debugging
+      console.log(`Attempting to load thumbnail: ${effectiveThumbnail}`);
+      
+      return () => {
+        // Cancel image loading on unmount
+        img.onload = null;
+        img.onerror = null;
+      };
+    } else {
+      // No thumbnail available
       setImageError(true);
-    };
-    
-    // Log for debugging
-    console.log(`Attempting to load thumbnail: ${thumbnail}`);
-    
-    return () => {
-      // Cancel image loading on unmount
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [thumbnail]);
+    }
+  }, [effectiveThumbnail]);
 
   const handlePlay = () => {
     setIsPlaying(true);
   };
-
-  // Extract video ID from Vimeo URL for direct thumbnail access
-  const getVimeoThumbnail = () => {
-    try {
-      // Try to extract the Vimeo ID from the URL
-      const match = videoUrl.match(/(?:vimeo\.com\/(?:video\/)?|player\.vimeo\.com\/video\/)(\d+)/);
-      if (match && match[1]) {
-        return `https://vumbnail.com/${match[1]}.jpg`;
-      }
-      return thumbnail;
-    } catch (error) {
-      console.error("Error getting Vimeo thumbnail:", error);
-      return thumbnail;
-    }
-  };
-
-  // Use Vimeo thumbnail service or fallback to provided thumbnail
-  const effectiveThumbnail = getVimeoThumbnail();
 
   return (
     <div className="video-card animate-fade-in">
@@ -91,15 +113,16 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
               <div className={`absolute inset-0 flex items-center justify-center bg-muted/50 ${imageLoaded ? 'hidden' : 'block'}`}>
                 <ImageIcon className="h-8 w-8 text-muted-foreground/50 animate-pulse" />
               </div>
-              <img 
-                src={effectiveThumbnail} 
-                alt={title} 
-                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                loading="lazy"
-                onLoad={() => setImageLoaded(true)}
-                onError={() => setImageError(true)}
-                crossOrigin="anonymous"
-              />
+              {effectiveThumbnail && (
+                <img 
+                  src={effectiveThumbnail} 
+                  alt={title} 
+                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  loading="lazy"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageError(true)}
+                />
+              )}
             </>
           )}
           <div className="video-card-overlay absolute inset-0 bg-black/30 transition-opacity hover:opacity-60 opacity-40" />
