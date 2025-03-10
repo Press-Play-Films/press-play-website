@@ -42,7 +42,7 @@ const HeroSection = () => {
   
   return (
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
-      <div className="container px-6 relative z-10">
+      <div className="container px-6 relative" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
           <h1 
             className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in relative inline-block"

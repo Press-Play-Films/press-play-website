@@ -31,17 +31,19 @@ const Index = () => {
   return (
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
       <ParticleBackground />
-      <Header />
-      
-      <HeroSection />
-      <NavigationTabs />
-      <CoreCompetenciesSection />
-      <FeaturedProjectsSection />
-      <AIIntegrationSection />
-      <FeatureFilmSection />
-      <SalesLeadershipSection />
-      
-      <Footer />
+      <div className="relative z-10"> {/* Add wrapper div with higher z-index */}
+        <Header />
+        
+        <HeroSection />
+        <NavigationTabs />
+        <CoreCompetenciesSection />
+        <FeaturedProjectsSection />
+        <AIIntegrationSection />
+        <FeatureFilmSection />
+        <SalesLeadershipSection />
+        
+        <Footer />
+      </div>
     </div>
   );
 };

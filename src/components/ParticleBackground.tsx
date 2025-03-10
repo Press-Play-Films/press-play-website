@@ -26,7 +26,7 @@ const ParticleBackground = () => {
         x: Math.random() * 100,
         y: Math.random() * 100,
         size: Math.random() * 60 + 20,
-        opacity: (Math.random() * 0.07 + 0.03) / 2,
+        opacity: (Math.random() * 0.07 + 0.03) / 4,
         delay: Math.random() * 5,
         speedX: (Math.random() - 0.5) * 0.08,
         speedY: (Math.random() - 0.5) * 0.08,
@@ -130,7 +130,7 @@ const ParticleBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
+    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
       {/* Particles */}
       {particles.map((particle) => (
         <div
@@ -147,6 +147,7 @@ const ParticleBackground = () => {
             transition: 'opacity 0.5s ease',
             animation: `pulse ${8 + particle.delay}s ease-in-out infinite`,
             animationDelay: `${particle.delay}s`,
+            zIndex: 1,
           }}
         />
       ))}
@@ -164,6 +165,7 @@ const ParticleBackground = () => {
             transition: 'opacity 0.5s ease',
             animation: `pulse 3s ease-in-out infinite`,
             animationDelay: `${star.delay}s`,
+            zIndex: 0,
           }}
         />
       ))}
