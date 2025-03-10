@@ -28,9 +28,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link 
             to="/" 
-            className="text-xl font-medium text-white hover:opacity-80 transition-opacity"
+            className="text-2xl font-medium text-white hover:opacity-80 transition-opacity"
           >
-            Andrew Freeman
+            Press Play
           </Link>
 
           {isMobile ? (
@@ -49,10 +49,10 @@ const Header = () => {
                     <div className="flex justify-between items-center py-4">
                       <Link 
                         to="/" 
-                        className="text-xl font-medium text-white"
+                        className="text-2xl font-medium text-white"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Andrew Freeman
+                        Press Play
                       </Link>
                       <button 
                         onClick={() => setMobileMenuOpen(false)}
