@@ -1,5 +1,6 @@
+
 import { useEffect, useState, useMemo } from 'react';
-import { ArrowRight, Play, Mail, Phone, MapPin } from 'lucide-react';
+import { ArrowRight, Play, Mail, Phone, MapPin, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -446,14 +447,24 @@ const Index = () => {
                   ) : (
                     <div className="mt-8">
                       <h3 className="text-xl font-semibold mb-4">Get Access to the Full Film</h3>
-                      <div className="w-full aspect-video bg-black/50 rounded-xl flex flex-col items-center justify-center">
-                        <div className="w-20 h-20 mb-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                          <Play className="h-8 w-8 text-white" />
+                      <div className="w-full aspect-video bg-black/50 rounded-xl flex flex-col items-center justify-center relative overflow-hidden group">
+                        {/* Added film thumbnail image */}
+                        <img 
+                          src="https://i.vimeocdn.com/video/483630693-12de2fceab8963d08e60639e00d892d7d4c5d8aa768daa67f37562d22bd717bf-d_640" 
+                          alt="A Different Corner - Full Feature Film" 
+                          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity"
+                        />
+                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
+                        
+                        <div className="relative z-10 flex flex-col items-center">
+                          <div className="w-20 h-20 mb-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                            <Film className="h-8 w-8 text-white" />
+                          </div>
+                          <h3 className="text-xl font-medium mb-2 text-white">Sign up for full access</h3>
+                          <p className="text-white/80 text-center max-w-xs">
+                            Fill out the contact form below to get exclusive access to the full feature film
+                          </p>
                         </div>
-                        <h3 className="text-xl font-medium mb-2">Sign up for full access</h3>
-                        <p className="text-muted-foreground text-center max-w-xs">
-                          Fill out the contact form below to get exclusive access to the full feature film
-                        </p>
                       </div>
                     </div>
                   )}
