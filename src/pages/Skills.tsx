@@ -75,6 +75,34 @@ const aiTools = [
   }
 ];
 
+// Add personality cards for the Sales Leadership section
+const salesLeaders = [
+  {
+    name: "Tony Robbins",
+    description: "Collaboration on strategic sales initiatives and performance coaching programs",
+    website: "https://www.tonyrobbins.com/",
+    icon: "/lovable-uploads/d692a2c6-2ad2-4e20-ae0d-b32fed6d7c15.png"
+  },
+  {
+    name: "Jordan Belfort",
+    description: "Implementation of the Straight Line Persuasion System for sales teams",
+    website: "https://jordanbelfort.com/",
+    icon: "https://jordanbelfort.com/wp-content/uploads/2021/10/website-logo-x1.png"
+  },
+  {
+    name: "Joe Verde",
+    description: "Automotive sales training programs and dealership management systems",
+    website: "https://www.joeverde.com/",
+    icon: "https://www.joeverde.com/assets/site-images/logo-menu.png"
+  },
+  {
+    name: "Tom Hopkins",
+    description: "Building Champions sales methodology and training implementation",
+    website: "https://www.tomhopkins.com/",
+    icon: "https://www.tomhopkins.com/wp-content/uploads/2020/11/cropped-tom-hopkins-logo.png"
+  }
+];
+
 const Skills = () => {
   return (
     <div className="min-h-screen">
@@ -138,6 +166,19 @@ const Skills = () => {
                   Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.
                 </p>
               </div>
+            </div>
+            
+            {/* Add Sales Leaders Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {salesLeaders.map((leader, index) => (
+                <AIToolCard
+                  key={index}
+                  name={leader.name}
+                  description={leader.description}
+                  icon={leader.icon}
+                  website={leader.website}
+                />
+              ))}
             </div>
             
             <div className="space-y-10">
