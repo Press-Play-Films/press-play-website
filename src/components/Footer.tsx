@@ -24,6 +24,9 @@ const Footer = () => {
         <p className="text-muted-foreground">
           © {currentYear} Andrew Freeman. All rights reserved.
         </p>
+        <p className="text-xs text-muted-foreground mt-2">
+          Coming soon to <span className="text-primary">pressp.vip</span>
+        </p>
       </div>
     </footer>
   );

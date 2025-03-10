@@ -1,7 +1,7 @@
-
 import { useEffect, useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import ParticleBackground from '@/components/ParticleBackground';
 import Header from '@/components/Header';
 import VideoCard from '@/components/VideoCard';
@@ -85,8 +85,28 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Skills Navigation */}
+      <section className="py-8 relative">
+        <div className="container px-6 relative z-10">
+          <div className="flex flex-wrap justify-center gap-4">
+            <HashLink smooth to="#ai-integration" className="px-4 py-2 rounded-full bg-blue-900/30 hover:bg-blue-500/30 transition-colors">
+              AI Integration
+            </HashLink>
+            <HashLink smooth to="#sales-leadership" className="px-4 py-2 rounded-full bg-green-900/30 hover:bg-green-500/30 transition-colors">
+              Sales Leadership
+            </HashLink>
+            <HashLink smooth to="#video-production" className="px-4 py-2 rounded-full bg-yellow-900/30 hover:bg-yellow-500/30 transition-colors">
+              Video Production
+            </HashLink>
+            <HashLink smooth to="#technical-expertise" className="px-4 py-2 rounded-full bg-red-900/30 hover:bg-red-500/30 transition-colors">
+              Technical Expertise
+            </HashLink>
+          </div>
+        </div>
+      </section>
+      
       {/* Skills Section */}
-      <section className="py-20 relative">
+      <section className="py-20 relative" id="skills">
         <div className="container px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Core Competencies</h2>
@@ -98,6 +118,7 @@ const Index = () => {
               title="AI Integration" 
               icon={<div className="w-6 h-6 bg-blue-500 rounded-full"></div>}
               color="bg-blue-900/30"
+              id="ai-integration"
             >
               <p className="mb-4">Implementing cutting-edge AI solutions to enhance business operations and creative workflows.</p>
               <div className="flex flex-wrap">
@@ -113,6 +134,7 @@ const Index = () => {
               title="Sales Leadership" 
               icon={<div className="w-6 h-6 bg-green-500 rounded-full"></div>}
               color="bg-green-900/30"
+              id="sales-leadership"
             >
               <p className="mb-4">Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.</p>
               <div className="flex flex-wrap">
@@ -126,6 +148,7 @@ const Index = () => {
               title="Video Production" 
               icon={<div className="w-6 h-6 bg-yellow-500 rounded-full"></div>}
               color="bg-yellow-900/30"
+              id="video-production"
             >
               <p className="mb-4">Professional video production services from concept to completion with industry-leading tools.</p>
               <div className="flex flex-wrap">
@@ -141,6 +164,7 @@ const Index = () => {
               title="Technical Expertise" 
               icon={<div className="w-6 h-6 bg-red-500 rounded-full"></div>}
               color="bg-red-900/30"
+              id="technical-expertise"
             >
               <p className="mb-4">Comprehensive technical understanding and implementation of complex systems and workflows.</p>
               <div className="flex flex-wrap">
