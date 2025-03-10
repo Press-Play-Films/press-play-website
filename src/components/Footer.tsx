@@ -18,6 +18,9 @@ const Footer = () => {
             <Linkedin size={24} />
           </a>
         </div>
+        <p className="text-muted-foreground mb-2">
+          Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
+        </p>
         <p className="text-muted-foreground">
           © {currentYear} Andrew Freeman. All rights reserved.
         </p>

@@ -17,7 +17,7 @@ const Contact = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Contact Me</h1>
             <p className="text-xl text-muted-foreground animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              Let's discuss how I can help you integrate AI into your business or create exceptional video content
+              Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           className="hover:text-primary transition-colors"
                         >
-                          Andrew Freeman
+                          Andrew Freeman - AI Integration & Video Production Specialist
                         </a>
                       </p>
                     </div>
