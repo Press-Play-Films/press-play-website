@@ -91,7 +91,7 @@ const salesLeaders = [
     name: "Jordan Belfort",
     description: "Implementation of the Straight Line Persuasion System for sales teams",
     website: "https://jordanbelfort.com/",
-    icon: "/lovable-uploads/411fbe05-780a-4dc9-8d41-2d6b55d7119d.png"
+    icon: "/lovable-uploads/5f3d2a9c-6e9c-4361-bb77-58ee71e41cbb.png"
   }
 ];
 

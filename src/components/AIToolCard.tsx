@@ -6,9 +6,16 @@ interface AIToolCardProps {
   description: string;
   icon?: string;
   website?: string;
+  logoClassName?: string;
 }
 
-const AIToolCard = ({ name, description, icon, website }: AIToolCardProps) => {
+const AIToolCard = ({ 
+  name, 
+  description, 
+  icon, 
+  website,
+  logoClassName = "w-9 h-9 object-contain" 
+}: AIToolCardProps) => {
   const handleClick = () => {
     if (website) {
       window.open(website, '_blank', 'noopener,noreferrer');
@@ -23,7 +30,7 @@ const AIToolCard = ({ name, description, icon, website }: AIToolCardProps) => {
       <div className="flex items-start gap-4">
         <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
           {icon ? (
-            <img src={icon} alt={name} className="w-9 h-9 object-contain" />
+            <img src={icon} alt={name} className={logoClassName} />
           ) : (
             <div className="w-8 h-8 bg-primary/50 rounded-full"></div>
           )}
