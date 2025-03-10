@@ -20,6 +20,15 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
     img.src = thumbnail;
     img.onload = () => setImageLoaded(true);
     img.onerror = () => setImageError(true);
+
+    // Log for debugging
+    console.log(`Loading thumbnail: ${thumbnail}`);
+    
+    return () => {
+      // Cancel image loading on unmount
+      img.onload = null;
+      img.onerror = null;
+    };
   }, [thumbnail]);
 
   const handlePlay = () => {
@@ -47,14 +56,20 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
               <span className="sr-only">Thumbnail unavailable</span>
             </div>
           ) : (
-            <img 
-              src={thumbnail} 
-              alt={title} 
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-              loading="lazy"
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageError(true)}
-            />
+            <>
+              <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
+                <ImageIcon className="h-8 w-8 text-muted-foreground/50 animate-pulse" />
+              </div>
+              <img 
+                src={thumbnail} 
+                alt={title} 
+                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                loading="lazy"
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+                crossOrigin="anonymous"
+              />
+            </>
           )}
           <div className="video-card-overlay" />
           <button 
