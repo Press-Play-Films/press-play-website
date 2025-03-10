@@ -48,6 +48,24 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
     setIsPlaying(true);
   };
 
+  // Extract video ID from Vimeo URL for direct thumbnail access
+  const getVimeoThumbnail = () => {
+    try {
+      // Try to extract the Vimeo ID from the URL
+      const match = videoUrl.match(/(?:vimeo\.com\/(?:video\/)?|player\.vimeo\.com\/video\/)(\d+)/);
+      if (match && match[1]) {
+        return `https://vumbnail.com/${match[1]}.jpg`;
+      }
+      return thumbnail;
+    } catch (error) {
+      console.error("Error getting Vimeo thumbnail:", error);
+      return thumbnail;
+    }
+  };
+
+  // Use Vimeo thumbnail service or fallback to provided thumbnail
+  const effectiveThumbnail = getVimeoThumbnail();
+
   return (
     <div className="video-card animate-fade-in">
       {isPlaying ? (
@@ -74,7 +92,7 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
                 <ImageIcon className="h-8 w-8 text-muted-foreground/50 animate-pulse" />
               </div>
               <img 
-                src={thumbnail} 
+                src={effectiveThumbnail} 
                 alt={title} 
                 className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 loading="lazy"
