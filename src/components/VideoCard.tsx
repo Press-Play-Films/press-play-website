@@ -15,14 +15,27 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
   const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
+    // Reset states when thumbnail changes
+    setImageLoaded(false);
+    setImageError(false);
+    
     // Preload image
     const img = new Image();
+    img.crossOrigin = "anonymous";
     img.src = thumbnail;
-    img.onload = () => setImageLoaded(true);
-    img.onerror = () => setImageError(true);
-
+    
+    img.onload = () => {
+      console.log(`Successfully loaded thumbnail: ${thumbnail}`);
+      setImageLoaded(true);
+    };
+    
+    img.onerror = (e) => {
+      console.error(`Failed to load thumbnail: ${thumbnail}`, e);
+      setImageError(true);
+    };
+    
     // Log for debugging
-    console.log(`Loading thumbnail: ${thumbnail}`);
+    console.log(`Attempting to load thumbnail: ${thumbnail}`);
     
     return () => {
       // Cancel image loading on unmount
@@ -57,7 +70,7 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
             </div>
           ) : (
             <>
-              <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
+              <div className={`absolute inset-0 flex items-center justify-center bg-muted/50 ${imageLoaded ? 'hidden' : 'block'}`}>
                 <ImageIcon className="h-8 w-8 text-muted-foreground/50 animate-pulse" />
               </div>
               <img 
@@ -71,16 +84,16 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
               />
             </>
           )}
-          <div className="video-card-overlay" />
+          <div className="video-card-overlay absolute inset-0 bg-black/30 transition-opacity hover:opacity-60 opacity-40" />
           <button 
             onClick={handlePlay} 
-            className="video-play-button group"
+            className="video-play-button group absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary/80 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
             aria-label={`Play ${title}`}
           >
-            <Play className="h-6 w-6 group-hover:scale-110 transition-transform" />
+            <Play className="h-8 w-8 text-white group-hover:scale-110 transition-transform" />
           </button>
           <div className="absolute bottom-4 left-4 right-4 text-white">
-            <h3 className="text-lg md:text-xl font-semibold mb-1">{title}</h3>
+            <h3 className="text-lg md:text-xl font-semibold mb-1 drop-shadow-md">{title}</h3>
           </div>
         </div>
       )}

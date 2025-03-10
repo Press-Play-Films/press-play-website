@@ -3,10 +3,15 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
 
-const ContactForm = () => {
+interface ContactFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,6 +23,15 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form data
+    if (!formData.name || !formData.email || !formData.phone) {
+      toast.error("Please fill in all required fields", {
+        description: "Name, email, and phone number are required to access the feature film.",
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
     
     // Simulate form submission
@@ -26,7 +40,13 @@ const ContactForm = () => {
         description: "Thank you for your message. I'll get back to you shortly.",
       });
       setIsSubmitting(false);
-      setFormData({ name: '', email: '', message: '' });
+      
+      // Trigger the onSubmitSuccess callback to give access to the feature film
+      if (onSubmitSuccess) {
+        onSubmitSuccess();
+      }
+      
+      setFormData({ name: '', email: '', phone: '', message: '' });
     }, 1500);
   };
 
@@ -34,7 +54,7 @@ const ContactForm = () => {
     <form onSubmit={handleSubmit} className="space-y-4 animate-fade-in">
       <div>
         <label htmlFor="name" className="block text-sm font-medium mb-1">
-          Name
+          Name <span className="text-red-500">*</span>
         </label>
         <input
           id="name"
@@ -49,7 +69,7 @@ const ContactForm = () => {
       
       <div>
         <label htmlFor="email" className="block text-sm font-medium mb-1">
-          Email
+          Email <span className="text-red-500">*</span>
         </label>
         <input
           id="email"
@@ -63,6 +83,21 @@ const ContactForm = () => {
       </div>
       
       <div>
+        <label htmlFor="phone" className="block text-sm font-medium mb-1">
+          Phone <span className="text-red-500">*</span>
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          required
+          value={formData.phone}
+          onChange={handleChange}
+          className="w-full px-4 py-3 bg-secondary/50 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+        />
+      </div>
+      
+      <div>
         <label htmlFor="message" className="block text-sm font-medium mb-1">
           Message
         </label>
@@ -70,7 +105,6 @@ const ContactForm = () => {
           id="message"
           name="message"
           rows={5}
-          required
           value={formData.message}
           onChange={handleChange}
           className="w-full px-4 py-3 bg-secondary/50 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
