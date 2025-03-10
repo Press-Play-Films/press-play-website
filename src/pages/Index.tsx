@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -9,6 +9,7 @@ import SkillCard from '@/components/SkillCard';
 import TechChip from '@/components/TechChip';
 import Footer from '@/components/Footer';
 import AIToolCard from '@/components/AIToolCard';
+import ContactForm from '@/components/ContactForm';
 
 const videoData = [
   {
@@ -119,6 +120,7 @@ const techUrls = {
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
   
   const skillCards = useMemo(() => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -211,6 +213,17 @@ const Index = () => {
       }
     }, 500);
   }, []);
+
+  const handleContactFormSuccess = () => {
+    setShowTrailer(true);
+    // Scroll to trailer
+    setTimeout(() => {
+      const trailerElement = document.getElementById('feature-film-trailer');
+      if (trailerElement) {
+        trailerElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
+  };
 
   const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
 
@@ -364,29 +377,89 @@ const Index = () => {
           <div className="max-w-4xl mx-auto glass-card rounded-3xl overflow-hidden">
             <div className="relative p-8 md:p-12">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 z-[-1]"></div>
-              <div className="md:flex items-center gap-8">
-                <div className="md:w-1/2 mb-8 md:mb-0">
-                  <h2 className="text-3xl font-bold mb-4">A Different Corner</h2>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">A Different Corner</h2>
                   <p className="text-muted-foreground mb-6">
                     Get exclusive access to my feature film "A Different Corner" by signing up for updates.
                   </p>
-                  <div className="flex items-center gap-4">
-                    <a href="#" className="btn-primary inline-flex items-center gap-2">
-                      <Play className="h-5 w-5" />
-                      Watch Trailer
-                    </a>
-                  </div>
-                </div>
-                <div className="md:w-1/2 rounded-xl overflow-hidden">
-                  <div className="relative pb-[56.25%] h-0 bg-black/50">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 mb-4 mx-auto">
-                          <Play className="h-6 w-6 text-white" />
+                  
+                  <div className="glass-card rounded-xl p-4 mb-6 border border-blue-500/20">
+                    <h3 className="text-xl font-semibold mb-3">Contact Information</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                          <Mail className="w-5 h-5 text-blue-400" />
                         </div>
-                        <p className="text-sm text-white/80">Sign up to access the trailer</p>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Email</p>
+                          <p className="font-medium">info@andrewfreeman.io</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                          <Phone className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Phone</p>
+                          <p className="font-medium">(310) 555-7890</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                          <MapPin className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Location</p>
+                          <p className="font-medium">Los Angeles, CA</p>
+                        </div>
                       </div>
                     </div>
+                  </div>
+                  
+                  {!showTrailer && (
+                    <button 
+                      onClick={() => setShowTrailer(true)}
+                      className="btn-primary inline-flex items-center gap-2"
+                    >
+                      <Play className="h-5 w-5" />
+                      Watch Trailer
+                    </button>
+                  )}
+                </div>
+                
+                <div>
+                  {showTrailer ? (
+                    <div id="feature-film-trailer" className="rounded-xl overflow-hidden">
+                      <div style={{padding: '56.25% 0 0 0', position: 'relative'}}>
+                        <iframe 
+                          src="https://player.vimeo.com/video/21007773?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                          frameBorder="0" 
+                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                          style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} 
+                          title="A Different Corner (Extended) Trailer"
+                        ></iframe>
+                      </div>
+                      <script src="https://player.vimeo.com/api/player.js"></script>
+                    </div>
+                  ) : (
+                    <div className="rounded-xl overflow-hidden">
+                      <div className="w-full aspect-video bg-black/50 rounded-xl flex flex-col items-center justify-center">
+                        <div className="w-20 h-20 mb-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                          <Play className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="text-xl font-medium mb-2">Sign up to access</h3>
+                        <p className="text-muted-foreground text-center max-w-xs">
+                          Fill out the contact form below to get exclusive access to the trailer
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="mt-6">
+                    <h3 className="text-xl font-semibold mb-4">Get Film Updates</h3>
+                    <ContactForm onSubmitSuccess={handleContactFormSuccess} />
                   </div>
                 </div>
               </div>
