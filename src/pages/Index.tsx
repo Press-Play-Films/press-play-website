@@ -64,7 +64,7 @@ const aiTools = [
     name: "NVIDIA AI", 
     description: "GPU-accelerated AI solutions for high-performance computing",
     website: "https://www.nvidia.com/en-us/ai/",
-    icon: "https://cdn.icon-icons.com/icons2/2699/PNG/512/nvidia_logo_icon_169902.png"
+    icon: "public/lovable-uploads/4ce6a67f-9c96-4a16-aa34-adc6a76cdc5d.png"
   },
   { 
     name: "Runway ML", 
