@@ -120,7 +120,7 @@ const techUrls = {
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showTrailer, setShowTrailer] = useState(false);
+  const [showFullFeatureFilm, setShowFullFeatureFilm] = useState(false);
   
   const skillCards = useMemo(() => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -215,12 +215,12 @@ const Index = () => {
   }, []);
 
   const handleContactFormSuccess = () => {
-    setShowTrailer(true);
-    // Scroll to trailer
+    setShowFullFeatureFilm(true);
+    // Scroll to full film
     setTimeout(() => {
-      const trailerElement = document.getElementById('feature-film-trailer');
-      if (trailerElement) {
-        trailerElement.scrollIntoView({ behavior: 'smooth' });
+      const filmElement = document.getElementById('full-feature-film');
+      if (filmElement) {
+        filmElement.scrollIntoView({ behavior: 'smooth' });
       }
     }, 300);
   };
@@ -382,7 +382,7 @@ const Index = () => {
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">A Different Corner</h2>
                   <p className="text-muted-foreground mb-6">
-                    Get exclusive access to my feature film "A Different Corner" by signing up for updates.
+                    Watch the trailer below and fill out the contact form to get exclusive access to the full feature film.
                   </p>
                   
                   <div className="glass-card rounded-xl p-4 mb-6 border border-blue-500/20">
@@ -418,40 +418,41 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  {!showTrailer && (
-                    <button 
-                      onClick={() => setShowTrailer(true)}
-                      className="btn-primary inline-flex items-center gap-2"
-                    >
-                      <Play className="h-5 w-5" />
-                      Watch Trailer
-                    </button>
-                  )}
-                </div>
-                
-                <div>
-                  {showTrailer ? (
-                    <div id="feature-film-trailer" className="rounded-xl overflow-hidden">
+                  <div id="feature-film-trailer" className="rounded-xl overflow-hidden mb-6">
+                    <div style={{padding: '56.25% 0 0 0', position: 'relative'}}>
+                      <iframe 
+                        src="https://player.vimeo.com/video/21007773?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                        frameBorder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                        style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} 
+                        title="A Different Corner (Extended) Trailer"
+                      ></iframe>
+                    </div>
+                  </div>
+                  
+                  {showFullFeatureFilm ? (
+                    <div id="full-feature-film" className="rounded-xl overflow-hidden mt-8">
+                      <h3 className="text-xl font-semibold mb-4">Full Feature Film</h3>
                       <div style={{padding: '56.25% 0 0 0', position: 'relative'}}>
                         <iframe 
-                          src="https://player.vimeo.com/video/21007773?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                          src="https://player.vimeo.com/video/99473243?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
                           frameBorder="0" 
                           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
                           style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} 
-                          title="A Different Corner (Extended) Trailer"
+                          title="A Different Corner (full feature film)"
                         ></iframe>
                       </div>
-                      <script src="https://player.vimeo.com/api/player.js"></script>
                     </div>
                   ) : (
-                    <div className="rounded-xl overflow-hidden">
+                    <div className="mt-8">
+                      <h3 className="text-xl font-semibold mb-4">Get Access to the Full Film</h3>
                       <div className="w-full aspect-video bg-black/50 rounded-xl flex flex-col items-center justify-center">
                         <div className="w-20 h-20 mb-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
                           <Play className="h-8 w-8 text-white" />
                         </div>
-                        <h3 className="text-xl font-medium mb-2">Sign up to access</h3>
+                        <h3 className="text-xl font-medium mb-2">Sign up for full access</h3>
                         <p className="text-muted-foreground text-center max-w-xs">
-                          Fill out the contact form below to get exclusive access to the trailer
+                          Fill out the contact form below to get exclusive access to the full feature film
                         </p>
                       </div>
                     </div>
