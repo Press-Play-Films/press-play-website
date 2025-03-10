@@ -1,10 +1,78 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 import AIToolCard from '@/components/AIToolCard';
 import TechChip from '@/components/TechChip';
 import { Progress } from '@/components/ui/progress';
+
+const aiTools = [
+  { 
+    name: "ChatGPT", 
+    description: "Advanced language model integration for natural conversations and content generation",
+    website: "https://chat.openai.com/",
+    icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+  },
+  { 
+    name: "Anthropic", 
+    description: "Constitutional AI for safe and ethical artificial intelligence solutions",
+    website: "https://www.anthropic.com/",
+    icon: "https://seeklogo.com/images/A/anthropic-logo-9882E29032-seeklogo.com.png"
+  },
+  { 
+    name: "Google Gemini", 
+    description: "Multimodal AI for advanced reasoning and problem-solving",
+    website: "https://deepmind.google/technologies/gemini/",
+    icon: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini_1.max-1200x1200.png"
+  },
+  { 
+    name: "NVIDIA AI", 
+    description: "GPU-accelerated AI solutions for high-performance computing",
+    website: "https://www.nvidia.com/en-us/ai/",
+    icon: "https://cdn.icon-icons.com/icons2/2699/PNG/512/nvidia_logo_icon_169902.png"
+  },
+  { 
+    name: "Runway ML", 
+    description: "Creative AI tools for video and content generation",
+    website: "https://runwayml.com/",
+    icon: "https://getlogovector.com/wp-content/uploads/2021/08/runway-ml-logo-vector.png"
+  },
+  { 
+    name: "DALL-E", 
+    description: "AI image generation for creative and commercial applications",
+    website: "https://openai.com/dall-e-3",
+    icon: "https://seeklogo.com/images/D/dall-e-logo-1104E7A45A-seeklogo.com.png"
+  },
+  { 
+    name: "SORA", 
+    description: "Text-to-video AI for dynamic content creation",
+    website: "https://openai.com/sora",
+    icon: "https://seeklogo.com/images/O/openai-logo-37AC22950B-seeklogo.com.png"
+  },
+  { 
+    name: "MidJourney", 
+    description: "AI-powered image generation for creative projects",
+    website: "https://www.midjourney.com/",
+    icon: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Midjourney_Emblem.png"
+  },
+  { 
+    name: "Zapier AI", 
+    description: "Workflow automation with intelligent processing",
+    website: "https://zapier.com/",
+    icon: "https://cdn.worldvectorlogo.com/logos/zapier-1.svg"
+  },
+  { 
+    name: "Jasper", 
+    description: "AI content generation and optimization platform",
+    website: "https://www.jasper.ai/",
+    icon: "https://seeklogo.com/images/J/jasper-logo-6C366F0911-seeklogo.com.png"
+  },
+  { 
+    name: "Quantum Computing", 
+    description: "Next-generation computing for advanced AI applications",
+    website: "https://research.ibm.com/quantum-computing/",
+    icon: "https://seeklogo.com/images/I/ibm-quantum-logo-34D60900FE-seeklogo.com.png"
+  }
+];
 
 const Skills = () => {
   return (
@@ -41,50 +109,15 @@ const Skills = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <AIToolCard
-                name="ChatGPT"
-                description="Advanced language model integration for natural conversations and content generation"
-              />
-              <AIToolCard
-                name="Anthropic"
-                description="Constitutional AI for safe and ethical artificial intelligence solutions"
-              />
-              <AIToolCard
-                name="Gemini"
-                description="Multimodal AI for advanced reasoning and problem-solving"
-              />
-              <AIToolCard
-                name="NVIDIA AI"
-                description="GPU-accelerated AI solutions for high-performance computing"
-              />
-              <AIToolCard
-                name="Runway ML"
-                description="Creative AI tools for video and content generation"
-              />
-              <AIToolCard
-                name="DALL-E"
-                description="AI image generation for creative and commercial applications"
-              />
-              <AIToolCard
-                name="SORA"
-                description="Text-to-video AI for dynamic content creation"
-              />
-              <AIToolCard
-                name="MidJourney"
-                description="AI-powered image generation for creative projects"
-              />
-              <AIToolCard
-                name="Zapier AI"
-                description="Workflow automation with intelligent processing"
-              />
-              <AIToolCard
-                name="Jasper"
-                description="AI content generation and optimization platform"
-              />
-              <AIToolCard
-                name="Quantum Computing"
-                description="Next-generation computing for advanced AI applications"
-              />
+              {aiTools.map((tool, index) => (
+                <AIToolCard
+                  key={index}
+                  name={tool.name}
+                  description={tool.description}
+                  icon={tool.icon}
+                  website={tool.website}
+                />
+              ))}
             </div>
           </div>
         </div>

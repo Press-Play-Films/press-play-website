@@ -22,12 +22,12 @@ const AIToolCard = ({ name, description, icon, website }: AIToolCardProps) => {
     >
       <div className="flex items-start gap-4">
         {icon ? (
-          <div className="w-10 h-10 flex-shrink-0 rounded bg-primary/20 flex items-center justify-center">
-            <img src={icon} alt={name} className="w-6 h-6" />
+          <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center">
+            <img src={icon} alt={name} className="w-8 h-8 object-contain" />
           </div>
         ) : (
-          <div className="w-10 h-10 flex-shrink-0 rounded bg-primary/20 flex items-center justify-center">
-            <div className="w-6 h-6 bg-primary/50 rounded-full"></div>
+          <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-primary/20 flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary/50 rounded-full"></div>
           </div>
         )}
         <div className="flex-1">
