@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 import ContactForm from '@/components/ContactForm';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -62,6 +62,25 @@ const Contact = () => {
                     <div>
                       <h3 className="text-sm font-medium text-muted-foreground mb-1">Location</h3>
                       <p className="text-base">Las Vegas, Nevada</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <Linkedin className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-1">LinkedIn</h3>
+                      <p className="text-base">
+                        <a 
+                          href="https://www.linkedin.com/in/pressplayproductions/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="hover:text-primary transition-colors"
+                        >
+                          Andrew Freeman
+                        </a>
+                      </p>
                     </div>
                   </div>
                 </div>
