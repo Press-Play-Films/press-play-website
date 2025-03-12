@@ -34,7 +34,7 @@ const videoData = [
   },
   {
     id: 4,
-    title: "Get your Hands on Me",
+    title: "Get Your Hands On Me",
     description: "A music video produced for the artist Samantha Alexis.",
     thumbnail: "https://i.vimeocdn.com/video/469706233-5a3cbeaac4e2da649beddd9fb778373a6d7482203b73b064d8c14c10bf84e80e-d_640",
     videoUrl: "https://player.vimeo.com/video/89813382?h=faa8e1acd2&title=0&byline=0&portrait=0",
