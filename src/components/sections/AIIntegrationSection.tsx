@@ -30,16 +30,16 @@ const AIIntegrationSection = () => {
       icon: "/lovable-uploads/4ce6a67f-9c96-4a16-aa34-adc6a76cdc5d.png"
     },
     { 
-      name: "Runway ML", 
-      description: "Creative AI tools for video and content generation",
-      website: "https://runwayml.com/",
-      icon: "https://getlogovector.com/wp-content/uploads/2021/08/runway-ml-logo-vector.png"
+      name: "Kling 1.6", 
+      description: "Advanced AI platform for multimodal content creation and analysis",
+      website: "https://www.klingai.com/",
+      icon: "/lovable-uploads/55577ffa-e304-4bcd-801f-f78b94e5c998.png"
     },
     { 
-      name: "DALL-E", 
-      description: "AI image generation for creative and commercial applications",
-      website: "https://openai.com/dall-e-3",
-      icon: "https://seeklogo.com/images/D/dall-e-logo-1104E7A45A-seeklogo.com.png"
+      name: "Manus AI", 
+      description: "Specialized AI for creative applications and digital interactions",
+      website: "https://manus.im",
+      icon: "/lovable-uploads/4da4cf20-5f68-48e7-82f4-f5ae7c43436c.png"
     },
   ];
   
