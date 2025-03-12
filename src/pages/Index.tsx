@@ -10,6 +10,7 @@ import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSecti
 import AIIntegrationSection from '@/components/sections/AIIntegrationSection';
 import SalesLeadershipSection from '@/components/sections/SalesLeadershipSection';
 import FeatureFilmSection from '@/components/sections/FeatureFilmSection';
+import AmbientAudio from '@/components/AmbientAudio';
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,6 +32,7 @@ const Index = () => {
   return (
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
       <ParticleBackground />
+      <AmbientAudio />
       <div className="relative z-10"> {/* Add wrapper div with higher z-index */}
         <Header />
         
