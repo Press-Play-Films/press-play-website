@@ -8,7 +8,6 @@ import NavigationTabs from '@/components/sections/NavigationTabs';
 import CoreCompetenciesSection from '@/components/sections/CoreCompetenciesSection';
 import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSection';
 import AIIntegrationSection from '@/components/sections/AIIntegrationSection';
-import SalesLeadershipSection from '@/components/sections/SalesLeadershipSection';
 import FeatureFilmSection from '@/components/sections/FeatureFilmSection';
 import AmbientAudio from '@/components/AmbientAudio';
 
@@ -33,7 +32,7 @@ const Index = () => {
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
       <ParticleBackground />
       <AmbientAudio />
-      <div className="relative z-10"> {/* Add wrapper div with higher z-index */}
+      <div className="relative z-10">
         <Header />
         
         <HeroSection />
@@ -42,7 +41,6 @@ const Index = () => {
         <FeaturedProjectsSection />
         <AIIntegrationSection />
         <FeatureFilmSection />
-        <SalesLeadershipSection />
         
         <Footer />
       </div>

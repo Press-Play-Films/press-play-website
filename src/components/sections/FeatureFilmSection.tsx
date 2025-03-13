@@ -44,6 +44,13 @@ const FeatureFilmSection = () => {
                 </div>
 
                 <div className="mt-8">
+                  <h3 className="text-xl font-semibold mb-4">Request an A.I. Demo</h3>
+                  <a href="#" className="btn-outline inline-flex">
+                    Schedule Demo
+                  </a>
+                </div>
+
+                <div className="mt-8">
                   <h3 className="text-xl font-semibold mb-4">Sales Leadership Partnerships</h3>
                   <div className="glass-card rounded-xl p-4 mb-6 border border-blue-500/20">
                     <div className="grid grid-cols-1 gap-4">
