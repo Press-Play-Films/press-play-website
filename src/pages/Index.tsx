@@ -33,9 +33,9 @@ const Index = () => {
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
       <ParticleBackground />
       <AmbientAudio />
-      <div className="relative z-10"> {/* Add wrapper div with higher z-index */}
-        <Header />
-        
+      <Header />
+      
+      <div className="relative z-10">
         <HeroSection />
         <NavigationTabs />
         <CoreCompetenciesSection />
