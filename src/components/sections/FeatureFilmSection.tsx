@@ -28,7 +28,7 @@ const FeatureFilmSection = () => {
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">A Different Corner</h2>
                 <p className="text-muted-foreground mb-6">
-                  Watch the trailer below and fill out the contact form to get exclusive access to the full feature film.
+                  Check out the trailer for my feature film project below.
                 </p>
                 
                 <div className="glass-card rounded-xl p-4 mb-6 border border-blue-500/20">
@@ -91,7 +91,7 @@ const FeatureFilmSection = () => {
                   </div>
                 ) : (
                   <div className="mt-8">
-                    <h3 className="text-xl font-semibold mb-4">Get Access to the Full Film</h3>
+                    <h3 className="text-xl font-semibold mb-4">Contact Me About the Film</h3>
                     <div className="w-full aspect-video bg-black/50 rounded-xl flex flex-col items-center justify-center relative overflow-hidden group">
                       {/* Added film thumbnail image */}
                       <img 
@@ -105,9 +105,9 @@ const FeatureFilmSection = () => {
                         <div className="w-20 h-20 mb-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
                           <Film className="h-8 w-8 text-white" />
                         </div>
-                        <h3 className="text-xl font-medium mb-2 text-white">Sign up for full access</h3>
+                        <h3 className="text-xl font-medium mb-2 text-white">Interested in the film?</h3>
                         <p className="text-white/80 text-center max-w-xs">
-                          Fill out the contact form below to get exclusive access to the full feature film
+                          Fill out the contact form below to learn more about this project
                         </p>
                       </div>
                     </div>
@@ -115,7 +115,7 @@ const FeatureFilmSection = () => {
                 )}
                 
                 <div className="mt-6">
-                  <h3 className="text-xl font-semibold mb-4">Get Film Updates</h3>
+                  <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
                   <ContactForm onSubmitSuccess={handleContactFormSuccess} />
                 </div>
               </div>

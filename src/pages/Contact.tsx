@@ -13,8 +13,8 @@ const Contact = () => {
 
   const handleFormSubmissionSuccess = () => {
     setHasFilmAccess(true);
-    toast.success("Feature Film Access Granted", {
-      description: "Thank you for your information. You now have access to 'A Different Corner'.",
+    toast.success("Thank You For Contacting", {
+      description: "I'll get back to you about 'A Different Corner' shortly.",
     });
   };
 
@@ -26,7 +26,7 @@ const Contact = () => {
     }
     
     toast.success("Successfully subscribed", {
-      description: "Please check your email for access to the feature film.",
+      description: "Thank you for subscribing to my newsletter.",
     });
     setNewsletterEmail('');
   };
@@ -147,7 +147,7 @@ const Contact = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-4">
                 {hasFilmAccess 
                   ? "Thank You! Enjoy 'A Different Corner'" 
-                  : "Get Free Access to 'A Different Corner'"}
+                  : "Learn More About 'A Different Corner'"}
               </h2>
               
               {hasFilmAccess ? (
@@ -169,17 +169,17 @@ const Contact = () => {
               ) : (
                 <>
                   <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-                    Fill out the contact form above with your information to get free access to my feature film "A Different Corner".
+                    Fill out the contact form above to learn more about my feature film "A Different Corner".
                   </p>
                   
                   <div className="flex justify-center">
                     <div className="w-full max-w-md bg-secondary/30 p-6 rounded-xl border border-border">
                       <div className="flex items-center mb-4">
                         <Film className="h-5 w-5 text-primary mr-2" />
-                        <h3 className="font-medium">Film Preview Locked</h3>
+                        <h3 className="font-medium">Film Information</h3>
                       </div>
                       <p className="text-sm text-muted-foreground mb-4">
-                        Please fill out the contact form above to unlock access to the full feature film.
+                        Please fill out the contact form above to learn more about the feature film.
                       </p>
                       <div className="aspect-video bg-background/50 rounded-lg flex items-center justify-center">
                         <Lock className="h-10 w-10 text-muted-foreground/50" />
