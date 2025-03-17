@@ -34,7 +34,7 @@ const Index = () => {
       <AmbientAudio />
       <Header />
       
-      <div className="relative z-10">
+      <div className="relative z-10 pt-24"> {/* Added padding top to account for fixed header */}
         <HeroSection />
         <NavigationTabs />
         <CoreCompetenciesSection />
