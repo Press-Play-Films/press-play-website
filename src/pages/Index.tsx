@@ -17,15 +17,16 @@ const Index = () => {
   useEffect(() => {
     setIsLoaded(true);
     
-    setTimeout(() => {
-      if (window.location.hash) {
+    // Handle hash navigation after page load
+    if (window.location.hash) {
+      setTimeout(() => {
         const id = window.location.hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }
-    }, 500);
+      }, 500);
+    }
   }, []);
 
   return (
@@ -34,7 +35,7 @@ const Index = () => {
       <AmbientAudio />
       <Header />
       
-      <div className="relative z-10 pt-24"> {/* Added padding top to account for fixed header */}
+      <div className="relative z-10 pt-24">
         <HeroSection />
         <NavigationTabs />
         <CoreCompetenciesSection />

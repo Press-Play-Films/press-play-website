@@ -3,9 +3,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, lazy, Suspense, memo } from "react";
 
 // Lazy load pages to reduce initial bundle size
 const Index = lazy(() => import("./pages/Index"));
@@ -25,8 +24,8 @@ const queryClient = new QueryClient({
   },
 });
 
-// Separate stars creation into its own component
-const BackgroundStars = () => {
+// Memoize stars component to prevent unnecessary re-renders
+const BackgroundStars = memo(() => {
   useEffect(() => {
     const createStars = () => {
       const container = document.body;
@@ -38,26 +37,30 @@ const BackgroundStars = () => {
       existingStars.forEach(star => star.remove());
       
       // Create fewer stars for better performance
-      const starCount = Math.min(100, Math.floor((screenWidth * screenHeight) / 10000));
+      const starCount = Math.min(80, Math.floor((screenWidth * screenHeight) / 12000));
       
-      // Create new stars
+      // Create stars with document fragment for better performance
+      const fragment = document.createDocumentFragment();
+      
       for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
         star.className = `star ${Math.random() < 0.8 ? 'small' : Math.random() < 0.95 ? 'medium' : 'large'}`;
         star.style.left = `${Math.random() * screenWidth}px`;
         star.style.top = `${Math.random() * screenHeight}px`;
         star.style.animationDelay = `${Math.random() * 5}s`;
-        container.appendChild(star);
+        fragment.appendChild(star);
       }
+      
+      container.appendChild(fragment);
     };
     
     createStars();
     
-    // Only recreate stars on significant size changes to reduce reflows
+    // Debounce resize handler to improve performance
     let resizeTimer: number;
     const handleResize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(createStars, 100);
+      resizeTimer = window.setTimeout(createStars, 250);
     };
     
     window.addEventListener('resize', handleResize);
@@ -69,7 +72,9 @@ const BackgroundStars = () => {
   }, []);
 
   return null;
-};
+});
+
+BackgroundStars.displayName = 'BackgroundStars';
 
 const App = () => {
   return (
