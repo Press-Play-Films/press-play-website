@@ -46,7 +46,7 @@ const AIIntegrationSection = () => {
   const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
   
   return (
-    <section className="py-20 relative">
+    <section id="ai-integration" className="py-20 relative scroll-mt-24">
       <div className="container px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">AI Integration Expertise</h2>

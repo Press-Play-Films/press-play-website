@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
 
-type Category = 'all' | 'video' | 'ai' | 'sales';
+// Export the Category type so it can be used in other components
+export type Category = 'all' | 'video' | 'ai' | 'sales';
 
 interface CategoryFilterProps {
   activeCategory: Category;
