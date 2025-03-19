@@ -37,30 +37,6 @@ export const portfolioData: Project[] = [
   },
   {
     id: 4,
-    title: "Get Your Hands On Me",
-    description: "A music video produced for the artist Samantha Alexis.",
-    thumbnail: "https://i.vimeocdn.com/video/469706233-5a3cbeaac4e2da649beddd9fb778373a6d7482203b73b064d8c14c10bf84e80e-d_640",
-    videoUrl: "https://player.vimeo.com/video/89813382?h=faa8e1acd2&title=0&byline=0&portrait=0",
-    category: "video"
-  },
-  {
-    id: 5,
-    title: "Capture Video",
-    description: "Video created for the artist Danielle.",
-    thumbnail: "https://i.vimeocdn.com/video/466568818-68ce2441b31f5b8a8f9811f1d1dcebe0acd1b1a3bedc338b10cbe72b94dea62e-d_640",
-    videoUrl: "https://player.vimeo.com/video/86253787?h=6b6e33fbfa&title=0&byline=0&portrait=0",
-    category: "video"
-  },
-  {
-    id: 6,
-    title: "Odessa",
-    description: "Music video produced for the artist \"The Star Killers\".",
-    thumbnail: "https://i.vimeocdn.com/video/118188204-3c1fd052d07727e8ada50274f0bbd928b5d271b2dbcbd2323b1ca8554c8fefb4-d_640",
-    videoUrl: "https://player.vimeo.com/video/18550227?h=d2399a7f11&title=0&byline=0&portrait=0",
-    category: "video"
-  },
-  {
-    id: 7,
     title: "A Different Corner (Extended) Trailer",
     description: "The full trailer for our Feature Film A Different Corner.",
     thumbnail: "https://i.vimeocdn.com/video/131842263-89a86c9e9641eeff4ce5bf9f6f75b7d0b0fc4f5d3c712e71ca78681436434bfc-d_640",
@@ -68,7 +44,7 @@ export const portfolioData: Project[] = [
     category: "video"
   },
   {
-    id: 8,
+    id: 5,
     title: "A Different Corner (Teaser) Trailer",
     description: "The teaser trailer for our first Feature Film A Different Corner.",
     thumbnail: "https://i.vimeocdn.com/video/83525259-aaa876bdc8cce4d02d52e8700e5cbecd1fc75c2df4ed639dda5b8848f73a3938-d_640",
@@ -76,11 +52,35 @@ export const portfolioData: Project[] = [
     category: "video"
   },
   {
-    id: 9,
+    id: 6,
     title: "Dani",
     description: "A clip from my film A Different Corner, introducing the character of Dani.",
     thumbnail: "https://i.vimeocdn.com/video/909729335-4f03a950f0d6d3010a96fae7a7146ae7a2a8a48964a4735be97bb01e8e6ba492-d_640",
     videoUrl: "https://player.vimeo.com/video/10861982?h=533b708382&title=0&byline=0&portrait=0",
+    category: "video"
+  },
+  {
+    id: 7,
+    title: "Get Your Hands On Me",
+    description: "A music video produced for the artist Samantha Alexis.",
+    thumbnail: "https://i.vimeocdn.com/video/469706233-5a3cbeaac4e2da649beddd9fb778373a6d7482203b73b064d8c14c10bf84e80e-d_640",
+    videoUrl: "https://player.vimeo.com/video/89813382?h=faa8e1acd2&title=0&byline=0&portrait=0",
+    category: "video"
+  },
+  {
+    id: 8,
+    title: "Capture Video",
+    description: "Video created for the artist Danielle.",
+    thumbnail: "https://i.vimeocdn.com/video/466568818-68ce2441b31f5b8a8f9811f1d1dcebe0acd1b1a3bedc338b10cbe72b94dea62e-d_640",
+    videoUrl: "https://player.vimeo.com/video/86253787?h=6b6e33fbfa&title=0&byline=0&portrait=0",
+    category: "video"
+  },
+  {
+    id: 9,
+    title: "Odessa",
+    description: "Music video produced for the artist \"The Star Killers\".",
+    thumbnail: "https://i.vimeocdn.com/video/118188204-3c1fd052d07727e8ada50274f0bbd928b5d271b2dbcbd2323b1ca8554c8fefb4-d_640",
+    videoUrl: "https://player.vimeo.com/video/18550227?h=d2399a7f11&title=0&byline=0&portrait=0",
     category: "video"
   },
   {
