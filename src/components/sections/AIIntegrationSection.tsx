@@ -36,10 +36,10 @@ const AIIntegrationSection = () => {
       icon: "/lovable-uploads/55577ffa-e304-4bcd-801f-f78b94e5c998.png"
     },
     { 
-      name: "Manus AI", 
-      description: "Specialized AI for creative applications and digital interactions",
-      website: "https://manus.im",
-      icon: "/lovable-uploads/4da4cf20-5f68-48e7-82f4-f5ae7c43436c.png"
+      name: "Gumloop", 
+      description: "AI platform for streamlined content creation and workflow automation",
+      website: "https://www.gumloop.com/",
+      icon: "/lovable-uploads/2c07bc4f-54e3-4b9c-b3e7-48f137aefe12.png"
     },
   ];
   
