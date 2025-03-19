@@ -197,8 +197,8 @@ const Portfolio = () => {
                       <Mail className="text-primary" size={20} />
                     </div>
                     <h3 className="font-medium mb-2">Email</h3>
-                    <a href="mailto:contact@example.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      contact@example.com
+                    <a href="mailto:info@pressp.vip" className="text-muted-foreground hover:text-primary transition-colors">
+                      info@pressp.vip
                     </a>
                   </CardContent>
                 </Card>
@@ -209,8 +209,8 @@ const Portfolio = () => {
                       <Phone className="text-primary" size={20} />
                     </div>
                     <h3 className="font-medium mb-2">Phone</h3>
-                    <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                      +1 (234) 567-890
+                    <a href="tel:+17026021277" className="text-muted-foreground hover:text-primary transition-colors">
+                      (702) 602-1277
                     </a>
                   </CardContent>
                 </Card>
@@ -221,9 +221,14 @@ const Portfolio = () => {
                       <MapPin className="text-primary" size={20} />
                     </div>
                     <h3 className="font-medium mb-2">Location</h3>
-                    <span className="text-muted-foreground text-center">
-                      Los Angeles, California
-                    </span>
+                    <a 
+                      href="https://maps.google.com/?q=Las+Vegas+NV" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      Las Vegas, NV
+                    </a>
                   </CardContent>
                 </Card>
               </div>
