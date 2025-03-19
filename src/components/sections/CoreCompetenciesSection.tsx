@@ -1,4 +1,3 @@
-
 import SkillCard from '@/components/SkillCard';
 import TechChip from '@/components/TechChip';
 import { useMemo } from 'react';
@@ -10,6 +9,7 @@ const CoreCompetenciesSection = () => {
     "Gemini": "https://deepmind.google/technologies/gemini/",
     "NVIDIA": "https://www.nvidia.com/en-us/ai/",
     "Kling 1.6": "https://www.klingai.com/",
+    "MCP": "https://modelcontextprotocol.io/introduction",
     
     "Projects with Tony Robbins": "https://www.tonyrobbins.com/",
     "Projects with Jordan Belfort": "https://jordanbelfort.com/",
@@ -42,6 +42,7 @@ const CoreCompetenciesSection = () => {
           <TechChip label="Gemini" url={techUrls["Gemini"]} />
           <TechChip label="NVIDIA" url={techUrls["NVIDIA"]} />
           <TechChip label="Kling 1.6" url={techUrls["Kling 1.6"]} />
+          <TechChip label="MCP" url={techUrls["MCP"]} />
         </div>
       </SkillCard>
       

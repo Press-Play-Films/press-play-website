@@ -1,4 +1,3 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -38,6 +37,12 @@ const aiTools = [
     icon: "/lovable-uploads/55577ffa-e304-4bcd-801f-f78b94e5c998.png"
   },
   { 
+    name: "MCP", 
+    description: "Model Context Protocol for enhanced AI interactions and contextual understanding",
+    website: "https://modelcontextprotocol.io/introduction",
+    icon: "/lovable-uploads/c3a1992b-95b0-43d1-b9af-e88dc859b01d.png"
+  },
+  { 
     name: "Manus AI", 
     description: "Specialized AI for creative applications and digital interactions",
     website: "https://manus.im",
@@ -75,7 +80,6 @@ const aiTools = [
   }
 ];
 
-// Add personality cards for the Sales Leadership section
 const salesLeaders = [
   {
     name: "Tony Robbins",
