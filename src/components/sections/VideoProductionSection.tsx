@@ -23,6 +23,7 @@ const VideoProductionSection = () => {
             <div>
               <h3 className="text-xl font-medium mb-4">Software Expertise</h3>
               <div className="flex flex-wrap gap-3">
+                <TechChip label="Adobe Creative Cloud" url="https://www.adobe.com/creativecloud.html" />
                 <TechChip label="Adobe Creative Suite" />
                 <TechChip label="DaVinci Resolve" />
                 <TechChip label="FCP X" />
