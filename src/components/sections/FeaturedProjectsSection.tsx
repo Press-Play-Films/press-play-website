@@ -2,43 +2,69 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import VideoCard from '@/components/VideoCard';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { Category } from '@/components/portfolio/CategoryFilter';
+import { HashLink } from 'react-router-hash-link';
 
 const FeaturedProjectsSection = () => {
+  const [activeCategory, setActiveCategory] = useState<Category>('all');
+  
   const videoData = [
     {
       id: 1,
       title: "Fuse Nightclub Promo",
       description: "High-energy promotional video showcasing nightlife atmosphere and entertainment.",
       thumbnail: "https://i.vimeocdn.com/video/438394212-1fff1408539b7be4dec8af951c955b8a2aec415a67c3bb895d54fb5f2777c9fd-d_640",
-      videoUrl: "https://player.vimeo.com/video/67933840?h=a5786d80c4&title=0&byline=0&portrait=0"
+      videoUrl: "https://player.vimeo.com/video/67933840?h=a5786d80c4&title=0&byline=0&portrait=0",
+      category: "video"
     },
     {
       id: 2,
       title: "ODESSA",
       description: "A single-camera, 4-location, music video produced for the Starkillers.",
       thumbnail: "https://i.vimeocdn.com/video/23430484-dbbe44ee8a4c9c81f3da8d6b0e9df5fc23a31de0d055b454b2d3badbe1d12f24-d_640",
-      videoUrl: "https://player.vimeo.com/video/6174101?h=b1777bbf85&title=0&byline=0&portrait=0"
+      videoUrl: "https://player.vimeo.com/video/6174101?h=b1777bbf85&title=0&byline=0&portrait=0",
+      category: "video"
     },
     {
       id: 3,
       title: "The Law of Nines",
       description: "A short film based on an excerpt from N.Y. Times best-selling author Terry Goodkind to promote his latest book.",
       thumbnail: "https://i.vimeocdn.com/video/39599292-18af5a5e46bd56ed74cbe3b43a90beb73b6bcf4d3c7bfdec43c89989c99cfa00-d_640",
-      videoUrl: "https://player.vimeo.com/video/8228797?h=b3f21e6126&title=0&byline=0&portrait=0"
+      videoUrl: "https://player.vimeo.com/video/8228797?h=b3f21e6126&title=0&byline=0&portrait=0",
+      category: "video"
     },
     {
       id: 4,
       title: "Get Your Hands On Me",
       description: "A music video produced for the artist Samantha Alexis.",
       thumbnail: "https://i.vimeocdn.com/video/469706233-5a3cbeaac4e2da649beddd9fb778373a6d7482203b73b064d8c14c10bf84e80e-d_640",
-      videoUrl: "https://player.vimeo.com/video/89813382?h=faa8e1acd2&title=0&byline=0&portrait=0"
+      videoUrl: "https://player.vimeo.com/video/89813382?h=faa8e1acd2&title=0&byline=0&portrait=0",
+      category: "video"
     }
   ];
   
+  const filteredVideos = useMemo(() => {
+    return videoData.filter(video => 
+      activeCategory === 'all' || video.category === activeCategory
+    );
+  }, [activeCategory]);
+  
+  const handleCategoryChange = (category: Category) => {
+    setActiveCategory(category);
+    
+    // If clicking on "ai" category, we should direct to the AI Integration section
+    if (category === 'ai') {
+      const element = document.getElementById('ai-integration');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+  
   const videoCards = useMemo(() => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {videoData.map((video) => (
+      {filteredVideos.map((video) => (
         <VideoCard
           key={video.id}
           title={video.title}
@@ -48,7 +74,7 @@ const FeaturedProjectsSection = () => {
         />
       ))}
     </div>
-  ), []);
+  ), [filteredVideos]);
   
   const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
   
@@ -61,11 +87,33 @@ const FeaturedProjectsSection = () => {
         </div>
         
         <div className="flex justify-center mb-10">
-          <div className="flex gap-2 bg-secondary/50 backdrop-blur-md p-1 rounded-full">
-            <button className="px-6 py-2 rounded-full bg-primary text-white">All</button>
-            <button className="px-6 py-2 rounded-full hover:bg-secondary transition-colors">Video Production</button>
-            <button className="px-6 py-2 rounded-full hover:bg-secondary transition-colors">AI Projects</button>
-            <button className="px-6 py-2 rounded-full hover:bg-secondary transition-colors">Sales</button>
+          <div className="flex flex-wrap justify-center gap-2 bg-secondary/50 backdrop-blur-md p-1 rounded-full">
+            <button 
+              className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'all' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
+              onClick={() => handleCategoryChange('all')}
+            >
+              All
+            </button>
+            <button 
+              className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'video' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
+              onClick={() => handleCategoryChange('video')}
+            >
+              Video Production
+            </button>
+            <HashLink 
+              smooth 
+              to="#ai-integration"
+              className={`px-6 py-2 rounded-full transition-colors text-center ${activeCategory === 'ai' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
+              onClick={() => setActiveCategory('ai')}
+            >
+              AI Projects
+            </HashLink>
+            <button 
+              className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'sales' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
+              onClick={() => handleCategoryChange('sales')}
+            >
+              Sales
+            </button>
           </div>
         </div>
         
