@@ -21,16 +21,16 @@ export const portfolioData: Project[] = [
   },
   {
     id: 2,
-    title: "The Law of Nines",
-    description: "A short film based on an excerpt from N.Y. Times best-selling author Terry Goodkind to promote his latest book.",
+    title: "The Law of Nines (Behind the Scenes)",
+    description: "A behind the scenes look of the making of the Law of Nines.",
     thumbnail: "https://i.vimeocdn.com/video/39599292-18af5a5e46bd56ed74cbe3b43a90beb73b6bcf4d3c7bfdec43c89989c99cfa00-d_640",
     videoUrl: "https://player.vimeo.com/video/8228797?h=b3f21e6126&title=0&byline=0&portrait=0",
     category: "video"
   },
   {
     id: 3,
-    title: "The Law of Nines (Behind the Scenes)",
-    description: "A behind the scenes look of the making of the Law of Nines.",
+    title: "The Law of Nines",
+    description: "A short film based on an excerpt from N.Y. Times best-selling author Terry Goodkind to promote his latest book.",
     thumbnail: "https://i.vimeocdn.com/video/23430484-dbbe44ee8a4c9c81f3da8d6b0e9df5fc23a31de0d055b454b2d3badbe1d12f24-d_640",
     videoUrl: "https://player.vimeo.com/video/6174101?h=b1777bbf85&title=0&byline=0&portrait=0",
     category: "video"
