@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import VideoCard from '@/components/VideoCard';
 import { useMemo, useState } from 'react';
 import { Category } from '@/components/portfolio/CategoryFilter';
-import { HashLink } from 'react-router-hash-link';
 import CategoryFilter from '@/components/portfolio/CategoryFilter';
 import { portfolioData } from '@/data/portfolioData';
 
@@ -22,13 +21,6 @@ const FeaturedProjectsSection = () => {
   
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
-    
-    if (category === 'video') {
-      const element = document.getElementById('featured-work');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
   };
   
   const videoCards = useMemo(() => (

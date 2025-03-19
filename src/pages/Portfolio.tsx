@@ -6,7 +6,6 @@ import ParticleBackground from '@/components/ParticleBackground';
 import PortfolioHeroSection from '@/components/portfolio/PortfolioHeroSection';
 import CategoryFilter from '@/components/portfolio/CategoryFilter';
 import ProjectList from '@/components/portfolio/ProjectList';
-import ContactSection from '@/components/portfolio/ContactSection';
 import { portfolioData, type ProjectCategory } from '@/data/portfolioData';
 
 const Portfolio = () => {
@@ -35,9 +34,6 @@ const Portfolio = () => {
           <ProjectList projects={filteredProjects} />
         </div>
       </section>
-      
-      {/* Contact Information Section */}
-      <ContactSection />
       
       <Footer />
     </div>
