@@ -22,8 +22,8 @@ const ContactSection = () => {
                     <Mail className="text-primary" size={20} />
                   </div>
                   <h3 className="font-medium mb-2">Email</h3>
-                  <a href="mailto:info@pressp.vip" className="text-muted-foreground hover:text-primary transition-colors">
-                    info@pressp.vip
+                  <a href="mailto:andrew@pressp.vip" className="text-muted-foreground hover:text-primary transition-colors">
+                    andrew@pressp.vip
                   </a>
                 </CardContent>
               </Card>
@@ -35,7 +35,7 @@ const ContactSection = () => {
                   </div>
                   <h3 className="font-medium mb-2">Phone</h3>
                   <a href="tel:+17026021277" className="text-muted-foreground hover:text-primary transition-colors">
-                    (702) 602-1277
+                    +1 (702) 602-1277
                   </a>
                 </CardContent>
               </Card>
