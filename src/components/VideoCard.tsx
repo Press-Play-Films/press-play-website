@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Play, Image as ImageIcon } from 'lucide-react';
 
@@ -13,6 +12,7 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
   const [isPlaying, setIsPlaying] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [fallbackThumbnail, setFallbackThumbnail] = useState<string | null>(null);
 
   // Extract video ID from various Vimeo URL formats
   const getVimeoId = (url: string): string | null => {
@@ -20,10 +20,10 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
     
     // Handle different Vimeo URL formats
     const patterns = [
-      /vimeo\.com\/(\d+)/,                                // vimeo.com/123456789
-      /player\.vimeo\.com\/video\/(\d+)/,                 // player.vimeo.com/video/123456789
-      /vimeo\.com\/channels\/[a-zA-Z0-9]+\/(\d+)/,        // vimeo.com/channels/staffpicks/123456789
-      /vimeo\.com\/video\/(\d+)/                          // vimeo.com/video/123456789
+      /vimeo\.com\/(\d+)/,                               
+      /player\.vimeo\.com\/video\/(\d+)/,                
+      /vimeo\.com\/channels\/[a-zA-Z0-9]+\/(\d+)/,        
+      /vimeo\.com\/video\/(\d+)/                        
     ];
     
     for (const pattern of patterns) {
@@ -39,54 +39,91 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
   // Get the Vimeo video ID
   const vimeoId = getVimeoId(videoUrl);
   
-  // Generate thumbnail URL from Vimeo video ID
-  const generateThumbnailUrl = (): string => {
-    if (vimeoId) {
-      // Use vumbnail.com as the primary thumbnail source for Vimeo videos
-      return `https://vumbnail.com/${vimeoId}.jpg`;
-    }
-    return thumbnail;
-  };
-
-  const effectiveThumbnail = generateThumbnailUrl();
-
   useEffect(() => {
-    // Reset states when thumbnail changes
+    // Reset states when thumbnail or videoUrl changes
     setImageLoaded(false);
     setImageError(false);
+    setFallbackThumbnail(null);
     
-    // Preload image only if we have a thumbnail
-    if (effectiveThumbnail) {
-      const img = new Image();
-      img.src = effectiveThumbnail;
-      
-      img.onload = () => {
-        console.log(`Successfully loaded thumbnail: ${effectiveThumbnail}`);
-        setImageLoaded(true);
-      };
-      
-      img.onerror = (e) => {
-        console.error(`Failed to load thumbnail: ${effectiveThumbnail}`, e);
+    const tryLoadingThumbnail = async () => {
+      // Try original thumbnail first
+      if (thumbnail) {
+        const originalImg = new Image();
+        originalImg.src = thumbnail;
+        
+        originalImg.onload = () => {
+          console.log(`Successfully loaded original thumbnail: ${thumbnail}`);
+          setImageLoaded(true);
+        };
+        
+        originalImg.onerror = async () => {
+          console.log(`Failed to load original thumbnail: ${thumbnail}, trying Vimeo ID options`);
+          
+          // Try multiple Vimeo thumbnail formats if we have a video ID
+          if (vimeoId) {
+            const thumbnailOptions = [
+              `https://vumbnail.com/${vimeoId}.jpg`,
+              `https://vumbnail.com/${vimeoId}_large.jpg`,
+              `https://i.vimeocdn.com/video/${vimeoId}_640.jpg`,
+              `https://i.vimeocdn.com/video/${vimeoId}.jpg`
+            ];
+            
+            for (const option of thumbnailOptions) {
+              try {
+                const img = new Image();
+                const loadPromise = new Promise((resolve, reject) => {
+                  img.onload = resolve;
+                  img.onerror = reject;
+                });
+                
+                img.src = option;
+                
+                await loadPromise;
+                console.log(`Successfully loaded fallback thumbnail: ${option}`);
+                setFallbackThumbnail(option);
+                setImageLoaded(true);
+                return;
+              } catch (err) {
+                console.log(`Failed to load fallback thumbnail: ${option}`);
+              }
+            }
+          }
+          
+          // All attempts failed
+          console.error(`Failed to load any thumbnail for: ${title}`);
+          setImageError(true);
+        };
+      } else if (vimeoId) {
+        // No original thumbnail provided, try Vimeo ID directly
+        const vimeoThumbnail = `https://vumbnail.com/${vimeoId}.jpg`;
+        const img = new Image();
+        img.src = vimeoThumbnail;
+        
+        img.onload = () => {
+          console.log(`Successfully loaded Vimeo thumbnail: ${vimeoThumbnail}`);
+          setFallbackThumbnail(vimeoThumbnail);
+          setImageLoaded(true);
+        };
+        
+        img.onerror = () => {
+          console.error(`Failed to load Vimeo thumbnail: ${vimeoThumbnail}`);
+          setImageError(true);
+        };
+      } else {
+        // No thumbnail and no video ID
         setImageError(true);
-      };
-      
-      // Log for debugging
-      console.log(`Attempting to load thumbnail: ${effectiveThumbnail}`);
-      
-      return () => {
-        // Cancel image loading on unmount
-        img.onload = null;
-        img.onerror = null;
-      };
-    } else {
-      // No thumbnail available
-      setImageError(true);
-    }
-  }, [effectiveThumbnail]);
+      }
+    };
+    
+    tryLoadingThumbnail();
+  }, [thumbnail, videoUrl, vimeoId, title]);
 
   const handlePlay = () => {
     setIsPlaying(true);
   };
+
+  // Use fallback thumbnail if available, otherwise use original
+  const displayThumbnail = fallbackThumbnail || thumbnail;
 
   return (
     <div className="video-card animate-fade-in">
@@ -113,14 +150,20 @@ const VideoCard = ({ title, description, thumbnail, videoUrl }: VideoCardProps) 
               <div className={`absolute inset-0 flex items-center justify-center bg-muted/50 ${imageLoaded ? 'hidden' : 'block'}`}>
                 <ImageIcon className="h-8 w-8 text-muted-foreground/50 animate-pulse" />
               </div>
-              {effectiveThumbnail && (
+              {displayThumbnail && (
                 <img 
-                  src={effectiveThumbnail} 
+                  src={displayThumbnail} 
                   alt={title} 
                   className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                   loading="lazy"
                   onLoad={() => setImageLoaded(true)}
-                  onError={() => setImageError(true)}
+                  onError={() => {
+                    // If this is the fallback already failing, show error
+                    if (fallbackThumbnail) {
+                      setImageError(true);
+                    }
+                    // Otherwise the useEffect will handle fallback loading
+                  }}
                 />
               )}
             </>
