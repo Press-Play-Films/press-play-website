@@ -57,7 +57,7 @@ const FeaturedProjectsSection = () => {
       <div className="container px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">A selection of my professional work across various industries</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">A selection of our professional work across various industries</p>
         </div>
         
         <div className="flex justify-center mb-10">
