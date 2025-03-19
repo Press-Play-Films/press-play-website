@@ -20,12 +20,13 @@ const CategoryFilter = ({ activeCategory, setActiveCategory }: CategoryFilterPro
         >
           All
         </button>
-        <button 
+        <HashLink 
+          to="/#featured-work"
           className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'video' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
           onClick={() => setActiveCategory('video')}
         >
           Video Production
-        </button>
+        </HashLink>
         <HashLink 
           to="/#ai-integration"
           className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'ai' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}

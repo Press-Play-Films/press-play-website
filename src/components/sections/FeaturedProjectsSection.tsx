@@ -1,10 +1,10 @@
-
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import VideoCard from '@/components/VideoCard';
 import { useMemo, useState } from 'react';
 import { Category } from '@/components/portfolio/CategoryFilter';
 import { HashLink } from 'react-router-hash-link';
+import CategoryFilter from '@/components/portfolio/CategoryFilter';
 
 const FeaturedProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('all');
@@ -53,9 +53,13 @@ const FeaturedProjectsSection = () => {
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
     
-    // If clicking on "ai" category, we should direct to the AI Integration section
     if (category === 'ai') {
       const element = document.getElementById('ai-integration');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (category === 'video') {
+      const element = document.getElementById('featured-work');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -86,36 +90,7 @@ const FeaturedProjectsSection = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto">A selection of our professional work across various industries</p>
         </div>
         
-        <div className="flex justify-center mb-10">
-          <div className="flex flex-wrap justify-center gap-2 bg-secondary/50 backdrop-blur-md p-1 rounded-full">
-            <button 
-              className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'all' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-              onClick={() => handleCategoryChange('all')}
-            >
-              All
-            </button>
-            <button 
-              className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'video' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-              onClick={() => handleCategoryChange('video')}
-            >
-              Video Production
-            </button>
-            <HashLink 
-              smooth 
-              to="#ai-integration"
-              className={`px-6 py-2 rounded-full transition-colors text-center ${activeCategory === 'ai' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-              onClick={() => setActiveCategory('ai')}
-            >
-              AI Projects
-            </HashLink>
-            <button 
-              className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'sales' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-              onClick={() => handleCategoryChange('sales')}
-            >
-              Sales
-            </button>
-          </div>
-        </div>
+        <CategoryFilter activeCategory={activeCategory} setActiveCategory={handleCategoryChange} />
         
         {videoCards}
         
