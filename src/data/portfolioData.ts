@@ -86,7 +86,7 @@ export const portfolioData: Project[] = [
   {
     id: 10,
     title: "NEST",
-    description: "Short film exploring themes of connection and technology in modern society.",
+    description: "The opening of Terry Goodkind's latest novel NEST. Voice Over by Terry Goodkind.",
     thumbnail: "https://i.vimeocdn.com/video/135485248-5aa36d74d1ed6c9f314d0c4a86eb9ef98ddabe9d2b370070d3db8addd0d7b6d8-d_640",
     videoUrl: "https://player.vimeo.com/video/21217448?h=d80e8ebad4&title=0&byline=0&portrait=0",
     category: "video"
