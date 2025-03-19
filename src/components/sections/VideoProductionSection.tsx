@@ -1,6 +1,8 @@
 
 import React from 'react';
 import TechChip from '@/components/TechChip';
+import { Button } from '@/components/ui/button';
+import { Cloud } from 'lucide-react';
 
 const VideoProductionSection = () => {
   return (
@@ -22,8 +24,14 @@ const VideoProductionSection = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-medium mb-4">Software Expertise</h3>
-              <div className="flex flex-wrap gap-3">
-                <TechChip label="Adobe Creative Cloud" url="https://www.adobe.com/creativecloud.html" />
+              <div className="flex flex-wrap gap-3 mb-4">
+                <Button 
+                  className="bg-gradient-to-r from-[#9b87f5] to-[#6E59A5] text-white hover:shadow-md hover:from-[#8B5CF6] hover:to-[#7E69AB] transition-all"
+                  onClick={() => window.open("https://www.adobe.com/creativecloud.html", "_blank")}
+                >
+                  <Cloud className="mr-2 h-4 w-4" />
+                  Adobe Creative Cloud
+                </Button>
                 <TechChip label="Adobe Creative Suite" />
                 <TechChip label="DaVinci Resolve" />
                 <TechChip label="FCP X" />
