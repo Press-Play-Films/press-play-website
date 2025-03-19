@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 import VideoCard from '@/components/VideoCard';
+import { Card, CardContent } from '@/components/ui/card';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 type Category = 'all' | 'video' | 'ai' | 'sales';
 
@@ -176,19 +178,54 @@ const Portfolio = () => {
         </div>
       </section>
       
-      {/* Feature Film Promo */}
+      {/* Contact Information Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="container px-6 relative z-10">
           <div className="max-w-4xl mx-auto glass-card rounded-3xl overflow-hidden">
             <div className="p-8 md:p-12">
-              <div className="text-center">
-                <h2 className="text-3xl font-bold mb-4">A Different Corner</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                  My feature film "A Different Corner" showcases storytelling through cinematography and character development.
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Have a project in mind? Reach out to discuss how we can bring your vision to life.
                 </p>
-                <a href="#" className="btn-primary inline-flex items-center gap-2 mx-auto">
-                  Contact Me for Private Screening
-                </a>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="bg-secondary/20 border-none">
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                      <Mail className="text-primary" size={20} />
+                    </div>
+                    <h3 className="font-medium mb-2">Email</h3>
+                    <a href="mailto:contact@example.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      contact@example.com
+                    </a>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-secondary/20 border-none">
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                      <Phone className="text-primary" size={20} />
+                    </div>
+                    <h3 className="font-medium mb-2">Phone</h3>
+                    <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
+                      +1 (234) 567-890
+                    </a>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-secondary/20 border-none">
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                      <MapPin className="text-primary" size={20} />
+                    </div>
+                    <h3 className="font-medium mb-2">Location</h3>
+                    <span className="text-muted-foreground text-center">
+                      Los Angeles, California
+                    </span>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
