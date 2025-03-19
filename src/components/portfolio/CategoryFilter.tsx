@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
 
 // Export the Category type so it can be used in other components
-export type Category = 'all' | 'video' | 'ai' | 'sales';
+export type Category = 'all' | 'video';
 
 interface CategoryFilterProps {
   activeCategory: Category;
@@ -27,19 +27,6 @@ const CategoryFilter = ({ activeCategory, setActiveCategory }: CategoryFilterPro
         >
           Video Production
         </HashLink>
-        <HashLink 
-          to="/#ai-integration"
-          className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'ai' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-          onClick={() => setActiveCategory('ai')}
-        >
-          AI Projects
-        </HashLink>
-        <button 
-          className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'sales' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-          onClick={() => setActiveCategory('sales')}
-        >
-          Sales
-        </button>
       </div>
     </div>
   );

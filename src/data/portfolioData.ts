@@ -1,5 +1,5 @@
 
-export type ProjectCategory = 'all' | 'video' | 'ai' | 'sales';
+export type ProjectCategory = 'all' | 'video';
 
 export interface Project {
   id: number;
@@ -90,21 +90,5 @@ export const portfolioData: Project[] = [
     thumbnail: "https://i.vimeocdn.com/video/135485248-5aa36d74d1ed6c9f314d0c4a86eb9ef98ddabe9d2b370070d3db8addd0d7b6d8-d_640",
     videoUrl: "https://player.vimeo.com/video/21217448?h=d80e8ebad4&title=0&byline=0&portrait=0",
     category: "video"
-  },
-  {
-    id: 11,
-    title: "AI Data Dashboard",
-    description: "Custom AI analytics dashboard for real-time business insights.",
-    thumbnail: "/lovable-uploads/67a4cd34-e6ba-4080-a65d-938b87eaf0a3.png",
-    videoUrl: "",
-    category: "ai"
-  },
-  {
-    id: 12,
-    title: "Sales Automation Platform",
-    description: "AI-powered sales automation platform for lead generation and conversion.",
-    thumbnail: "/lovable-uploads/7e8d83e6-f84c-45eb-a959-ec76b81a3a73.png",
-    videoUrl: "",
-    category: "sales"
   }
 ];

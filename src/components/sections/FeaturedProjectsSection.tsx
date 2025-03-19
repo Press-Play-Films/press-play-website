@@ -1,3 +1,4 @@
+
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import VideoCard from '@/components/VideoCard';
@@ -53,12 +54,7 @@ const FeaturedProjectsSection = () => {
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
     
-    if (category === 'ai') {
-      const element = document.getElementById('ai-integration');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else if (category === 'video') {
+    if (category === 'video') {
       const element = document.getElementById('featured-work');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
