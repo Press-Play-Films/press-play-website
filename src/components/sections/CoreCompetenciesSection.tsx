@@ -1,3 +1,4 @@
+
 import SkillCard from '@/components/SkillCard';
 import TechChip from '@/components/TechChip';
 import { useMemo } from 'react';
@@ -32,6 +33,7 @@ const CoreCompetenciesSection = () => {
         icon={<div className="w-6 h-6 bg-blue-500 rounded-full"></div>}
         color="bg-blue-900/30"
         id="ai-integration"
+        linkTo="#ai-integration"
       >
         <p className="mb-4">Implementing cutting-edge AI solutions to enhance business operations and creative workflows.</p>
         <div className="flex flex-wrap">
@@ -48,6 +50,7 @@ const CoreCompetenciesSection = () => {
         icon={<div className="w-6 h-6 bg-yellow-500 rounded-full"></div>}
         color="bg-yellow-900/30"
         id="video-production"
+        linkTo="#featured-work"
       >
         <p className="mb-4">Professional video production services from concept to completion with industry-leading tools.</p>
         <div className="flex flex-wrap">
@@ -64,6 +67,7 @@ const CoreCompetenciesSection = () => {
         icon={<div className="w-6 h-6 bg-red-500 rounded-full"></div>}
         color="bg-red-900/30"
         id="technical-expertise"
+        linkTo="#technical-expertise"
       >
         <p className="mb-4">Comprehensive technical understanding and implementation of complex systems and workflows.</p>
         <div className="flex flex-wrap">
@@ -78,6 +82,7 @@ const CoreCompetenciesSection = () => {
         icon={<div className="w-6 h-6 bg-green-500 rounded-full"></div>}
         color="bg-green-900/30"
         id="sales-leadership"
+        linkTo="#sales-leadership"
       >
         <p className="mb-4">Strategic sales leadership with a focus on relationship building and AI-powered CRM implementation.</p>
         <div className="flex flex-wrap">
