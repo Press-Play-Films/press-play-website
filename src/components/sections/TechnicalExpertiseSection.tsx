@@ -1,6 +1,7 @@
 
 import React from 'react';
 import TechChip from '@/components/TechChip';
+import { techUrls } from '@/data/techUrls';
 
 const TechnicalExpertiseSection = () => {
   return (
@@ -12,31 +13,55 @@ const TechnicalExpertiseSection = () => {
               <div className="w-8 h-8 bg-red-500 rounded-full"></div>
             </div>
             <div>
-              <h2 className="text-3xl font-bold mb-2">Technical Expertise</h2>
-              <p className="text-muted-foreground">
+              <h2 className="text-3xl font-bold mb-2 section-title-gradient">Technical Expertise</h2>
+              <p className="text-muted-foreground section-subtitle-gradient">
                 Comprehensive technical understanding and implementation of complex systems and workflows.
               </p>
             </div>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
               <h3 className="text-xl font-medium mb-4">Certifications & Training</h3>
               <div className="flex flex-wrap gap-3">
-                <TechChip label="Apple Certified T3 Trainer" />
-                <TechChip label="Technical Training" />
-                <TechChip label="Professional Equipment Setup" />
+                <TechChip 
+                  label="Apple Certified T3 Trainer" 
+                  url={techUrls["Apple Certified T3 Trainer"]} 
+                />
+                <TechChip 
+                  label="Technical Training" 
+                  url={techUrls["Technical Training"]} 
+                />
+                <TechChip 
+                  label="Professional Equipment Setup" 
+                  url={techUrls["Professional Equipment Setup"]} 
+                />
               </div>
             </div>
             
             <div>
               <h3 className="text-xl font-medium mb-4">Systems</h3>
               <div className="flex flex-wrap gap-3">
-                <TechChip label="Lighting Systems Installation" />
-                <TechChip label="Audio Systems Programming" />
-                <TechChip label="System Integration" />
-                <TechChip label="Network Configuration" />
-                <TechChip label="Cloud Infrastructure" />
+                <TechChip 
+                  label="Lighting Systems Installation" 
+                  url={techUrls["Lighting Systems Installation"]} 
+                />
+                <TechChip 
+                  label="Audio Systems Programming" 
+                  url={techUrls["Audio Systems Programming"]} 
+                />
+                <TechChip 
+                  label="System Integration" 
+                  url={techUrls["System Integration"]} 
+                />
+                <TechChip 
+                  label="Network Configuration" 
+                  url={techUrls["Network Configuration"]} 
+                />
+                <TechChip 
+                  label="Cloud Infrastructure" 
+                  url={techUrls["Cloud Infrastructure"]} 
+                />
               </div>
             </div>
           </div>
