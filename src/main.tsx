@@ -1,7 +1,7 @@
 
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
+import './styles/index.css'
 
 // Production-optimized React rendering with proper error handling
 const root = document.getElementById("root");

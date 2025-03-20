@@ -1,0 +1,15 @@
+
+/* Interactive hover effects */
+.hover-scale {
+  @apply transition-transform duration-300;
+}
+.hover-scale:hover {
+  @apply transform scale-105;
+}
+
+.hover-glow {
+  @apply transition-all duration-300;
+}
+.hover-glow:hover {
+  @apply shadow-[0_0_15px_rgba(59,130,246,0.5)];
+}

@@ -1,0 +1,33 @@
+
+/* Particle Background */
+.particles-container {
+  @apply fixed top-0 left-0 w-full h-full pointer-events-none;
+  z-index: -1;
+}
+
+.particle {
+  @apply absolute rounded-full bg-blue-400/20;
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Add star backgrounds */
+.star {
+  @apply w-px h-px bg-blue-100 fixed;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+
+.star.small {
+  width: 1px;
+  height: 1px;
+}
+
+.star.medium {
+  width: 2px;
+  height: 2px;
+}
+
+.star.large {
+  width: 3px;
+  height: 3px;
+}

@@ -1,0 +1,90 @@
+
+@layer components {
+  /* Glass Card Effect */
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-lg border border-white/10 shadow-lg;
+  }
+
+  /* Metal Card Effect */
+  .metal-card {
+    @apply bg-gradient-to-b from-[#9F9EA1] via-[#C8C8C9] to-[#8E9196] backdrop-blur-lg border border-white/20 shadow-lg;
+    box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Chrome Button Effect */
+  .chrome-button {
+    background: linear-gradient(145deg, #C8C8C9, #9F9EA1);
+    @apply px-6 py-3 rounded-full text-gray-800 font-medium transition-all duration-300 shadow-lg 
+           hover:shadow-xl border border-white/30 backdrop-blur-md relative overflow-hidden;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+  
+  .chrome-button:hover {
+    background: linear-gradient(145deg, #A8A8A9, #8F8E91);
+    transform: translateY(-1px);
+  }
+  
+  .chrome-button:active {
+    background: linear-gradient(145deg, #8F8E91, #A8A8A9);
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .chrome-tab {
+    background: linear-gradient(145deg, #8E9196 0%, #C8C8C9 50%, #9F9EA1 100%);
+    @apply px-6 py-3 rounded-full text-gray-800 font-medium transition-all duration-300 
+           hover:shadow-md border border-white/20 backdrop-blur-md;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  }
+  
+  .chrome-tab:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+
+  /* Text Gradient */
+  .text-gradient {
+    @apply bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  /* Button effects - updated to match the design in the screenshots */
+  .btn-primary {
+    @apply bg-blue-500 text-white px-6 py-3 rounded-full font-medium 
+    transition-all duration-300 hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]
+    active:scale-95 shadow-lg flex items-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border border-blue-500 text-blue-500 px-6 py-3 rounded-full font-medium 
+    transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500
+    active:scale-95;
+  }
+
+  /* Video card */
+  .video-card {
+    @apply relative overflow-hidden rounded-2xl 
+    transition-all duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]
+    hover:scale-[1.02];
+  }
+
+  .video-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 to-transparent 
+    opacity-70 transition-opacity duration-300;
+  }
+
+  .video-card:hover .video-card-overlay {
+    @apply opacity-90;
+  }
+
+  .video-play-button {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+    w-16 h-16 rounded-full bg-white/10 backdrop-blur-md
+    flex items-center justify-center
+    border border-white/20 text-white
+    transition-all duration-300;
+  }
+
+  .video-card:hover .video-play-button {
+    @apply bg-primary/80 scale-110 shadow-[0_0_20px_rgba(59,130,246,0.5)];
+  }
+}
