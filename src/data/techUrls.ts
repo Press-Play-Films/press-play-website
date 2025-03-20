@@ -47,5 +47,5 @@ export const techUrls = {
   "Cloud Infrastructure": "https://aws.amazon.com/",
   "Professional Equipment Setup": "https://pro.sony/",
   "Lighting Systems Installation": "https://www.arri.com/lighting",
-  "Audio Systems Programming": "https://www.avid.com/pro-tools"
+  "Audio Systems Programming": "https://www.apple.com/logic-pro/"
 };
