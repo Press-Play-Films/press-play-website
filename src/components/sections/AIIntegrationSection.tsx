@@ -2,6 +2,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AIToolCard from '@/components/AIToolCard';
+import { Button } from '@/components/ui/button';
 
 const AIIntegrationSection = () => {
   const aiTools = [
@@ -43,8 +44,6 @@ const AIIntegrationSection = () => {
     },
   ];
   
-  const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
-  
   return (
     <section id="ai-integration" className="py-20 relative scroll-mt-24">
       <div className="container px-6 relative z-10">
@@ -69,9 +68,11 @@ const AIIntegrationSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <Link to="/contact" className={buttonStyle}>
-            Request an A.I. Demo
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Link to="/contact">
+            <Button className="gap-2">
+              Request an A.I. Demo
+              <ArrowRight className="h-5 w-5" />
+            </Button>
           </Link>
         </div>
       </div>
