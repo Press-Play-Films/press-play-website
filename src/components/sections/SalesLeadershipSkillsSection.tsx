@@ -20,13 +20,13 @@ const salesLeaders = [
     name: "Joe Verde",
     description: "Automotive sales training programs and dealership management systems",
     website: "https://www.joeverde.com/",
-    icon: "https://www.joeverde.com/assets/site-images/logo-menu.png"
+    icon: "/lovable-uploads/6cc6a7ed-4d54-46d9-b2b7-ea2e524a8d1a.png"
   },
   {
     name: "Tom Hopkins",
     description: "Building Champions sales methodology and training implementation",
     website: "https://www.tomhopkins.com/",
-    icon: "https://www.tomhopkins.com/wp-content/uploads/2020/11/cropped-tom-hopkins-logo.png"
+    icon: "/lovable-uploads/6cc6a7ed-4d54-46d9-b2b7-ea2e524a8d1a.png"
   }
 ];
 
