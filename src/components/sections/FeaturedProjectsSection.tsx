@@ -1,3 +1,4 @@
+
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import VideoCard from '@/components/VideoCard';
@@ -63,7 +64,7 @@ const FeaturedProjectsSection = () => {
         
         {!(activeCategory === 'video' && showAllVideoProduction) && (
           <div className="text-center mt-12">
-            <Link to="/portfolio" className="px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl mx-auto w-fit">
+            <Link to="/portfolio" className="chrome-button text-gray-800 flex items-center gap-2 mx-auto w-fit">
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

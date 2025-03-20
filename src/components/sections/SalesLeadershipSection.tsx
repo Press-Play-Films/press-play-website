@@ -42,7 +42,7 @@ const SalesLeadershipSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <Link to="/skills" className="chrome-button text-black flex items-center gap-2 inline-flex">
+          <Link to="/skills" className="chrome-button text-gray-800 flex items-center gap-2 inline-flex">
             View All Partnerships
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>

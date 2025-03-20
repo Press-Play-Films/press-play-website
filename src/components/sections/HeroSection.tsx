@@ -56,7 +56,7 @@ const HeroSection = () => {
             Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
           </p>
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Link to="/portfolio" className="chrome-button text-black flex items-center gap-2">
+            <Link to="/portfolio" className="chrome-button text-gray-800 flex items-center gap-2">
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
