@@ -26,16 +26,16 @@ const AIToolCard = ({
   return (
     <div 
       className={cn(
-        "glass-card rounded-xl p-6 relative overflow-hidden transition-all duration-300",
-        "hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)] cursor-pointer",
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-500/10 before:to-transparent before:opacity-0",
+        "metal-card rounded-xl p-6 relative overflow-hidden transition-all duration-300",
+        "hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(0,0,0,0.5)] cursor-pointer",
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:to-transparent before:opacity-0",
         "hover:before:opacity-100 before:transition-opacity before:duration-300"
       )}
       onClick={handleClick}
     >
       <div className="flex items-start gap-4 relative z-10">
-        <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0 
-          transition-all duration-300 group-hover:bg-white/20">
+        <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 
+          transition-all duration-300 group-hover:bg-white/30">
           {icon ? (
             <img 
               src={icon} 
@@ -49,14 +49,14 @@ const AIToolCard = ({
         
         <div className="flex-1">
           <div className="flex justify-between items-start">
-            <h3 className="font-semibold text-xl transition-colors duration-300 text-white group-hover:text-white">{name}</h3>
+            <h3 className="font-semibold text-xl transition-colors duration-300 text-black group-hover:text-black">{name}</h3>
           </div>
-          <p className="text-muted-foreground text-sm mt-1 transition-colors duration-300">{description}</p>
+          <p className="text-gray-800 text-sm mt-1 transition-colors duration-300">{description}</p>
         </div>
         
         {website && (
           <div className="absolute top-5 right-5 transform transition-transform duration-300 hover:scale-110">
-            <ExternalLink className="w-5 h-5 text-muted-foreground hover:text-white transition-colors duration-300" />
+            <ExternalLink className="w-5 h-5 text-gray-800 hover:text-black transition-colors duration-300" />
           </div>
         )}
       </div>

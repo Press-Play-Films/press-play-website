@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
   const [glowIntensity, setGlowIntensity] = useState(0);
-  const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
   
   useEffect(() => {
     // Build up the glow effect
@@ -57,7 +56,7 @@ const HeroSection = () => {
             Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
           </p>
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Link to="/portfolio" className={buttonStyle}>
+            <Link to="/portfolio" className="chrome-button text-black flex items-center gap-2">
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

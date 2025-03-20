@@ -6,16 +6,16 @@ const NavigationTabs = () => {
     <section className="py-8 relative">
       <div className="container px-6 relative z-10">
         <div className="flex flex-wrap justify-center gap-4">
-          <HashLink smooth to="#ai-integration" className="px-6 py-3 rounded-full bg-blue-900/30 hover:bg-blue-500/30 transition-colors">
+          <HashLink smooth to="#ai-integration" className="chrome-tab">
             AI Integration
           </HashLink>
-          <HashLink smooth to="#featured-work" className="px-6 py-3 rounded-full bg-yellow-900/30 hover:bg-yellow-500/30 transition-colors">
+          <HashLink smooth to="#featured-work" className="chrome-tab">
             Video Production
           </HashLink>
-          <HashLink smooth to="#technical-expertise" className="px-6 py-3 rounded-full bg-red-900/30 hover:bg-red-500/30 transition-colors">
+          <HashLink smooth to="#technical-expertise" className="chrome-tab">
             Technical Expertise
           </HashLink>
-          <HashLink smooth to="#sales-leadership" className="px-6 py-3 rounded-full bg-green-900/30 hover:bg-green-500/30 transition-colors">
+          <HashLink smooth to="#sales-leadership" className="chrome-tab">
             Sales Leadership
           </HashLink>
         </div>

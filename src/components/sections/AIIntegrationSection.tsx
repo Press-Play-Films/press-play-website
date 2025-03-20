@@ -69,10 +69,10 @@ const AIIntegrationSection = () => {
         
         <div className="text-center mt-12">
           <Link to="/contact">
-            <Button className="gap-2">
+            <button className="chrome-button text-black flex items-center gap-2">
               Request an A.I. Demo
               <ArrowRight className="h-5 w-5" />
-            </Button>
+            </button>
           </Link>
         </div>
       </div>

@@ -19,8 +19,6 @@ const SalesLeadershipSection = () => {
     }
   ];
   
-  const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
-  
   return (
     <section className="py-20 relative">
       <div className="container px-6 relative z-10">
@@ -44,7 +42,7 @@ const SalesLeadershipSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <Link to="/skills" className={buttonStyle}>
+          <Link to="/skills" className="chrome-button text-black flex items-center gap-2 inline-flex">
             View All Partnerships
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
