@@ -44,7 +44,7 @@ const HeroSection = () => {
       <div className="container px-6 relative" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
           <h1 
-            className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in relative inline-block"
+            className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in section-title-gradient"
             style={{
               textShadow: `0 0 ${glowIntensity * 0.2}px rgba(59, 130, 246, ${glowIntensity / 100})`,
               transition: 'text-shadow 0.3s ease-out'

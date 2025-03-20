@@ -23,8 +23,8 @@ const SalesLeadershipSection = () => {
     <section className="py-20 relative">
       <div className="container px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Sales Leadership Partnerships</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl section-title-gradient mb-4">Sales Leadership Partnerships</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto section-subtitle-gradient">
             Implementing cutting-edge sales methodologies in partnership with industry leaders.
           </p>
         </div>
