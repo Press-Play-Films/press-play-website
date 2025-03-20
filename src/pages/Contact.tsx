@@ -107,16 +107,6 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="mt-10">
-                  <h3 className="text-lg font-medium mb-4">Request a Demo</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Interested in seeing how AI can transform your business? Schedule a personalized demo.
-                  </p>
-                  <a href="#" className="btn-outline inline-flex">
-                    Schedule Demo
-                  </a>
-                </div>
               </div>
               
               <div>
