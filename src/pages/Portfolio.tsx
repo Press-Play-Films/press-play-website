@@ -10,15 +10,15 @@ import { portfolioData, type ProjectCategory } from '@/data/portfolioData';
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
-  const [showAll, setShowAll] = useState(false);
 
   const filteredProjects = portfolioData.filter(
     (project) => activeCategory === 'all' || project.category === activeCategory
   );
 
-  const showAllVideos = () => {
-    setShowAll(true);
-  };
+  // This function is required by the CategoryFilter component interface
+  // but doesn't need to do anything in this context since we're already
+  // showing all videos when the category is selected
+  const showAllVideos = () => {};
 
   return (
     <div className="min-h-screen">
