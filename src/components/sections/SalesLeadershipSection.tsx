@@ -20,7 +20,7 @@ const SalesLeadershipSection = () => {
   ];
   
   return (
-    <section className="py-20 relative">
+    <section id="sales-leadership" className="py-20 relative scroll-mt-24">
       <div className="container px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl section-title-gradient mb-4">Sales Leadership Partnerships</h2>
@@ -37,12 +37,13 @@ const SalesLeadershipSection = () => {
               description={leader.description}
               icon={leader.icon}
               website={leader.website}
+              className="hover-glow metal-card-premium"
             />
           ))}
         </div>
         
         <div className="text-center mt-12">
-          <Link to="/skills" className="chrome-button text-gray-800 flex items-center gap-2 inline-flex">
+          <Link to="/skills" className="chrome-button-premium text-gray-800 flex items-center gap-2 inline-flex">
             View All Partnerships
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
