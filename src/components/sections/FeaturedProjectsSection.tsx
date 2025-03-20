@@ -1,4 +1,3 @@
-
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import VideoCard from '@/components/VideoCard';
@@ -9,18 +8,27 @@ import { portfolioData } from '@/data/portfolioData';
 
 const FeaturedProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const [showAllVideoProduction, setShowAllVideoProduction] = useState(false);
   
-  // Take the first 6 videos from portfolioData
-  const videoData = portfolioData.slice(0, 6);
+  const videoData = useMemo(() => {
+    if (activeCategory === 'video' && showAllVideoProduction) {
+      return portfolioData;
+    }
+    return portfolioData.slice(0, 6);
+  }, [activeCategory, showAllVideoProduction]);
   
   const filteredVideos = useMemo(() => {
     return videoData.filter(video => 
       activeCategory === 'all' || video.category === activeCategory
     );
-  }, [activeCategory]);
+  }, [activeCategory, videoData]);
   
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category);
+  };
+  
+  const showAllVideos = () => {
+    setShowAllVideoProduction(true);
   };
   
   const videoCards = useMemo(() => (
@@ -37,8 +45,6 @@ const FeaturedProjectsSection = () => {
     </div>
   ), [filteredVideos]);
   
-  const buttonStyle = "px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl";
-  
   return (
     <section id="featured-work" className="py-20 relative">
       <div className="container px-6 relative z-10">
@@ -47,16 +53,22 @@ const FeaturedProjectsSection = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto">A selection of our professional work across various industries</p>
         </div>
         
-        <CategoryFilter activeCategory={activeCategory} setActiveCategory={handleCategoryChange} />
+        <CategoryFilter 
+          activeCategory={activeCategory} 
+          setActiveCategory={handleCategoryChange} 
+          showAllVideos={showAllVideos}
+        />
         
         {videoCards}
         
-        <div className="text-center mt-12">
-          <Link to="/portfolio" className={buttonStyle}>
-            View Full Portfolio
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-        </div>
+        {!(activeCategory === 'video' && showAllVideoProduction) && (
+          <div className="text-center mt-12">
+            <Link to="/portfolio" className="px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl mx-auto w-fit">
+              View Full Portfolio
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

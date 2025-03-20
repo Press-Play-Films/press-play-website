@@ -10,9 +10,10 @@ export type Category = 'all' | 'video';
 interface CategoryFilterProps {
   activeCategory: Category;
   setActiveCategory: (category: Category) => void;
+  showAllVideos: () => void;
 }
 
-const CategoryFilter = ({ activeCategory, setActiveCategory }: CategoryFilterProps) => {
+const CategoryFilter = ({ activeCategory, setActiveCategory, showAllVideos }: CategoryFilterProps) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10">
       <div className="flex flex-wrap justify-center gap-2 bg-secondary/50 backdrop-blur-md p-1 rounded-full">
@@ -22,13 +23,15 @@ const CategoryFilter = ({ activeCategory, setActiveCategory }: CategoryFilterPro
         >
           All
         </button>
-        <HashLink 
-          to="/#featured-work"
+        <button 
           className={`px-6 py-2 rounded-full transition-colors ${activeCategory === 'video' ? 'bg-primary text-white' : 'hover:bg-secondary'}`}
-          onClick={() => setActiveCategory('video')}
+          onClick={() => {
+            setActiveCategory('video');
+            showAllVideos();
+          }}
         >
           Video Production
-        </HashLink>
+        </button>
       </div>
       
       <HashLink to="/#ai-integration" smooth>

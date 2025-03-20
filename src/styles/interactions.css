@@ -13,3 +13,22 @@
 .hover-glow:hover {
   @apply shadow-[0_0_15px_rgba(59,130,246,0.5)];
 }
+
+/* Video card hover effect */
+.video-card {
+  @apply transition-all duration-300;
+}
+.video-card:hover {
+  @apply transform scale-[1.02];
+}
+
+.video-card:hover .video-play-button {
+  @apply bg-primary scale-110;
+}
+
+.video-card-overlay {
+  @apply transition-opacity duration-300;
+}
+.video-card:hover .video-card-overlay {
+  @apply opacity-20;
+}
