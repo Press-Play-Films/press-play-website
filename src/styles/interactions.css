@@ -33,20 +33,20 @@
   @apply opacity-20;
 }
 
-/* Chrome Button with Gleam Animation - Enhanced 3D metallic look */
+/* Chrome Button with Gleam Animation - Enhanced 3D silver metallic look */
 .chrome-button {
   @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300;
-  background: linear-gradient(145deg, #D8D8D9 0%, #9F9EA1 50%, #8E9196 100%);
+  background: linear-gradient(145deg, #E8E8E9 0%, #9F9EA1 50%, #8E9196 100%);
   box-shadow: 
     0 6px 12px -2px rgba(0, 0, 0, 0.35), 
-    inset 0 1px 2px rgba(255, 255, 255, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -2px 1px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .chrome-button:hover {
-  background: linear-gradient(145deg, #E8E8E9, #AFAEA1);
+  background: linear-gradient(145deg, #F0F0F2, #C4C4C8);
   transform: translateY(-2px);
   box-shadow: 
     0 8px 15px -2px rgba(0, 0, 0, 0.25), 
@@ -55,7 +55,7 @@
 }
 
 .chrome-button:active {
-  background: linear-gradient(145deg, #9F9EA1, #C8C8C9);
+  background: linear-gradient(145deg, #9F9EA1, #D8D8D9);
   transform: translateY(1px);
   box-shadow: 
     0 2px 5px -1px rgba(0, 0, 0, 0.4), 
@@ -74,7 +74,7 @@
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.6) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: rotate(30deg);
@@ -86,20 +86,20 @@
   transition: left 0.7s ease-in-out;
 }
 
-/* Chrome tab style - Enhanced 3D metallic look */
+/* Chrome tab style - Enhanced 3D silver metallic look */
 .chrome-tab {
   @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300 text-gray-800;
-  background: linear-gradient(145deg, #D8D8D9 0%, #9F9EA1 50%, #8E9196 100%);
+  background: linear-gradient(145deg, #E8E8E9 0%, #9F9EA1 50%, #8E9196 100%);
   box-shadow: 
     0 4px 10px -2px rgba(0, 0, 0, 0.3), 
-    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.7),
     inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .chrome-tab:hover {
-  background: linear-gradient(145deg, #E8E8E9, #AFAEA1);
+  background: linear-gradient(145deg, #F0F0F2, #C4C4C8);
   transform: translateY(-1px);
   box-shadow: 
     0 6px 12px -2px rgba(0, 0, 0, 0.2), 
@@ -108,7 +108,7 @@
 }
 
 .chrome-tab:active {
-  background: linear-gradient(145deg, #9F9EA1, #C8C8C9);
+  background: linear-gradient(145deg, #9F9EA1, #D8D8D9);
   transform: translateY(1px);
   box-shadow: 
     0 2px 5px -1px rgba(0, 0, 0, 0.3), 
@@ -127,7 +127,7 @@
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.6) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: rotate(30deg);
