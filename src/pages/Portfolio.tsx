@@ -10,10 +10,15 @@ import { portfolioData, type ProjectCategory } from '@/data/portfolioData';
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
+  const [showAll, setShowAll] = useState(false);
 
   const filteredProjects = portfolioData.filter(
     (project) => activeCategory === 'all' || project.category === activeCategory
   );
+
+  const showAllVideos = () => {
+    setShowAll(true);
+  };
 
   return (
     <div className="min-h-screen">
@@ -29,6 +34,7 @@ const Portfolio = () => {
           <CategoryFilter 
             activeCategory={activeCategory} 
             setActiveCategory={setActiveCategory} 
+            showAllVideos={showAllVideos}
           />
           
           <ProjectList projects={filteredProjects} />
