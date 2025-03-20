@@ -9,6 +9,7 @@ import CoreCompetenciesSection from '@/components/sections/CoreCompetenciesSecti
 import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSection';
 import AIIntegrationSection from '@/components/sections/AIIntegrationSection';
 import SalesLeadershipSection from '@/components/sections/SalesLeadershipSection';
+import VideoProductionSection from '@/components/sections/VideoProductionSection';
 import AmbientAudio from '@/components/AmbientAudio';
 
 const Index = () => {
@@ -60,6 +61,7 @@ const Index = () => {
         <FeaturedProjectsSection />
         <AIIntegrationSection />
         <SalesLeadershipSection />
+        <VideoProductionSection />
         
         <Footer />
       </div>
