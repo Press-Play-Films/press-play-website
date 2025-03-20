@@ -8,6 +8,7 @@ interface AIToolCardProps {
   icon?: string;
   website?: string;
   logoClassName?: string;
+  className?: string;
 }
 
 const AIToolCard = ({ 
@@ -15,7 +16,8 @@ const AIToolCard = ({
   description, 
   icon, 
   website,
-  logoClassName = "w-9 h-9 object-contain" 
+  logoClassName = "w-9 h-9 object-contain",
+  className
 }: AIToolCardProps) => {
   const handleClick = () => {
     if (website) {
@@ -29,7 +31,8 @@ const AIToolCard = ({
         "metal-card rounded-xl p-6 relative overflow-hidden transition-all duration-300",
         "hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(0,0,0,0.5)] cursor-pointer",
         "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:to-transparent before:opacity-0",
-        "hover:before:opacity-100 before:transition-opacity before:duration-300"
+        "hover:before:opacity-100 before:transition-opacity before:duration-300",
+        className
       )}
       onClick={handleClick}
     >
