@@ -54,10 +54,18 @@ const HeroSection = () => {
               Press Play
             </h1>
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground my-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
-          </p>
-          <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <div className="inline-block rounded-lg px-5 py-2 mt-6 backdrop-blur-sm bg-white/5 border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.25)]">
+            <p 
+              className="text-xl md:text-2xl font-trajan text-white/90 animate-fade-in section-subtitle-gradient" 
+              style={{ 
+                animationDelay: "0.1s",
+                textShadow: `0 0 ${glowIntensity * 0.1}px rgba(59, 130, 246, ${glowIntensity / 150})` 
+              }}
+            >
+              Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
+            </p>
+          </div>
+          <div className="flex justify-center mt-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <Link to="/portfolio" className="chrome-button text-gray-800 flex items-center gap-2">
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
