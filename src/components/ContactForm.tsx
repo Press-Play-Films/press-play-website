@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
-import { sendEmail } from '@/utils/emailService';
+import { sendContactForm } from '@/utils/emailService';
 
 interface ContactFormProps {
   onSubmitSuccess?: () => void;
@@ -36,19 +35,11 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
     setIsSubmitting(true);
     
     try {
-      const templateParams = {
-        from_name: formData.name,
-        reply_to: formData.email,
-        to_name: "Andrew",
-        phone: formData.phone,
-        message: formData.message,
-      };
-      
       // Gmail service ID from EmailJS dashboard
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_o9ghk7h';
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
       
-      await sendEmail(serviceId, templateId, templateParams);
+      await sendContactForm(serviceId, templateId, formData);
       
       toast.success("Message sent successfully", {
         description: "Thank you for your message. I'll get back to you shortly.",

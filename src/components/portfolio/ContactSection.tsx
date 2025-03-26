@@ -1,9 +1,8 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { sendEmail } from '@/utils/emailService';
+import { sendContactForm } from '@/utils/emailService';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -29,18 +28,14 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      const templateParams = {
-        from_name: formData.name,
-        reply_to: formData.email,
-        to_name: "Andrew",
-        message: formData.message,
-      };
-      
       // Gmail service ID from EmailJS dashboard
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_o9ghk7h';
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
       
-      await sendEmail(serviceId, templateId, templateParams);
+      await sendContactForm(serviceId, templateId, {
+        ...formData,
+        phone: "Not provided" // This form doesn't collect phone numbers
+      });
       
       toast.success("Message sent successfully", {
         description: "Thank you for your message. I'll get back to you shortly.",

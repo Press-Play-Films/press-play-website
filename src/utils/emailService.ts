@@ -1,4 +1,3 @@
-
 import emailjs from 'emailjs-com';
 
 /**
@@ -103,6 +102,34 @@ export const getAutoReplyMessage = (): string => {
 };
 
 /**
+ * Send contact form with auto-reply capability
+ * This function handles both the main form submission and auto-reply configuration
+ * 
+ * @param serviceId Your EmailJS Service ID
+ * @param templateId Your EmailJS Template ID (with auto-reply enabled)
+ * @param formData Form data containing name, email, phone, and message
+ * @returns Promise resolving to the EmailJS response
+ */
+export const sendContactForm = async (
+  serviceId: string,
+  templateId: string,
+  formData: { name: string; email: string; phone?: string; message: string }
+) => {
+  // EmailJS template params including auto-reply configuration
+  const templateParams = {
+    from_name: formData.name,
+    reply_to: formData.email,
+    to_name: "Andrew",
+    phone: formData.phone || "Not provided",
+    message: formData.message,
+    // The auto-reply content is configured in the EmailJS dashboard
+    // using the template variables and formatted message
+  };
+  
+  return sendEmail(serviceId, templateId, templateParams);
+};
+
+/**
  * EmailJS Configuration Guide:
  * 
  * Current setup:
@@ -111,19 +138,23 @@ export const getAutoReplyMessage = (): string => {
  * To complete the setup:
  * 1. Create an Email Template if you haven't already
  *    - Go to Email Templates in the EmailJS dashboard
- *    - Create a template with these parameters:
+ *    - Create a template with type "Contact Form"
+ *    - Enable "Auto Reply" option in the template configuration
+ *    - Make sure your template uses these parameters:
  *      {{from_name}} - Sender's name
- *      {{reply_to}} - Sender's email
+ *      {{reply_to}} - Sender's email for replies
+ *      {{to_name}} - Your name (Andrew)
  *      {{phone}} - Sender's phone (for ContactForm)
  *      {{message}} - Message content
  * 
  * 2. Set these environment variables in your project:
  *    - VITE_EMAILJS_USER_ID - Your EmailJS Public Key
- *    - VITE_EMAILJS_SERVICE_ID - service_o9ghk7h
- *    - VITE_EMAILJS_TEMPLATE_ID - Your Template ID
+ *    - VITE_EMAILJS_SERVICE_ID - service_o9ghk7h (Gmail integration)
+ *    - VITE_EMAILJS_TEMPLATE_ID - Your Template ID with auto-reply enabled
  * 
- * If you need additional email functionality:
- * - Rate limiting: Use a counter in localStorage to prevent spam
- * - Attachments: Add file inputs to your form and pass the files in templateParams
- * - HTML emails: Format your templates with HTML in the EmailJS dashboard
+ * Auto-Reply Configuration:
+ * - When setting up the template in EmailJS, enable the Auto-Reply option
+ * - In the EmailJS dashboard's Auto-Reply section, use {{reply_to}} as the recipient
+ * - For the Auto-Reply content, you can copy the HTML from getAutoReplyMessage()
+ * - You can customize the subject line to something like "Thank you for contacting Andrew Freeman"
  */
