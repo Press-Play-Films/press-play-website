@@ -12,21 +12,50 @@
     <meta property="og:url" content="https://andrewfreeman.dev" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Strong cache control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <link rel="preload" href="/ambient-drone.mp3" as="audio" />
-    <link rel="preload" href="/src/styles/index.css?v=1.0.1" as="style" />
-    <!-- Update font loading strategy -->
+    
+    <!-- Preload resources with cache-busting query params -->
+    <link rel="preload" href="/ambient-drone.mp3?v=2025.03.26.1" as="audio" />
+    <link rel="preload" href="/src/styles/index.css?v=2025.03.26.1" as="style" />
+    
+    <!-- Font preloading with cache-busting -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Add font-display:swap to improve font loading -->
+    <style>
+      /* Ensure font is loaded properly */
+      @font-face {
+        font-family: 'Cinzel';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cinzel/v23/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnfYPlDX5Z.woff2) format('woff2');
+      }
+      
+      /* Temporary invisible element to trigger font loading */
+      body::before {
+        content: 'Font Preload';
+        font-family: 'Cinzel';
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        z-index: -9999;
+      }
+    </style>
+    
     <title>Andrew Freeman</title>
   </head>
   <body>
     <div id="root"></div>
     <!-- Lovable script tag for enabling new features -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx?v=1.0.1"></script>
+    <!-- Add version query param for cache busting -->
+    <script type="module" src="/src/main.tsx?v=2025.03.26.1"></script>
   </body>
 </html>

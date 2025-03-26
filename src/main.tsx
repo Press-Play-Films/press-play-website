@@ -4,36 +4,48 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
-// Clear any cached resources
-if (window.performance && window.performance.navigation.type === 0) {
+// Clear all caches on page load
+const clearAllCaches = async () => {
   if ('caches' in window) {
-    caches.keys().then(cacheNames => {
-      cacheNames.forEach(cacheName => {
-        caches.delete(cacheName);
-      });
-      console.log('Caches cleared on refresh');
-    });
+    try {
+      const cacheNames = await caches.keys();
+      await Promise.all(
+        cacheNames.map(cacheName => caches.delete(cacheName))
+      );
+      console.log('All caches cleared successfully');
+    } catch (error) {
+      console.error('Failed to clear caches:', error);
+    }
   }
-}
+};
 
-// Force reload if older than 24 hours
-const lastLoadTime = localStorage.getItem('last_load_time');
-const currentTime = new Date().getTime();
-if (lastLoadTime && (currentTime - parseInt(lastLoadTime)) > 86400000) {
-  localStorage.setItem('last_load_time', currentTime.toString());
-  window.location.reload(); // Removed the boolean parameter to fix TypeScript error
-} else {
-  localStorage.setItem('last_load_time', currentTime.toString());
-}
+// Apply a cache-busting version to localStorage
+const appVersion = '2025.03.26.1'; // Increment this when deploying new versions
+const storedVersion = localStorage.getItem('app_version');
 
-// Production-optimized React rendering with proper error handling
-const root = document.getElementById("root");
-if (root) {
-  createRoot(root).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
+// Force a clean reload if version has changed
+if (storedVersion !== appVersion) {
+  localStorage.setItem('app_version', appVersion);
+  console.log(`Version changed from ${storedVersion} to ${appVersion}, forcing reload`);
+  
+  // Clear all caches before reloading
+  clearAllCaches().then(() => {
+    // Use location.replace for a clean reload without history entry
+    window.location.replace(window.location.href.split('#')[0]);
+  });
 } else {
-  console.error("Root element not found. Cannot mount React application.");
+  // Still clear caches but don't force reload
+  clearAllCaches();
+  
+  // Production-optimized React rendering with proper error handling
+  const root = document.getElementById("root");
+  if (root) {
+    createRoot(root).render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  } else {
+    console.error("Root element not found. Cannot mount React application.");
+  }
 }

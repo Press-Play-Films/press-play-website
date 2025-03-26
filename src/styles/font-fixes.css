@@ -12,7 +12,7 @@
   font-family: "Trajan Pro", "Cinzel", serif !important;
 }
 
-/* Force font loading check */
+/* Force font loading check with clear console debugging */
 body::after {
   content: '';
   font-family: "Cinzel";
@@ -20,6 +20,12 @@ body::after {
   position: absolute;
   pointer-events: none;
 }
+
+/* Add font loading debug */
+document.fonts.ready.then(() => {
+  console.log('Fonts are loaded and ready to use!');
+  document.documentElement.classList.add('fonts-loaded');
+});
 
 /* Ensure proper styling of chrome buttons */
 .chrome-button {
