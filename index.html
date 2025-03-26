@@ -36,6 +36,14 @@
         font-family: 'Cinzel', serif;
       }
       
+      /* Critical gradient styles */
+      .section-title-gradient, .force-gradient {
+        background: linear-gradient(90deg, #FFFFFF, #E8E8E9 50%, #C4C4C8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
       /* Loading indicator */
       #loading-screen {
         position: fixed;
@@ -94,6 +102,22 @@
       // Initialize with a unique session ID to prevent any session-based issues
       window.sessionId = Date.now().toString() + Math.random().toString(36).substring(2, 10);
       window.initializerRun = true;
+      
+      // Immediately add a global style to ensure gradients are visible
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add global style element to ensure gradients display correctly
+        const styleEl = document.createElement('style');
+        styleEl.textContent = `
+          .section-title-gradient, .force-gradient {
+            background: linear-gradient(90deg, #FFFFFF, #E8E8E9 50%, #C4C4C8) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.15) !important;
+          }
+        `;
+        document.head.appendChild(styleEl);
+      });
       
       // Function to hide loading screen
       const hideLoadingScreen = () => {
