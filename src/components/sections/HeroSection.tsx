@@ -11,7 +11,7 @@ const HeroSection = () => {
     if (mounted.current) return;
     mounted.current = true;
     
-    console.log('HeroSection mounted - version 2025.03.28.1');
+    console.log('HeroSection mounted - version 2025.03.28.2');
     
     // Track this session in sessionStorage
     const sessionKey = `hero_section_loaded_${window.sessionId || Date.now()}`;
