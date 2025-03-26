@@ -1,4 +1,3 @@
-
 /**
  * EmailJS Configuration Guide: To avoid re-authentication issues
  * 
@@ -90,29 +89,42 @@ export const imageEmbeddingGuide = {};
 /**
  * Troubleshooting EmailJS Template Setup:
  * 
- * If your auto-reply template is not showing up as a selection:
+ * If your auto-reply template is not showing up as a selection or you cannot select it:
  * 
  * 1. Make sure you have created at least one template:
  *    - Go to "Email Templates" in the left sidebar
  *    - Create a new template if none exists
  *    - Save the template completely before trying to link it
  * 
- * 2. Check your EmailJS subscription level:
- *    - Auto-reply is a premium feature in EmailJS
+ * 2. Selection Issues:
+ *    - If you see the dropdown showing your template (e.g., template_n7hpkvu) but clicking 
+ *      doesn't select it, try clicking elsewhere in the dropdown area (not just on the text)
+ *    - Try clicking the search icon on the right side of the dropdown
+ *    - Try refreshing the page and then clicking directly on the template name
+ *    - If using Chrome, try disabling any autofill extensions that might interfere
+ * 
+ * 3. Browser Issues:
+ *    - Clear browser cache and cookies
+ *    - Try using a different browser (Firefox, Edge, etc.)
+ *    - Disable browser extensions that might interfere with form interactions
+ * 
+ * 4. EmailJS Account:
+ *    - Check your EmailJS subscription level (auto-reply is a premium feature)
  *    - Verify your account has access to this feature
  *    - The free plan has limited features
  * 
- * 3. Try these troubleshooting steps:
+ * 5. Try these additional troubleshooting steps:
  *    - After creating a template, refresh the page completely
  *    - Make sure the template is properly saved (green success message)
  *    - Check that you're logged in with the correct EmailJS account
- *    - Clear browser cache or try a different browser
+ *    - Try a private/incognito browser window
+ *    - Check for any console errors in your browser's developer tools
  * 
- * 4. Common template variables to use:
- *    - {{name}} - Sender's name
- *    - {{email}} - Sender's email
- *    - {{message}} - Message content
- *    - {{phone}} - Sender's phone number (if collected)
+ * 6. Template Name/ID Issues:
+ *    - Try creating a new template with a simpler name
+ *    - Avoid special characters in template names
+ *    - If you see template_ID but can't select it, note down this ID manually
+ *      and use it directly in your code as the templateId parameter
  * 
  * For persistent issues, contact EmailJS support at support@emailjs.com
  */
@@ -145,4 +157,3 @@ export const authTroubleshootingGuide = {};
  * - Check the appropriate checkbox to allow unsubscribing from that template
  */
 export const unsubscribeGuide = {};
-
