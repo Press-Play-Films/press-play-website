@@ -69,7 +69,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-        trajan: ["Trajan Pro", "serif"],
+        trajan: ["Trajan Pro", "Cinzel", "serif"],
       },
       keyframes: {
         "accordion-down": {

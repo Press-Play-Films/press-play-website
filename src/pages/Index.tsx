@@ -15,19 +15,7 @@ const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   
   useEffect(() => {
-    // Load Trajan Pro font
-    const trajanProFont = new FontFace(
-      'Trajan Pro', 
-      'url(https://fonts.cdnfonts.com/s/19372/TrajanPro-Regular.woff)'
-    );
-    
-    trajanProFont.load().then((loadedFont) => {
-      document.fonts.add(loadedFont);
-      console.log('Trajan Pro font loaded successfully');
-    }).catch(err => {
-      console.error('Error loading Trajan Pro font:', err);
-    });
-    
+    // Set loaded state immediately since we're using web fonts
     setIsLoaded(true);
     
     // Handle hash navigation after page load
