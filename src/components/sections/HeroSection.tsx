@@ -43,7 +43,7 @@ const HeroSection = () => {
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
       <div className="container px-6 relative" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-block rounded-lg px-6 py-3 backdrop-blur-sm bg-white/5 border border-white/10 shadow-[0_4px_15px_rgba(0,0,0,0.2)]">
+          <div className="inline-block rounded-lg px-6 py-3 backdrop-blur-sm bg-white/10 border border-white/20 shadow-[0_4px_15px_rgba(0,0,0,0.3)]">
             <h1 
               className="text-5xl md:text-7xl font-trajan font-bold section-title-gradient"
               style={{
