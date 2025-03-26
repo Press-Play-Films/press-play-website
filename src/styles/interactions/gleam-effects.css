@@ -1,0 +1,69 @@
+
+/* Gleam animation for chrome buttons */
+.chrome-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0s;
+}
+
+.chrome-button:hover::before {
+  left: 150%;
+  transition: left 0.7s ease-in-out;
+}
+
+/* Enhanced gleam animation for premium chrome buttons */
+.chrome-button-premium::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0s;
+}
+
+.chrome-button-premium:hover::before {
+  left: 150%;
+  transition: left 0.7s ease-in-out;
+}
+
+/* Gleam animation for chrome tabs */
+.chrome-tab::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0s;
+}
+
+.chrome-tab:hover::before {
+  left: 150%;
+  transition: left 0.7s ease-in-out;
+}

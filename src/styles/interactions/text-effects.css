@@ -1,0 +1,17 @@
+
+/* Section title gradient */
+.section-title-gradient {
+  @apply font-bold;
+  background: linear-gradient(90deg, #FFFFFF, #E8E8E9 50%, #C4C4C8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+}
+
+.section-subtitle-gradient {
+  background: linear-gradient(90deg, #D4D4D8, #A1A1AA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

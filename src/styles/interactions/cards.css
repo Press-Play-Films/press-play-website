@@ -1,0 +1,19 @@
+
+/* Premium Metal Card with enhanced 3D effect */
+.metal-card-premium {
+  @apply relative overflow-hidden rounded-xl border p-6 transition-all duration-300;
+  background: linear-gradient(145deg, #FFFFFF 0%, #E8E8EE 50%, #D0D0D8 100%);
+  box-shadow: 
+    0 10px 20px -5px rgba(0, 0, 0, 0.35), 
+    inset 0 1px 3px rgba(255, 255, 255, 1),
+    inset 0 -2px 1px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.metal-card-premium:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    0 15px 30px -8px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(59, 130, 246, 0.4),
+    inset 0 1px 3px rgba(255, 255, 255, 1);
+}
