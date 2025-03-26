@@ -18,38 +18,39 @@
 
   /* Chrome Button styles to match the design in the screenshots */
   .chrome-button {
-    @apply relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-300 
-    text-gray-800 px-6 py-3 rounded-full font-medium 
-    transition-all duration-300 hover:from-gray-200 hover:to-gray-400
-    active:scale-95 shadow-md flex items-center justify-center;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300;
+    background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%);
     box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-      0 2px 4px -1px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 6px 12px -2px rgba(0, 0, 0, 0.35), 
+      inset 0 1px 3px rgba(255, 255, 255, 0.9),
+      inset 0 -2px 1px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    color: #333;
   }
 
   .chrome-button-premium {
-    @apply relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-300 
-    text-gray-800 px-6 py-3 rounded-full font-medium 
-    transition-all duration-300 hover:from-gray-200 hover:to-gray-400
-    active:scale-95 shadow-md flex items-center justify-center;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300;
+    background: linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%);
     box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-      0 2px 4px -1px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 8px 16px -4px rgba(0, 0, 0, 0.4), 
+      inset 0 1px 3px rgba(255, 255, 255, 1),
+      inset 0 -2px 1px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+    color: #333;
   }
 
   .chrome-tab {
-    @apply relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-300 
-    text-gray-800 px-6 py-3 rounded-full font-medium 
-    border border-white/80 shadow-md
-    transition-all duration-300 hover:from-gray-200 hover:to-gray-400;
+    @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300;
+    background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%);
     box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-      0 2px 4px -1px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 4px 10px -2px rgba(0, 0, 0, 0.3), 
+      inset 0 1px 2px rgba(255, 255, 255, 0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+    color: #333;
   }
 
   /* Button effects - preserved for compatibility */
@@ -91,5 +92,38 @@
 
   .video-card:hover .video-play-button {
     @apply bg-primary/80 scale-110 shadow-[0_0_20px_rgba(59,130,246,0.5)];
+  }
+  
+  /* Glass box styles for gradient text content */
+  .title-glass-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 5;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    display: inline-block;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle-glass-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 5;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    display: inline-block;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    margin-bottom: 2.5rem;
   }
 }

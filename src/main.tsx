@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
@@ -13,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.29.3';
+const APP_VERSION = '2025.03.29.4';
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle
@@ -25,7 +26,7 @@ const logAppState = (message) => {
 logAppState('Initializing application');
 
 // A longer delay to ensure all styles are properly loaded before mounting
-const mountDelay = 600; // Increased from 400ms to 600ms
+const mountDelay = 1000; // Increased from 600ms to 1000ms
 logAppState(`Using mount delay of ${mountDelay}ms to ensure styles are loaded`);
 
 // Force CSS recalculation by adding a delay before mounting
@@ -105,5 +106,5 @@ window.addEventListener('load', () => {
     // Force reflow one more time
     document.body.classList.add('force-reflow');
     setTimeout(() => document.body.classList.remove('force-reflow'), 10);
-  }, 800); // Increased timeout for final style check
+  }, 1000); // Increased timeout for final style check
 });

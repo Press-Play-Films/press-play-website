@@ -34,6 +34,9 @@
   transform: translateZ(0) !important; 
   will-change: transform, opacity !important;
   display: inline-block !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .subtitle-glass-box {
@@ -47,6 +50,9 @@
   transform: translateZ(0) !important;
   will-change: transform, opacity !important;
   display: inline-block !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1.25rem !important;
+  margin-bottom: 2.5rem !important;
 }
 
 /* Add debug outlines if needed for troubleshooting */

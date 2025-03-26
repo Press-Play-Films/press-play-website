@@ -15,11 +15,23 @@ const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   
   useEffect(() => {
-    // Set a timeout to ensure CSS is properly loaded
+    // Set a timeout to ensure CSS is properly loaded - increased from 100ms to 800ms
     const timer = setTimeout(() => {
       setIsLoaded(true);
       console.log('[Index] Page marked as loaded');
-    }, 100);
+      
+      // Verify glass box elements
+      const titleBox = document.querySelector('.title-glass-box');
+      const subtitleBox = document.querySelector('.subtitle-glass-box');
+      console.log('[Index] Glass boxes present:', { 
+        titleBox: !!titleBox, 
+        subtitleBox: !!subtitleBox,
+        buttons: document.querySelectorAll('.chrome-button-premium, .chrome-tab').length
+      });
+      
+      // Force a reflow
+      document.body.offsetHeight;
+    }, 800);
     
     // Handle hash navigation after page load
     if (window.location.hash) {
@@ -29,7 +41,7 @@ const Index = () => {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 500);
+      }, 800); // Increased from 500ms
     }
     
     return () => clearTimeout(timer);
