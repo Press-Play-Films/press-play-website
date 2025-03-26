@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
   const [glowIntensity, setGlowIntensity] = useState(0);
+  const [version] = useState(`v${new Date().toISOString().slice(0, 10)}`);
   
   useEffect(() => {
     // Build up the glow effect
@@ -33,11 +34,15 @@ const HeroSection = () => {
       return () => clearInterval(fadeOutInterval);
     }, 4000); // Changed to 4000 ms (1 second longer than before)
 
+    // Log to console to help with debugging
+    console.log('HeroSection mounted, Cinzel font should be visible now');
+    console.log('Current build:', version);
+
     return () => {
       clearInterval(buildUpInterval);
       clearTimeout(fadeTimeout);
     };
-  }, []);
+  }, [version]);
   
   return (
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">

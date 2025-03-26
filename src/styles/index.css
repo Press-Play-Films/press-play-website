@@ -13,3 +13,6 @@
 
 /* Import interaction styles */
 @import "./interactions.css";
+
+/* Import font fixes */
+@import "./font-fixes.css";
