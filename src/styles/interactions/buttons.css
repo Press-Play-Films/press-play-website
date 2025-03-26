@@ -1,90 +1,121 @@
 
 /* Chrome Button with Gleam Animation - Enhanced 3D silver metallic look */
 .chrome-button {
-  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300;
-  background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%);
+  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300 !important;
+  background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%) !important;
   box-shadow: 
     0 6px 12px -2px rgba(0, 0, 0, 0.35), 
     inset 0 1px 3px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 1px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    inset 0 -2px 1px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+  color: #333 !important;
 }
 
 .chrome-button:hover {
-  background: linear-gradient(145deg, #FFFFFF, #D8D8DC);
-  transform: translateY(-2px);
+  background: linear-gradient(145deg, #FFFFFF, #D8D8DC) !important;
+  transform: translateY(-2px) !important;
   box-shadow: 
     0 8px 15px -2px rgba(0, 0, 0, 0.25), 
     inset 0 1px 3px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 1px rgba(0, 0, 0, 0.1);
+    inset 0 -2px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
 .chrome-button:active {
-  background: linear-gradient(145deg, #C4C4C8, #E8E8EC);
-  transform: translateY(1px);
+  background: linear-gradient(145deg, #C4C4C8, #E8E8EC) !important;
+  transform: translateY(1px) !important;
   box-shadow: 
     0 2px 5px -1px rgba(0, 0, 0, 0.4), 
     inset 0 1px 1px rgba(255, 255, 255, 0.4),
-    inset 0 1px 4px rgba(0, 0, 0, 0.2);
+    inset 0 1px 4px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Premium Chrome Button - More vibrant silver with stronger 3D effect */
 .chrome-button-premium {
-  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300;
-  background: linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%);
+  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300 !important;
+  background: linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%) !important;
   box-shadow: 
     0 8px 16px -4px rgba(0, 0, 0, 0.4), 
     inset 0 1px 3px rgba(255, 255, 255, 1),
-    inset 0 -2px 1px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+    inset 0 -2px 1px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important;
+  color: #333 !important;
 }
 
 .chrome-button-premium:hover {
-  background: linear-gradient(145deg, #FFFFFF, #E8E8F2);
-  transform: translateY(-3px);
+  background: linear-gradient(145deg, #FFFFFF, #E8E8F2) !important;
+  transform: translateY(-3px) !important;
   box-shadow: 
     0 10px 20px -5px rgba(0, 0, 0, 0.3), 
     inset 0 1px 3px rgba(255, 255, 255, 1),
-    inset 0 -2px 1px rgba(0, 0, 0, 0.1);
+    inset 0 -2px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
 .chrome-button-premium:active {
-  background: linear-gradient(145deg, #D8D8E0, #F8F8FC);
-  transform: translateY(1px);
+  background: linear-gradient(145deg, #D8D8E0, #F8F8FC) !important;
+  transform: translateY(1px) !important;
   box-shadow: 
     0 3px 7px -1px rgba(0, 0, 0, 0.35), 
     inset 0 1px 1px rgba(255, 255, 255, 0.6),
-    inset 0 1px 4px rgba(0, 0, 0, 0.15);
+    inset 0 1px 4px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Chrome tab style - Enhanced 3D silver metallic look */
 .chrome-tab {
-  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300 text-gray-800;
-  background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%);
+  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium transition-all duration-300 !important;
+  background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%) !important;
   box-shadow: 
     0 4px 10px -2px rgba(0, 0, 0, 0.3), 
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+  color: #333 !important;
 }
 
 .chrome-tab:hover {
-  background: linear-gradient(145deg, #FFFFFF, #D8D8DC);
-  transform: translateY(-1px);
+  background: linear-gradient(145deg, #FFFFFF, #D8D8DC) !important;
+  transform: translateY(-1px) !important;
   box-shadow: 
     0 6px 12px -2px rgba(0, 0, 0, 0.2), 
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+    inset 0 -1px 1px rgba(0, 0, 0, 0.05) !important;
 }
 
 .chrome-tab:active {
-  background: linear-gradient(145deg, #C4C4C8, #E8E8EC);
-  transform: translateY(1px);
+  background: linear-gradient(145deg, #C4C4C8, #E8E8EC) !important;
+  transform: translateY(1px) !important;
   box-shadow: 
     0 2px 5px -1px rgba(0, 0, 0, 0.3), 
     inset 0 1px 1px rgba(255, 255, 255, 0.4),
-    inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    inset 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Reinforcing gleam effects */
+.chrome-button::before,
+.chrome-button-premium::before,
+.chrome-tab::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -100% !important;
+  width: 80% !important;
+  height: 200% !important;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  transform: rotate(30deg) !important;
+  transition: transform 0s !important;
+  z-index: 5 !important;
+}
+
+.chrome-button:hover::before,
+.chrome-button-premium:hover::before,
+.chrome-tab:hover::before {
+  left: 150% !important;
+  transition: left 0.7s ease-in-out !important;
 }

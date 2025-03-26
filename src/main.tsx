@@ -3,8 +3,17 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
+// Extend Window interface to declare our custom properties
+declare global {
+  interface Window {
+    sessionId?: string;
+    _titleBox?: HTMLElement;
+    _titleElement?: HTMLElement;
+  }
+}
+
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.29.1';
+const APP_VERSION = '2025.03.29.2';
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle
@@ -16,7 +25,7 @@ const logAppState = (message) => {
 logAppState('Initializing application');
 
 // A longer delay to ensure all styles are properly loaded before mounting
-const mountDelay = 250; // Increased from 100ms to 250ms
+const mountDelay = 400; // Increased from 250ms to 400ms
 logAppState(`Using mount delay of ${mountDelay}ms to ensure styles are loaded`);
 
 // Force CSS recalculation by adding a delay before mounting
@@ -68,7 +77,7 @@ setTimeout(() => {
         
         // Verify backdrop-filter support
         logAppState(`Backdrop-filter support test: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
-      }, 200);
+      }, 300);
     } catch (error) {
       console.error('[main.tsx] Failed to render React application:', error);
     }
@@ -93,13 +102,13 @@ window.addEventListener('load', () => {
       logAppState(`Glass box: bg=${boxStyles.backgroundColor}, backdropFilter=${boxStyles.backdropFilter}, border=${boxStyles.border}`);
       
       // Force browser to maintain styles by keeping a reference
-      window._titleBox = titleBox;
-      window._titleElement = titleElement;
+      window._titleBox = titleBox as HTMLElement;
+      window._titleElement = titleElement as HTMLElement;
     } else {
       console.error('[main.tsx] Title elements not found in final check');
       // Try to force rerender if elements are missing
       document.body.classList.add('force-reflow');
       setTimeout(() => document.body.classList.remove('force-reflow'), 10);
     }
-  }, 500);
+  }, 600); // Increased timeout to make sure everything is fully rendered
 });

@@ -12,7 +12,7 @@ const HeroSection = () => {
     if (mounted.current) return;
     mounted.current = true;
     
-    const version = '2025.03.29.1';
+    const version = '2025.03.29.2';
     console.log(`HeroSection mounted - version ${version}`);
     
     // Force a reflow before starting animations
@@ -158,11 +158,11 @@ const HeroSection = () => {
           </div>
           
           <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Link to="/portfolio" className="btn-primary bg-blue-500 hover:bg-blue-600 text-white flex items-center gap-2 rounded-full px-6 py-3 font-medium transition-all">
+            <Link to="/portfolio" className="chrome-button-premium text-gray-800 flex items-center gap-2">
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <Link to="#featured-work" className="ml-4 btn-outline border border-white/30 text-white/90 hover:bg-white/10 rounded-full px-6 py-3 font-medium transition-all">
+            <Link to="#featured-work" className="ml-4 chrome-tab text-gray-800 hover:bg-white/10">
               Featured Work
             </Link>
           </div>
