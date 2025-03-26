@@ -26,27 +26,37 @@
 export const emailJSConfigGuide = {};
 
 /**
- * EmailJS Auto-Reply Template Setup Guide:
+ * EmailJS Template Setup Guide (Step by Step):
  * 
- * 1. In the EmailJS dashboard, go to "Email Templates"
- * 2. Create a new template or select an existing one
- * 3. Choose/enable the "Auto-Reply" option
- * 4. Configure the template to use your branding and message
- * 5. In the template editor:
- *    - For the MAIN notification email (to you), use variables like:
- *      {{from_name}}, {{message}}, {{phone}}, etc.
- *    - For the AUTO-REPLY section (to the sender), copy and paste the HTML from
- *      the getAutoReplyMessage() function above into the auto-reply content area
- *    - Set the reply-to address to {{reply_to}} (the sender's email)
- *    - Choose a clear subject line like "Thank you for contacting Andrew Freeman"
+ * 1. In the EmailJS dashboard, go to "Email Templates" in the left sidebar
+ * 2. Click the "Create New Template" button
+ * 3. Complete these fields in the Content tab:
+ *    - Subject: "Contact Us: {{title}}" or "Thank you for contacting Andrew Freeman"
+ *    - Content: You can start with their default template, which includes:
+ *      ```
+ *      A message by {{name}} has been received. Kindly respond at your earliest convenience.
+ *      
+ *      {{name}}
+ *      {{time}}
+ *      
+ *      {{message}}
+ *      ```
  * 
- * 6. Save the template and note the Template ID
- * 7. Set the Template ID as VITE_EMAILJS_TEMPLATE_ID environment variable
+ * 4. On the right side form, fill in:
+ *    - To Email: your email address (e.g., andyfree@gmail.com)
+ *    - From Name: {{name}} (this will display the sender's name)
+ *    - Reply To: {{email}} (this allows you to reply directly to the sender)
  * 
- * Specific to press.vip account:
- * - You already have the service ID "service_o9ghk7h" set up
- * - After creating your template, update the templateId in ContactForm/ContactSection components
- * - Test the form to ensure the auto-reply is working correctly
+ * 5. After saving the basic template, click on the "Auto-Reply" tab to set up the auto-response
+ * 6. In the Auto-Reply tab:
+ *    - Enable auto-reply by toggling it on
+ *    - Set the Subject to something like "Thank you for contacting Andrew Freeman"
+ *    - In the Content section, paste the HTML from the getAutoReplyMessage() function
+ * 
+ * 7. Click "Save" to finalize your template
+ * 8. Once saved, get the Template ID from the URL or settings and add it to your environment variables
+ * 
+ * Note: The template ID will appear in the URL like: https://dashboard.emailjs.com/admin/templates/YOUR_TEMPLATE_ID
  */
 export const autoReplyGuide = {};
 
@@ -54,14 +64,20 @@ export const autoReplyGuide = {};
  * How to Embed Images in EmailJS Templates:
  * 
  * 1. Upload Your Logo to EmailJS:
- *    - In the EmailJS dashboard, go to "Email Services" > select "press.vip" service
- *    - Click on the "Content" tab and upload your logo image
+ *    - In the EmailJS dashboard, go to "Email Services" > select your service
+ *    - Click on the "Content" tab > scroll down to "Attachments" section
+ *    - Click "Add file" and upload your logo image
  *    - Important: Name your file "logo.png" to match the template code
  * 
  * 2. The Template is Already Set Up:
  *    - The auto-reply template already includes the code:
  *      <img src="cid:logo.png" alt="Andrew Freeman Logo" style="max-width: 150px; height: auto;" />
  *    - This will automatically display your uploaded logo in emails
+ * 
+ * 3. Testing Your Logo:
+ *    - After uploading the logo and setting up the template
+ *    - Click the "Test It" button in the top menu
+ *    - Send a test email to yourself to verify the logo appears correctly
  * 
  * Notes:
  * - Image filenames are case-sensitive and cannot contain spaces
@@ -72,16 +88,31 @@ export const autoReplyGuide = {};
 export const imageEmbeddingGuide = {};
 
 /**
- * Troubleshooting EmailJS Authentication Issues:
+ * Troubleshooting EmailJS Template Setup:
  * 
- * If you're repeatedly asked to sign in to EmailJS:
+ * If your auto-reply template is not showing up as a selection:
  * 
- * 1. Check the browser console for error messages
- * 2. Verify your environment variables are set correctly
- * 3. Ensure you're using the correct Public Key (User ID)
- * 4. Try refreshing your EmailJS Public Key in the dashboard
- * 5. Ensure your EmailJS account is in good standing
- * 6. Check if your EmailJS plan has any restrictions
+ * 1. Make sure you have created at least one template:
+ *    - Go to "Email Templates" in the left sidebar
+ *    - Create a new template if none exists
+ *    - Save the template completely before trying to link it
+ * 
+ * 2. Check your EmailJS subscription level:
+ *    - Auto-reply is a premium feature in EmailJS
+ *    - Verify your account has access to this feature
+ *    - The free plan has limited features
+ * 
+ * 3. Try these troubleshooting steps:
+ *    - After creating a template, refresh the page completely
+ *    - Make sure the template is properly saved (green success message)
+ *    - Check that you're logged in with the correct EmailJS account
+ *    - Clear browser cache or try a different browser
+ * 
+ * 4. Common template variables to use:
+ *    - {{name}} - Sender's name
+ *    - {{email}} - Sender's email
+ *    - {{message}} - Message content
+ *    - {{phone}} - Sender's phone number (if collected)
  * 
  * For persistent issues, contact EmailJS support at support@emailjs.com
  */
@@ -114,3 +145,4 @@ export const authTroubleshootingGuide = {};
  * - Check the appropriate checkbox to allow unsubscribing from that template
  */
 export const unsubscribeGuide = {};
+
