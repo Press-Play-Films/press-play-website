@@ -3,27 +3,10 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
-import { toast } from 'sonner'
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.29.1'; // Version updated to ensure complete refresh
+const APP_VERSION = '2025.03.28.3'; // Updated version
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
-
-// Global error handler
-window.addEventListener('error', (event) => {
-  console.error('[Global Error Handler]', event.error);
-  toast.error('An unexpected error occurred', {
-    description: 'Please try refreshing the page',
-  });
-});
-
-// Unhandled promise rejection handler
-window.addEventListener('unhandledrejection', (event) => {
-  console.error('[Unhandled Promise Rejection]', event.reason);
-  toast.error('An unexpected error occurred', {
-    description: 'Please try refreshing the page',
-  });
-});
 
 // Mount the application
 console.log('[main.tsx] Mounting React application');
