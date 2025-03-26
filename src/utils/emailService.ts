@@ -1,4 +1,3 @@
-
 import emailjs from 'emailjs-com';
 
 /**
@@ -10,6 +9,7 @@ import emailjs from 'emailjs-com';
 export const initEmailJS = (userId: string) => {
   if (!userId || userId === 'YOUR_USER_ID') {
     console.warn('EmailJS User ID not provided. Email functionality will not work correctly.');
+    console.log('To fix this, please set the VITE_EMAILJS_USER_ID environment variable with your EmailJS User ID (public key)');
     return;
   }
   
@@ -60,6 +60,9 @@ export const sendEmail = async (
       }
       if (error.message.includes('Network Error')) {
         throw new Error('Network error when connecting to email service. Please check your internet connection.');
+      }
+      if (error.message.includes('invalid user id')) {
+        throw new Error('Invalid EmailJS User ID. Please check your VITE_EMAILJS_USER_ID environment variable.');
       }
     }
     
@@ -130,6 +133,31 @@ export const sendContactForm = async (
 };
 
 /**
+ * EmailJS Configuration Guide: To avoid re-authentication issues
+ * 
+ * To prevent having to sign in repeatedly to EmailJS:
+ * 
+ * 1. Get your keys from your EmailJS dashboard (https://dashboard.emailjs.com/admin):
+ *    - Public Key (User ID): Found under Account > API Keys
+ *    - Service ID: Found under Email Services > [Your Service] > Settings
+ *    - Template ID: Found under Email Templates > [Your Template] > Settings
+ * 
+ * 2. Set these values as environment variables in your Lovable project:
+ *    - VITE_EMAILJS_USER_ID (Public Key)
+ *    - VITE_EMAILJS_SERVICE_ID
+ *    - VITE_EMAILJS_TEMPLATE_ID
+ * 
+ * 3. In your Lovable project:
+ *    - Click on Project Settings (gear icon)
+ *    - Select "Environment Variables"
+ *    - Add each variable and its corresponding value
+ *    - Click "Save" and then click "Rebuild"
+ * 
+ * This ensures your EmailJS credentials are securely stored and eliminates the need 
+ * to re-authenticate each time you use the service.
+ */
+
+/**
  * EmailJS Auto-Reply Template Setup Guide:
  * 
  * 1. In the EmailJS dashboard, go to "Email Templates"
@@ -170,4 +198,19 @@ export const sendContactForm = async (
  * - Use the exact filename as the CID value
  * - Images must be uploaded to your EmailJS service before they can be embedded
  * - For dynamically changing images, you would need to use a different approach with file hosting
+ */
+
+/**
+ * Troubleshooting EmailJS Authentication Issues:
+ * 
+ * If you're repeatedly asked to sign in to EmailJS:
+ * 
+ * 1. Check the browser console for error messages
+ * 2. Verify your environment variables are set correctly
+ * 3. Ensure you're using the correct Public Key (User ID)
+ * 4. Try refreshing your EmailJS Public Key in the dashboard
+ * 5. Ensure your EmailJS account is in good standing
+ * 6. Check if your EmailJS plan has any restrictions
+ * 
+ * For persistent issues, contact EmailJS support at support@emailjs.com
  */
