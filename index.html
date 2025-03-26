@@ -84,72 +84,32 @@
     <!-- Required Lovable script tag for new features -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     
-    <!-- Initialization script to handle cache clearing before React loads -->
+    <!-- Direct import of main.tsx instead of dynamic script creation -->
+    <script type="module" src="/src/main.tsx"></script>
+    
     <script>
       // Initialize with a unique session ID to prevent any session-based issues
       window.sessionId = Date.now().toString() + Math.random().toString(36).substring(2, 10);
-      
-      // Aggressive cache clearing function
-      const clearBrowserCache = async () => {
-        // Clear localStorage
-        try {
-          localStorage.clear();
-          console.log('[Initializer] localStorage cleared');
-        } catch (e) {
-          console.error('[Initializer] Failed to clear localStorage:', e);
-        }
-        
-        // Clear sessionStorage
-        try {
-          sessionStorage.clear();
-          console.log('[Initializer] sessionStorage cleared');
-        } catch (e) {
-          console.error('[Initializer] Failed to clear sessionStorage:', e);
-        }
-        
-        // Clear cache API if available
-        if ('caches' in window) {
-          try {
-            const cacheNames = await caches.keys();
-            await Promise.all(
-              cacheNames.map(cacheName => caches.delete(cacheName))
-            );
-            console.log('[Initializer] Browser caches cleared');
-          } catch (error) {
-            console.error('[Initializer] Failed to clear caches:', error);
-          }
-        }
-        
-        console.log('[Initializer] Cache clearing completed');
-        return true;
-      };
-      
-      // Set a flag to confirm initialization was run
       window.initializerRun = true;
       
-      // Run cache clearing before loading React
-      clearBrowserCache().then(() => {
-        console.log('[Initializer] Loading application with new session ID:', window.sessionId);
-        
-        // Create script element for main
-        const mainScript = document.createElement('script');
-        mainScript.src = `/src/main.tsx?v=${Date.now()}`;
-        mainScript.type = "module";
-        document.body.appendChild(mainScript);
-        
-        // Hide loading screen when main script loads
-        mainScript.onload = () => {
-          setTimeout(() => {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-              loadingScreen.style.opacity = '0';
-              setTimeout(() => {
-                loadingScreen.style.display = 'none';
-              }, 500);
-            }
-          }, 300);
-        };
-      });
+      // Function to hide loading screen
+      const hideLoadingScreen = () => {
+        setTimeout(() => {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }
+        }, 300);
+      };
+      
+      // Hide loading screen when window is loaded
+      window.addEventListener('load', hideLoadingScreen);
+      
+      // Fallback to hide loading screen after 5 seconds
+      setTimeout(hideLoadingScreen, 5000);
     </script>
   </body>
 </html>
