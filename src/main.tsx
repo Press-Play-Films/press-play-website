@@ -17,7 +17,7 @@ if (storedVersion !== APP_VERSION) {
   
   // Only force refresh if this isn't the initial load
   if (storedVersion) {
-    window.location.reload(true);
+    window.location.reload();
   }
 }
 
