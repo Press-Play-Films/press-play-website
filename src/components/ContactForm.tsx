@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -43,8 +44,8 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
         message: formData.message,
       };
       
-      // Environment variables for EmailJS
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+      // Gmail service ID from EmailJS dashboard
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_o9ghk7h';
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
       
       await sendEmail(serviceId, templateId, templateParams);
@@ -62,8 +63,11 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       console.error('Failed to send email:', error);
+      
+      // Show more helpful error message
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       toast.error("Failed to send message", {
-        description: "There was a problem sending your message. Please try again later.",
+        description: errorMessage,
       });
     } finally {
       setIsSubmitting(false);

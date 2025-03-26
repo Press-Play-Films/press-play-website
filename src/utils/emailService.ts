@@ -43,17 +43,20 @@ export const sendEmail = async (
   }
   
   try {
-    console.log('Attempting to send email with:', { serviceId, templateId });
+    console.log('Sending email via Gmail integration with service:', serviceId);
     const response = await emailjs.send(serviceId, templateId, templateParams);
-    console.log('Email sent successfully:', response);
+    console.log('Email sent successfully via Gmail:', response);
     return response;
   } catch (error) {
     console.error('Error sending email:', error);
     
-    // Provide more specific error messages based on common issues
+    // Gmail-specific error handling
     if (error instanceof Error) {
-      if (error.message.includes('Forbidden') || error.message.includes('412')) {
-        throw new Error('Email service authorization failed. Please check your Mailgun API key, domain setup, and account status.');
+      if (error.message.includes('daily sending quota')) {
+        throw new Error('Gmail daily sending quota exceeded. Please try again tomorrow.');
+      }
+      if (error.message.includes('invalid credentials')) {
+        throw new Error('Gmail authentication failed. Please check your EmailJS service configuration.');
       }
       if (error.message.includes('Network Error')) {
         throw new Error('Network error when connecting to email service. Please check your internet connection.');
@@ -66,37 +69,27 @@ export const sendEmail = async (
 };
 
 /**
- * EmailJS Alternative Setup Instructions:
+ * EmailJS Configuration Guide:
  * 
- * If you're experiencing issues with Mailgun, consider these alternatives:
+ * Current setup:
+ * - You're using Gmail integration with EmailJS (service_o9ghk7h)
  * 
- * 1. Gmail integration:
- *    - Create an Email Service in EmailJS using Gmail
- *    - You'll need to provide your Gmail credentials
+ * To complete the setup:
+ * 1. Create an Email Template if you haven't already
+ *    - Go to Email Templates in the EmailJS dashboard
+ *    - Create a template with these parameters:
+ *      {{from_name}} - Sender's name
+ *      {{reply_to}} - Sender's email
+ *      {{phone}} - Sender's phone (for ContactForm)
+ *      {{message}} - Message content
  * 
- * 2. SMTP integration:
- *    - Create an Email Service in EmailJS using SMTP
- *    - You can use various email providers like Gmail, Outlook, etc.
+ * 2. Set these environment variables in your project:
+ *    - VITE_EMAILJS_USER_ID - Your EmailJS Public Key
+ *    - VITE_EMAILJS_SERVICE_ID - service_o9ghk7h
+ *    - VITE_EMAILJS_TEMPLATE_ID - Your Template ID
  * 
- * 3. SendGrid integration:
- *    - Create an Email Service in EmailJS using SendGrid
- *    - You'll need a SendGrid API key
- * 
- * General EmailJS Setup:
- * 1. Sign up at https://www.emailjs.com/ (they have a free tier)
- * 2. Create an Email Service (Gmail, SMTP, SendGrid, etc)
- * 3. Create an Email Template with these parameters:
- *    - {{from_name}} - Sender's name
- *    - {{reply_to}} - Sender's email
- *    - {{phone}} - Sender's phone (for ContactForm)
- *    - {{message}} - Message content
- * 4. Get your User ID (public key) from Account > API Keys
- * 5. Get your Service ID from Email Services
- * 6. Get your Template ID from Email Templates
- * 
- * Usage in App.tsx:
- * initEmailJS('your_emailjs_user_id');
- * 
- * Usage in contact forms:
- * await sendEmail('your_service_id', 'your_template_id', templateParams);
+ * If you need additional email functionality:
+ * - Rate limiting: Use a counter in localStorage to prevent spam
+ * - Attachments: Add file inputs to your form and pass the files in templateParams
+ * - HTML emails: Format your templates with HTML in the EmailJS dashboard
  */
