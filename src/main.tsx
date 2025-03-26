@@ -13,7 +13,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.29.2';
+const APP_VERSION = '2025.03.29.3';
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle
@@ -25,7 +25,7 @@ const logAppState = (message) => {
 logAppState('Initializing application');
 
 // A longer delay to ensure all styles are properly loaded before mounting
-const mountDelay = 400; // Increased from 250ms to 400ms
+const mountDelay = 600; // Increased from 400ms to 600ms
 logAppState(`Using mount delay of ${mountDelay}ms to ensure styles are loaded`);
 
 // Force CSS recalculation by adding a delay before mounting
@@ -51,6 +51,9 @@ setTimeout(() => {
       );
       logAppState('React successfully mounted');
       
+      // Force browser to recalculate styles
+      document.body.offsetHeight;
+      
       // Additional logging to help with debugging
       setTimeout(() => {
         // Check if the glass boxes are rendered
@@ -66,11 +69,12 @@ setTimeout(() => {
           console.error('[main.tsx] Title glass box not found in document after mount!');
         }
         
-        // Force reflow if needed
-        document.body.offsetHeight;
+        // Force reflow
+        document.body.classList.add('force-reflow');
+        setTimeout(() => document.body.classList.remove('force-reflow'), 10);
         
         // Check all critical CSS classes
-        ['section-title-gradient', 'section-subtitle-gradient', 'title-glass-box', 'subtitle-glass-box'].forEach(className => {
+        ['section-title-gradient', 'section-subtitle-gradient', 'title-glass-box', 'subtitle-glass-box', 'chrome-button', 'chrome-tab'].forEach(className => {
           const elements = document.querySelectorAll(`.${className}`);
           logAppState(`Found ${elements.length} elements with class ${className}`);
         });
@@ -90,25 +94,16 @@ window.addEventListener('load', () => {
   
   // Additional check for styling issues
   setTimeout(() => {
-    const titleElement = document.querySelector('.section-title-gradient');
-    const titleBox = document.querySelector('.title-glass-box');
+    // Force browser to maintain styles by keeping a reference
+    const elements = {
+      chromeButtons: document.querySelectorAll('.chrome-button, .chrome-button-premium, .chrome-tab'),
+      titleElements: document.querySelectorAll('h1, h2')
+    };
     
-    if (titleElement && titleBox) {
-      const titleStyles = window.getComputedStyle(titleElement);
-      const boxStyles = window.getComputedStyle(titleBox);
-      
-      logAppState('Final render check: Title element and glass box are present');
-      logAppState(`Title text: color=${titleStyles.color}, bgClip=${titleStyles.backgroundClip}, fillColor=${titleStyles.webkitTextFillColor}`);
-      logAppState(`Glass box: bg=${boxStyles.backgroundColor}, backdropFilter=${boxStyles.backdropFilter}, border=${boxStyles.border}`);
-      
-      // Force browser to maintain styles by keeping a reference
-      window._titleBox = titleBox as HTMLElement;
-      window._titleElement = titleElement as HTMLElement;
-    } else {
-      console.error('[main.tsx] Title elements not found in final check');
-      // Try to force rerender if elements are missing
-      document.body.classList.add('force-reflow');
-      setTimeout(() => document.body.classList.remove('force-reflow'), 10);
-    }
-  }, 600); // Increased timeout to make sure everything is fully rendered
+    logAppState(`Final check: Found ${elements.chromeButtons.length} chrome buttons and ${elements.titleElements.length} title elements`);
+    
+    // Force reflow one more time
+    document.body.classList.add('force-reflow');
+    setTimeout(() => document.body.classList.remove('force-reflow'), 10);
+  }, 800); // Increased timeout for final style check
 });

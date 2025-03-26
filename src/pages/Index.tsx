@@ -15,8 +15,11 @@ const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   
   useEffect(() => {
-    // Set loaded state immediately since we're using web fonts
-    setIsLoaded(true);
+    // Set a timeout to ensure CSS is properly loaded
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+      console.log('[Index] Page marked as loaded');
+    }, 100);
     
     // Handle hash navigation after page load
     if (window.location.hash) {
@@ -28,6 +31,8 @@ const Index = () => {
         }
       }, 500);
     }
+    
+    return () => clearTimeout(timer);
   }, []);
 
   // Add event listener for when hash changes

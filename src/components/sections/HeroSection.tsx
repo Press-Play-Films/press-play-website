@@ -12,7 +12,7 @@ const HeroSection = () => {
     if (mounted.current) return;
     mounted.current = true;
     
-    const version = '2025.03.29.2';
+    const version = '2025.03.29.3';
     console.log(`HeroSection mounted - version ${version}`);
     
     // Force a reflow before starting animations
@@ -101,68 +101,21 @@ const HeroSection = () => {
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
       <div className="container px-6 relative" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
-          {/* Title glass box with forced styles to ensure it renders properly */}
-          <div 
-            className="title-glass-box inline-block rounded-lg px-12 py-6 mb-6"
-            style={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
-              position: 'relative',
-              zIndex: 5,
-              transform: 'translateZ(0)', 
-              willChange: 'transform, opacity'
-            }}
-          >
-            <h1 
-              className="text-5xl md:text-7xl font-cinzel font-bold section-title-gradient"
-              style={{
-                textShadow: `0 0 ${glowIntensity * 0.3}px rgba(59, 130, 246, ${glowIntensity / 90})`,
-                transition: 'text-shadow 0.3s ease-out',
-                position: 'relative',
-                zIndex: 10
-              }}
-            >
-              Press Play
-            </h1>
-          </div>
+          {/* Main Title */}
+          <h1 className="text-5xl md:text-7xl font-cinzel font-bold mb-6">
+            Press Play
+          </h1>
           
-          {/* Subtitle glass box with forced styles */}
-          <div 
-            className="subtitle-glass-box mt-6 inline-block rounded-lg px-8 py-4"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              boxShadow: '0 2px 15px rgba(0, 0, 0, 0.35)',
-              position: 'relative',
-              zIndex: 5,
-              transform: 'translateZ(0)',
-              willChange: 'transform, opacity'
-            }}
-          >
-            <p 
-              className="text-xl md:text-2xl font-cinzel text-white/90 animate-fade-in section-subtitle-gradient"
-              style={{ 
-                animationDelay: "0.1s",
-                textShadow: `0 0 ${glowIntensity * 0.15}px rgba(59, 130, 246, ${glowIntensity / 130})`,
-                position: 'relative',
-                zIndex: 10
-              }}
-            >
-              Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
-            </p>
-          </div>
+          <p className="text-xl md:text-2xl font-cinzel text-white/90 mb-12">
+            Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
+          </p>
           
-          <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Link to="/portfolio" className="chrome-button-premium text-gray-800 flex items-center gap-2">
+          <div className="flex justify-center mt-12 space-x-4">
+            <Link to="/portfolio" className="chrome-button-premium inline-flex items-center">
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <Link to="#featured-work" className="ml-4 chrome-tab text-gray-800 hover:bg-white/10">
+            <Link to="#featured-work" className="chrome-tab inline-flex items-center">
               Featured Work
             </Link>
           </div>

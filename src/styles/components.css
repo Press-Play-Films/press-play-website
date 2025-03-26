@@ -16,7 +16,43 @@
     @apply bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent;
   }
 
-  /* Button effects - updated to match the design in the screenshots */
+  /* Chrome Button styles to match the design in the screenshots */
+  .chrome-button {
+    @apply relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-300 
+    text-gray-800 px-6 py-3 rounded-full font-medium 
+    transition-all duration-300 hover:from-gray-200 hover:to-gray-400
+    active:scale-95 shadow-md flex items-center justify-center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .chrome-button-premium {
+    @apply relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-300 
+    text-gray-800 px-6 py-3 rounded-full font-medium 
+    transition-all duration-300 hover:from-gray-200 hover:to-gray-400
+    active:scale-95 shadow-md flex items-center justify-center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .chrome-tab {
+    @apply relative overflow-hidden bg-gradient-to-b from-gray-100 to-gray-300 
+    text-gray-800 px-6 py-3 rounded-full font-medium 
+    border border-white/80 shadow-md
+    transition-all duration-300 hover:from-gray-200 hover:to-gray-400;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  /* Button effects - preserved for compatibility */
   .btn-primary {
     @apply bg-blue-500 text-white px-6 py-3 rounded-full font-medium 
     transition-all duration-300 hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]
