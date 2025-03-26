@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, lazy, Suspense, memo } from "react";
+import { initEmailJS } from "@/utils/emailService";
 
 // Lazy load pages to reduce initial bundle size
 const Index = lazy(() => import("./pages/Index"));
@@ -23,6 +24,10 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+// Initialize EmailJS - replace 'YOUR_USER_ID' with your actual EmailJS User ID
+// This is "safe" to include in client-side code as it's only the public user ID
+initEmailJS('YOUR_USER_ID');
 
 // Memoize stars component to prevent unnecessary re-renders
 const BackgroundStars = memo(() => {

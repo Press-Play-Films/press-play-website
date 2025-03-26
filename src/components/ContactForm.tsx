@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
+import emailjs from 'emailjs-com';
 
 interface ContactFormProps {
   onSubmitSuccess?: () => void;
@@ -21,33 +22,56 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate form data
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error("Please fill in all required fields", {
-        description: "Name, email, and phone number are required to access the feature film.",
+        description: "Name, email, and phone number are required.",
       });
       return;
     }
     
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // You'll need to replace these with your actual EmailJS service ID, template ID, and user ID
+      // after signing up at emailjs.com
+      const templateParams = {
+        from_name: formData.name,
+        reply_to: formData.email,
+        to_name: "Andrew",
+        phone: formData.phone,
+        message: formData.message,
+      };
+      
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        templateParams,
+        'YOUR_USER_ID' // Replace with your EmailJS user ID
+      );
+      
       toast.success("Message sent successfully", {
         description: "Thank you for your message. I'll get back to you shortly.",
       });
-      setIsSubmitting(false);
       
-      // Trigger the onSubmitSuccess callback to give access to the feature film
+      // Trigger the onSubmitSuccess callback
       if (onSubmitSuccess) {
         onSubmitSuccess();
       }
       
+      // Reset form
       setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 1500);
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      toast.error("Failed to send message", {
+        description: "There was a problem sending your message. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

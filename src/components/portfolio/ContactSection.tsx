@@ -1,8 +1,65 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      // You'll need to replace these with your actual EmailJS service ID, template ID, and user ID
+      const templateParams = {
+        from_name: formData.name,
+        reply_to: formData.email,
+        to_name: "Andrew",
+        message: formData.message,
+      };
+      
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        templateParams,
+        'YOUR_USER_ID' // Replace with your EmailJS user ID
+      );
+      
+      toast.success("Message sent successfully", {
+        description: "Thank you for your message. I'll get back to you shortly.",
+      });
+      
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      toast.error("Failed to send message", {
+        description: "There was a problem sending your message. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-20 relative overflow-hidden">
       <div className="container px-6 relative z-10">
@@ -15,47 +72,108 @@ const ContactSection = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="bg-secondary/20 border-none">
-                <CardContent className="flex flex-col items-center p-6">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
-                    <Mail className="text-primary" size={20} />
-                  </div>
-                  <h3 className="font-medium mb-2">Email</h3>
-                  <a href="mailto:andrew@pressp.vip" className="text-muted-foreground hover:text-primary transition-colors">
-                    andrew@pressp.vip
-                  </a>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-6">
+                <Card className="bg-secondary/20 border-none">
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                      <Mail className="text-primary" size={20} />
+                    </div>
+                    <h3 className="font-medium mb-2">Email</h3>
+                    <a href="mailto:andrew@pressp.vip" className="text-muted-foreground hover:text-primary transition-colors">
+                      andrew@pressp.vip
+                    </a>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-secondary/20 border-none">
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                      <Phone className="text-primary" size={20} />
+                    </div>
+                    <h3 className="font-medium mb-2">Phone</h3>
+                    <a href="tel:+17026021277" className="text-muted-foreground hover:text-primary transition-colors">
+                      +1 (702) 602-1277
+                    </a>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-secondary/20 border-none">
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                      <MapPin className="text-primary" size={20} />
+                    </div>
+                    <h3 className="font-medium mb-2">Location</h3>
+                    <a 
+                      href="https://maps.google.com/?q=Las+Vegas+NV" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      Las Vegas, NV
+                    </a>
+                  </CardContent>
+                </Card>
+              </div>
               
-              <Card className="bg-secondary/20 border-none">
-                <CardContent className="flex flex-col items-center p-6">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
-                    <Phone className="text-primary" size={20} />
+              <div className="bg-secondary/10 p-6 rounded-xl">
+                <h3 className="text-xl font-semibold mb-4">Send a Message</h3>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="portfolio-name" className="block text-sm font-medium mb-1">
+                      Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="portfolio-name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-secondary/30 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    />
                   </div>
-                  <h3 className="font-medium mb-2">Phone</h3>
-                  <a href="tel:+17026021277" className="text-muted-foreground hover:text-primary transition-colors">
-                    +1 (702) 602-1277
-                  </a>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-secondary/20 border-none">
-                <CardContent className="flex flex-col items-center p-6">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
-                    <MapPin className="text-primary" size={20} />
+                  
+                  <div>
+                    <label htmlFor="portfolio-email" className="block text-sm font-medium mb-1">
+                      Email <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="portfolio-email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-secondary/30 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    />
                   </div>
-                  <h3 className="font-medium mb-2">Location</h3>
-                  <a 
-                    href="https://maps.google.com/?q=Las+Vegas+NV" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                  
+                  <div>
+                    <label htmlFor="portfolio-message" className="block text-sm font-medium mb-1">
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      id="portfolio-message"
+                      name="message"
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-secondary/30 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+                    />
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary w-full flex items-center justify-center gap-2"
                   >
-                    Las Vegas, NV
-                  </a>
-                </CardContent>
-              </Card>
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    <Send size={16} />
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
