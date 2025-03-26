@@ -22,7 +22,7 @@ export const getAutoReplyMessage = (): string => {
       
       <p>In the meantime, feel free to:</p>
       <ul>
-        <li>Check out my <a href="https://yourportfolio.com" style="color: #6d28d9;">portfolio</a> for examples of my work</li>
+        <li>Check out my <a href="https://pressp.vip" style="color: #6d28d9;">portfolio</a> for examples of my work</li>
         <li>Connect with me on <a href="https://www.linkedin.com/in/pressplayproductions/" style="color: #6d28d9;">LinkedIn</a></li>
       </ul>
       
