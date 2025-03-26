@@ -1,3 +1,4 @@
+
 # Welcome to your Lovable project
 
 ## Project info
@@ -52,7 +53,7 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with:
 
 - Vite
 - TypeScript
@@ -62,8 +63,48 @@ This project is built with .
 
 ## How can I deploy this project?
 
+### Option 1: Use Lovable's built-in publishing
+
 Simply open [Lovable](https://lovable.dev/projects/f43c1bc0-45b5-42b4-aaa3-fa041342ae04) and click on Share -> Publish.
+
+### Option 2: Deploy to Netlify with a custom domain
+
+If you want to use your own domain, follow these steps:
+
+1. **Push your code to GitHub** (if not already there)
+
+2. **Sign up or log in to Netlify**
+   - Go to [Netlify](https://app.netlify.com/) and create an account or log in
+
+3. **Create a new site**
+   - Click "New site from Git"
+   - Connect to your GitHub repository
+   - Configure build settings:
+     - Build command: `npm run build`
+     - Publish directory: `dist`
+
+4. **Add your custom domain**
+   - Go to Site settings > Domain management
+   - Click "Add domain"
+   - Enter your domain name (e.g., pressp.vip)
+   - Follow Netlify's instructions to verify domain ownership
+   - Update your domain's DNS settings to point to Netlify's servers
+
+5. **Configure environment variables** (if needed)
+   - Go to Site settings > Build & deploy > Environment
+   - Add any required environment variables
+
+### Option 3: Deploy to Vercel
+
+Vercel is another excellent option for deploying React apps:
+
+1. Create an account at [Vercel](https://vercel.com/)
+2. Import your GitHub repository
+3. Configure the build settings (similar to Netlify)
+4. Add your custom domain in the Vercel dashboard
 
 ## I want to use a custom domain - is that possible?
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+While Lovable doesn't directly support custom domains, you can deploy your project to a service like Netlify or Vercel (see instructions above) and connect your domain there.
+
+For more information on using custom domains with alternative deployment methods, visit our docs: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
