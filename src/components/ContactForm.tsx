@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -15,6 +16,7 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -28,6 +30,13 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error("Please fill in all required fields", {
         description: "Name, email, and phone number are required.",
+      });
+      return;
+    }
+
+    if (!isPrivacyAccepted) {
+      toast.error("Please accept the privacy policy", {
+        description: "You must accept the privacy policy to submit the form.",
       });
       return;
     }
@@ -52,6 +61,7 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
       
       // Reset form
       setFormData({ name: '', email: '', phone: '', message: '' });
+      setIsPrivacyAccepted(false);
     } catch (error) {
       console.error('Failed to send email:', error);
       
@@ -124,6 +134,19 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
           onChange={handleChange}
           className="w-full px-4 py-3 bg-secondary/50 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
         />
+      </div>
+      
+      <div className="flex items-start gap-2">
+        <input
+          type="checkbox"
+          id="privacy"
+          checked={isPrivacyAccepted}
+          onChange={() => setIsPrivacyAccepted(!isPrivacyAccepted)}
+          className="mt-1"
+        />
+        <label htmlFor="privacy" className="text-sm text-muted-foreground">
+          I accept the privacy policy and understand I can unsubscribe at any time via the unsubscribe link in any email.
+        </label>
       </div>
       
       <div>

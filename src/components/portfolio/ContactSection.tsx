@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
@@ -11,6 +12,7 @@ const ContactSection = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -22,6 +24,13 @@ const ContactSection = () => {
     
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill in all required fields");
+      return;
+    }
+
+    if (!isPrivacyAccepted) {
+      toast.error("Please accept the privacy policy", {
+        description: "You must accept the privacy policy to submit the form.",
+      });
       return;
     }
     
@@ -43,6 +52,7 @@ const ContactSection = () => {
       
       // Reset form
       setFormData({ name: '', email: '', message: '' });
+      setIsPrivacyAccepted(false);
     } catch (error) {
       console.error('Failed to send email:', error);
       
@@ -158,6 +168,19 @@ const ContactSection = () => {
                       onChange={handleChange}
                       className="w-full px-4 py-2 bg-secondary/30 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
                     />
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <input
+                      type="checkbox"
+                      id="portfolio-privacy"
+                      checked={isPrivacyAccepted}
+                      onChange={() => setIsPrivacyAccepted(!isPrivacyAccepted)}
+                      className="mt-1"
+                    />
+                    <label htmlFor="portfolio-privacy" className="text-sm text-muted-foreground">
+                      I accept the privacy policy and understand I can unsubscribe at any time via the unsubscribe link in any email.
+                    </label>
                   </div>
                   
                   <button

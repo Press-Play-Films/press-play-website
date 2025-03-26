@@ -1,3 +1,4 @@
+
 import emailjs from 'emailjs-com';
 
 /**
@@ -100,6 +101,7 @@ export const getAutoReplyMessage = (): string => {
       <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eaeaea; font-size: 12px; color: #666;">
         <p>This is an automated response. Please do not reply to this email.</p>
         <p>Phone: +1 (702) 602-1277 | Email: andrew@pressp.vip | Las Vegas, NV</p>
+        <p>To unsubscribe from future emails, <a href="{{user_unsubscribe}}" style="color: #6d28d9;">click here</a>.</p>
       </div>
     </div>
   `;
@@ -214,3 +216,31 @@ export const sendContactForm = async (
  * 
  * For persistent issues, contact EmailJS support at support@emailjs.com
  */
+
+/**
+ * Adding Unsubscribe Link to EmailJS Templates:
+ * 
+ * EmailJS automatically handles unsubscribe functionality if you include the proper 
+ * variable in your templates. Here's how to set it up:
+ * 
+ * 1. In the Design Editor:
+ *    - Press "Insert/edit link"
+ *    - Set the URL input field to {{user_unsubscribe}}
+ *    - Complete the link setup in the pop-up
+ * 
+ * 2. In the Code Editor (HTML):
+ *    - Add an <a> tag with the {{user_unsubscribe}} variable:
+ *      <a href="{{user_unsubscribe}}" rel="noopener" target="_blank">Unsubscribe</a>
+ * 
+ * 3. When emails are sent:
+ *    - EmailJS automatically replaces {{user_unsubscribe}} with a unique unsubscribe URL
+ *    - When recipients click this link, they're added to your suppression list
+ *    - Emails to addresses on the suppression list will be rejected automatically
+ * 
+ * Note: This feature requires a Professional plan or higher on EmailJS.
+ * 
+ * To allow users to unsubscribe from specific templates:
+ * - Go to the template settings
+ * - Check the appropriate checkbox to allow unsubscribing from that template
+ */
+
