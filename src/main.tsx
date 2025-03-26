@@ -6,7 +6,7 @@ import './styles/index.css'
 import { toast } from 'sonner'
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.28.5'; // Updated version number
+const APP_VERSION = '2025.03.28.6'; // Updated version number to force a new build
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Global error handler
