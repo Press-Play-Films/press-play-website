@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -26,9 +25,9 @@ const queryClient = new QueryClient({
   },
 });
 
-// Initialize EmailJS - replace 'YOUR_USER_ID' with your actual EmailJS User ID
-// This is "safe" to include in client-side code as it's only the public user ID
-initEmailJS('YOUR_USER_ID');
+// Initialize EmailJS with environment variable or fallback to placeholder
+const emailJsUserId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID';
+initEmailJS(emailJsUserId);
 
 // Memoize stars component to prevent unnecessary re-renders
 const BackgroundStars = memo(() => {

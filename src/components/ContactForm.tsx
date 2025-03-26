@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
-import emailjs from 'emailjs-com';
+import { sendEmail } from '@/utils/emailService';
 
 interface ContactFormProps {
   onSubmitSuccess?: () => void;
@@ -36,8 +35,6 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
     setIsSubmitting(true);
     
     try {
-      // You'll need to replace these with your actual EmailJS service ID, template ID, and user ID
-      // after signing up at emailjs.com
       const templateParams = {
         from_name: formData.name,
         reply_to: formData.email,
@@ -46,12 +43,11 @@ const ContactForm = ({ onSubmitSuccess }: ContactFormProps) => {
         message: formData.message,
       };
       
-      await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
-        templateParams,
-        'YOUR_USER_ID' // Replace with your EmailJS user ID
-      );
+      // Environment variables for EmailJS
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+      
+      await sendEmail(serviceId, templateId, templateParams);
       
       toast.success("Message sent successfully", {
         description: "Thank you for your message. I'll get back to you shortly.",
