@@ -9,7 +9,7 @@ import { useEffect, lazy, Suspense, memo } from "react";
 import { initEmailJS } from "@/utils/email";
 
 // Lazy load pages to reduce initial bundle size
-const Index = lazy(() => import("./pages/Index"));
+const Index = lazy(() => import("./pages/index"));
 const Skills = lazy(() => import("./pages/Skills"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Contact = lazy(() => import("./pages/Contact"));
