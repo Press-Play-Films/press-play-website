@@ -11,16 +11,22 @@ const HeroSection = () => {
     if (mounted.current) return;
     mounted.current = true;
     
-    console.log('HeroSection mounted - version 2025.03.28.2');
+    const version = '2025.03.28.3';
+    console.log(`HeroSection mounted - version ${version}`);
+    
+    // Log critical rendering information
+    console.log('HeroSection: Starting render sequence');
     
     // Track this session in sessionStorage
     const sessionKey = `hero_section_loaded_${window.sessionId || Date.now()}`;
     sessionStorage.setItem(sessionKey, 'true');
     
     // Build up the glow effect
+    console.log('HeroSection: Initializing glow effect');
     const buildUpInterval = setInterval(() => {
       setGlowIntensity(prev => {
         if (prev >= 100) {
+          console.log('HeroSection: Glow effect reached maximum');
           clearInterval(buildUpInterval);
           return 100;
         }
@@ -30,9 +36,11 @@ const HeroSection = () => {
 
     // Start fade out after 4 seconds
     const fadeTimeout = setTimeout(() => {
+      console.log('HeroSection: Starting fade out sequence');
       const fadeOutInterval = setInterval(() => {
         setGlowIntensity(prev => {
           if (prev <= 0) {
+            console.log('HeroSection: Fade out complete');
             clearInterval(fadeOutInterval);
             return 0;
           }

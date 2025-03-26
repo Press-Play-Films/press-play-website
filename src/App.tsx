@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -29,9 +30,13 @@ const queryClient = new QueryClient({
 const emailJsUserId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID';
 initEmailJS(emailJsUserId);
 
+// Log initialization
+console.log(`[App] Initialized with EmailJS User ID: ${emailJsUserId === 'YOUR_USER_ID' ? 'PLACEHOLDER (email will not work)' : 'VALID'}`);
+
 // Memoize stars component to prevent unnecessary re-renders
 const BackgroundStars = memo(() => {
   useEffect(() => {
+    console.log('[BackgroundStars] Creating stars background');
     const createStars = () => {
       const container = document.body;
       const screenWidth = window.innerWidth;
@@ -43,6 +48,7 @@ const BackgroundStars = memo(() => {
       
       // Create fewer stars for better performance
       const starCount = Math.min(80, Math.floor((screenWidth * screenHeight) / 12000));
+      console.log(`[BackgroundStars] Creating ${starCount} stars for screen size ${screenWidth}x${screenHeight}`);
       
       // Create stars with document fragment for better performance
       const fragment = document.createDocumentFragment();
@@ -65,7 +71,10 @@ const BackgroundStars = memo(() => {
     let resizeTimer: number;
     const handleResize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(createStars, 250);
+      resizeTimer = window.setTimeout(() => {
+        console.log('[BackgroundStars] Window resized, recreating stars');
+        createStars();
+      }, 250);
     };
     
     window.addEventListener('resize', handleResize);
@@ -73,6 +82,7 @@ const BackgroundStars = memo(() => {
     return () => {
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', handleResize);
+      console.log('[BackgroundStars] Cleanup');
     };
   }, []);
 
@@ -82,6 +92,14 @@ const BackgroundStars = memo(() => {
 BackgroundStars.displayName = 'BackgroundStars';
 
 const App = () => {
+  useEffect(() => {
+    console.log('[App] Component mounted');
+    
+    return () => {
+      console.log('[App] Component unmounted');
+    };
+  }, []);
+  
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
