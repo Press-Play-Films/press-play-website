@@ -5,35 +5,10 @@ import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
   const [glowIntensity, setGlowIntensity] = useState(0);
-  const [version] = useState(`v${new Date().toISOString().slice(0, 10)}`);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  
-  // Check if fonts are already loaded
-  useEffect(() => {
-    const checkFontsLoaded = () => {
-      if (document.documentElement.classList.contains('fonts-loaded')) {
-        setFontsLoaded(true);
-      }
-    };
-    
-    // Check immediately in case class was already added
-    checkFontsLoaded();
-    
-    // Also set up an observer to detect if the class is added later
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        if (mutation.attributeName === 'class') {
-          checkFontsLoaded();
-        }
-      });
-    });
-    
-    observer.observe(document.documentElement, { attributes: true });
-    
-    return () => observer.disconnect();
-  }, []);
   
   useEffect(() => {
+    console.log('HeroSection mounted - new version 2025.03.27.1');
+    
     // Build up the glow effect
     const buildUpInterval = setInterval(() => {
       setGlowIntensity(prev => {
@@ -45,7 +20,7 @@ const HeroSection = () => {
       });
     }, 20);
 
-    // Start fade out after 4 seconds (increased for a longer glow effect)
+    // Start fade out after 4 seconds
     const fadeTimeout = setTimeout(() => {
       const fadeOutInterval = setInterval(() => {
         setGlowIntensity(prev => {
@@ -58,20 +33,13 @@ const HeroSection = () => {
       }, 30);
       
       return () => clearInterval(fadeOutInterval);
-    }, 4000); // Changed to 4000 ms (1 second longer than before)
-
-    // Log to console to help with debugging
-    console.log('HeroSection mounted, Cinzel font should be visible now');
-    console.log('Current build:', version);
+    }, 4000);
 
     return () => {
       clearInterval(buildUpInterval);
       clearTimeout(fadeTimeout);
     };
-  }, [version]);
-  
-  // Font classes to use
-  const fontClass = fontsLoaded ? 'font-cinzel' : 'font-cinzel-fallback';
+  }, []);
   
   return (
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
@@ -79,7 +47,7 @@ const HeroSection = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-block rounded-lg px-6 py-3 backdrop-blur-sm bg-white/15 border border-white/25 shadow-[0_4px_15px_rgba(0,0,0,0.35)]">
             <h1 
-              className={`text-5xl md:text-7xl ${fontClass} font-bold section-title-gradient font-dependent`}
+              className="text-5xl md:text-7xl font-cinzel font-bold section-title-gradient"
               style={{
                 textShadow: `0 0 ${glowIntensity * 0.3}px rgba(59, 130, 246, ${glowIntensity / 90})`,
                 transition: 'text-shadow 0.3s ease-out'
@@ -90,7 +58,7 @@ const HeroSection = () => {
           </div>
           <div className="inline-block rounded-lg px-5 py-2 mt-6 backdrop-blur-sm bg-white/10 border border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.3)]">
             <p 
-              className={`text-xl md:text-2xl ${fontClass} text-white/90 animate-fade-in section-subtitle-gradient font-dependent`}
+              className="text-xl md:text-2xl font-cinzel text-white/90 animate-fade-in section-subtitle-gradient"
               style={{ 
                 animationDelay: "0.1s",
                 textShadow: `0 0 ${glowIntensity * 0.15}px rgba(59, 130, 246, ${glowIntensity / 130})` 

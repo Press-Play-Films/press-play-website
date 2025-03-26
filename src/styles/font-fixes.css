@@ -1,5 +1,5 @@
 
-/* Font fixes and optimizations */
+/* Simple Font fixes */
 
 /* Improve font rendering */
 html {
@@ -8,35 +8,12 @@ html {
   text-rendering: optimizeLegibility;
 }
 
-/* Font loading states */
-.font-dependent {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.fonts-loaded .font-dependent {
-  opacity: 1;
-}
-
-/* Font fallbacks */
+/* Direct font classes */
 .font-cinzel {
-  font-family: "Times New Roman", serif;
-}
-
-.fonts-loaded .font-cinzel {
   font-family: 'Cinzel', serif;
 }
 
-/* Font debugging class */
-.font-debug-info {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  z-index: 9999;
-  display: none;
+/* Fallback */
+.font-cinzel-fallback {
+  font-family: "Times New Roman", serif;
 }

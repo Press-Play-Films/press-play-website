@@ -4,71 +4,47 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
-// Enhanced font loading detection with better error handling
-const detectFontLoading = () => {
-  try {
-    // Use Promise.race to add a timeout - prevents hanging if fonts never load
-    const fontPromise = document.fonts.ready;
-    const timeoutPromise = new Promise(resolve => setTimeout(resolve, 3000)); // 3 second timeout
-    
-    Promise.race([fontPromise, timeoutPromise])
-      .then(() => {
-        console.log('Fonts are loaded and ready to use!');
-        document.documentElement.classList.add('fonts-loaded');
-        
-        // Add this class for any font-dependent elements
-        const fontDependentElements = document.querySelectorAll('.font-dependent');
-        fontDependentElements.forEach(el => {
-          el.classList.add('font-loaded');
-        });
-      })
-      .catch(error => {
-        console.error('Error loading fonts:', error);
-        // Add the class anyway to ensure content is visible
-        document.documentElement.classList.add('fonts-loaded');
-      });
-  } catch (error) {
-    console.error('Font loading detection failed:', error);
-    // Fallback: add the class anyway to ensure content is visible
-    document.documentElement.classList.add('fonts-loaded');
-  }
-};
-
-// Clear all caches on page load
-const clearAllCaches = async () => {
+// Immediately force clear cache
+const forceClearCache = async () => {
   if ('caches' in window) {
     try {
       const cacheNames = await caches.keys();
       await Promise.all(
         cacheNames.map(cacheName => caches.delete(cacheName))
       );
-      console.log('All caches cleared successfully');
+      console.log('All browser caches forcibly cleared');
     } catch (error) {
       console.error('Failed to clear caches:', error);
     }
   }
+  
+  // Also clear localStorage completely
+  try {
+    localStorage.clear();
+    console.log('localStorage completely cleared');
+  } catch (e) {
+    console.error('Failed to clear localStorage:', e);
+  }
+  
+  // Clear sessionStorage as well
+  try {
+    sessionStorage.clear();
+    console.log('sessionStorage completely cleared');
+  } catch (e) {
+    console.error('Failed to clear sessionStorage:', e);
+  }
 };
 
-// Apply a cache-busting version to localStorage
-const appVersion = '2025.03.26.3'; // Incremented version number again
-const storedVersion = localStorage.getItem('app_version');
+// Apply a significantly incremented cache-busting version 
+// Force reload on each new version
+const appVersion = '2025.03.27.1'; // Major version bump
+localStorage.setItem('app_version', appVersion);
+console.log(`Current app version: ${appVersion}`);
 
-// Force a clean reload if version has changed
-if (storedVersion !== appVersion) {
-  localStorage.setItem('app_version', appVersion);
-  console.log(`Version changed from ${storedVersion} to ${appVersion}, forcing reload`);
-  
-  // Clear all caches before reloading
-  clearAllCaches().then(() => {
-    // Use location.replace for a clean reload without history entry
-    window.location.replace(window.location.href.split('#')[0]);
-  });
-} else {
-  // Still clear caches but don't force reload
-  clearAllCaches();
-  
-  // Run font detection
-  detectFontLoading();
+// Forcibly clear all caches before rendering
+forceClearCache().then(() => {
+  // Simple font handling approach to avoid complexity
+  document.documentElement.classList.add('fonts-loaded');
   
   // Production-optimized React rendering with proper error handling
   const root = document.getElementById("root");
@@ -81,4 +57,4 @@ if (storedVersion !== appVersion) {
   } else {
     console.error("Root element not found. Cannot mount React application.");
   }
-}
+});
