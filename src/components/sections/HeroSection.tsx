@@ -43,23 +43,23 @@ const HeroSection = () => {
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
       <div className="container px-6 relative" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-block rounded-lg px-6 py-3 backdrop-blur-sm bg-white/10 border border-white/20 shadow-[0_4px_15px_rgba(0,0,0,0.3)]">
+          <div className="inline-block rounded-lg px-6 py-3 backdrop-blur-sm bg-white/15 border border-white/25 shadow-[0_4px_15px_rgba(0,0,0,0.35)]">
             <h1 
               className="text-5xl md:text-7xl font-trajan font-bold section-title-gradient"
               style={{
-                textShadow: `0 0 ${glowIntensity * 0.2}px rgba(59, 130, 246, ${glowIntensity / 100})`,
+                textShadow: `0 0 ${glowIntensity * 0.3}px rgba(59, 130, 246, ${glowIntensity / 90})`,
                 transition: 'text-shadow 0.3s ease-out'
               }}
             >
               Press Play
             </h1>
           </div>
-          <div className="inline-block rounded-lg px-5 py-2 mt-6 backdrop-blur-sm bg-white/5 border border-white/10 shadow-[0_2px_10px_rgba(0,0,0,0.25)]">
+          <div className="inline-block rounded-lg px-5 py-2 mt-6 backdrop-blur-sm bg-white/10 border border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.3)]">
             <p 
               className="text-xl md:text-2xl font-trajan text-white/90 animate-fade-in section-subtitle-gradient" 
               style={{ 
                 animationDelay: "0.1s",
-                textShadow: `0 0 ${glowIntensity * 0.1}px rgba(59, 130, 246, ${glowIntensity / 150})` 
+                textShadow: `0 0 ${glowIntensity * 0.15}px rgba(59, 130, 246, ${glowIntensity / 130})` 
               }}
             >
               Pioneering the intersection of Sales, Technology, and Entertainment through AI Innovation
