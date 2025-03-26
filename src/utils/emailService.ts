@@ -42,15 +42,49 @@ export const sendEmail = async (
     throw new Error('EmailJS Template ID not provided');
   }
   
-  return emailjs.send(serviceId, templateId, templateParams);
+  try {
+    console.log('Attempting to send email with:', { serviceId, templateId });
+    const response = await emailjs.send(serviceId, templateId, templateParams);
+    console.log('Email sent successfully:', response);
+    return response;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    
+    // Provide more specific error messages based on common issues
+    if (error instanceof Error) {
+      if (error.message.includes('Forbidden') || error.message.includes('412')) {
+        throw new Error('Email service authorization failed. Please check your Mailgun API key, domain setup, and account status.');
+      }
+      if (error.message.includes('Network Error')) {
+        throw new Error('Network error when connecting to email service. Please check your internet connection.');
+      }
+    }
+    
+    // Re-throw the original error
+    throw error;
+  }
 };
 
 /**
- * EmailJS Setup Guide:
+ * EmailJS Alternative Setup Instructions:
  * 
+ * If you're experiencing issues with Mailgun, consider these alternatives:
+ * 
+ * 1. Gmail integration:
+ *    - Create an Email Service in EmailJS using Gmail
+ *    - You'll need to provide your Gmail credentials
+ * 
+ * 2. SMTP integration:
+ *    - Create an Email Service in EmailJS using SMTP
+ *    - You can use various email providers like Gmail, Outlook, etc.
+ * 
+ * 3. SendGrid integration:
+ *    - Create an Email Service in EmailJS using SendGrid
+ *    - You'll need a SendGrid API key
+ * 
+ * General EmailJS Setup:
  * 1. Sign up at https://www.emailjs.com/ (they have a free tier)
- * 2. Create an Email Service (Gmail, Outlook, Mailgun, SendGrid, etc)
- *    - For Mailgun: You'll need to add your Mailgun domain and API key in the EmailJS dashboard
+ * 2. Create an Email Service (Gmail, SMTP, SendGrid, etc)
  * 3. Create an Email Template with these parameters:
  *    - {{from_name}} - Sender's name
  *    - {{reply_to}} - Sender's email
@@ -59,10 +93,6 @@ export const sendEmail = async (
  * 4. Get your User ID (public key) from Account > API Keys
  * 5. Get your Service ID from Email Services
  * 6. Get your Template ID from Email Templates
- * 
- * Mailgun Setup Note:
- * - If using Mailgun with EmailJS, you only need to provide your Mailgun API key in the EmailJS dashboard
- * - The API key does NOT need to be added to this codebase
  * 
  * Usage in App.tsx:
  * initEmailJS('your_emailjs_user_id');
