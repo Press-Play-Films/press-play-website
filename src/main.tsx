@@ -1,11 +1,10 @@
-
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.28.6'; // Updated version
+const APP_VERSION = '2025.03.29.1';
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle
@@ -15,6 +14,10 @@ const logAppState = (message) => {
 
 // Log initial state
 logAppState('Initializing application');
+
+// A longer delay to ensure all styles are properly loaded before mounting
+const mountDelay = 250; // Increased from 100ms to 250ms
+logAppState(`Using mount delay of ${mountDelay}ms to ensure styles are loaded`);
 
 // Force CSS recalculation by adding a delay before mounting
 setTimeout(() => {
@@ -49,14 +52,28 @@ setTimeout(() => {
         
         if (titleBox) {
           const computedStyle = window.getComputedStyle(titleBox);
-          logAppState(`Title box styles: bg=${computedStyle.backgroundColor}, border=${computedStyle.borderColor}, backdrop=${computedStyle.backdropFilter}`);
+          logAppState(`Title box styles: bg=${computedStyle.backgroundColor}, backdrop=${computedStyle.backdropFilter}, border=${computedStyle.border}, boxShadow=${computedStyle.boxShadow}`);
+        } else {
+          console.error('[main.tsx] Title glass box not found in document after mount!');
         }
-      }, 100);
+        
+        // Force reflow if needed
+        document.body.offsetHeight;
+        
+        // Check all critical CSS classes
+        ['section-title-gradient', 'section-subtitle-gradient', 'title-glass-box', 'subtitle-glass-box'].forEach(className => {
+          const elements = document.querySelectorAll(`.${className}`);
+          logAppState(`Found ${elements.length} elements with class ${className}`);
+        });
+        
+        // Verify backdrop-filter support
+        logAppState(`Backdrop-filter support test: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
+      }, 200);
     } catch (error) {
       console.error('[main.tsx] Failed to render React application:', error);
     }
   }
-}, 100); // Increased delay to ensure all styles are loaded
+}, mountDelay);
 
 // Hide loading screen when window is fully loaded
 window.addEventListener('load', () => {
@@ -73,9 +90,16 @@ window.addEventListener('load', () => {
       
       logAppState('Final render check: Title element and glass box are present');
       logAppState(`Title text: color=${titleStyles.color}, bgClip=${titleStyles.backgroundClip}, fillColor=${titleStyles.webkitTextFillColor}`);
-      logAppState(`Glass box: bg=${boxStyles.backgroundColor}, backdropFilter=${boxStyles.backdropFilter}`);
+      logAppState(`Glass box: bg=${boxStyles.backgroundColor}, backdropFilter=${boxStyles.backdropFilter}, border=${boxStyles.border}`);
+      
+      // Force browser to maintain styles by keeping a reference
+      window._titleBox = titleBox;
+      window._titleElement = titleElement;
     } else {
       console.error('[main.tsx] Title elements not found in final check');
+      // Try to force rerender if elements are missing
+      document.body.classList.add('force-reflow');
+      setTimeout(() => document.body.classList.remove('force-reflow'), 10);
     }
   }, 500);
 });
