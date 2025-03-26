@@ -1,13 +1,21 @@
 
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const HeroSection = () => {
   const [glowIntensity, setGlowIntensity] = useState(0);
+  const mounted = useRef(false);
   
   useEffect(() => {
-    console.log('HeroSection mounted - new version 2025.03.27.1');
+    if (mounted.current) return;
+    mounted.current = true;
+    
+    console.log('HeroSection mounted - version 2025.03.28.1');
+    
+    // Track this session in sessionStorage
+    const sessionKey = `hero_section_loaded_${window.sessionId || Date.now()}`;
+    sessionStorage.setItem(sessionKey, 'true');
     
     // Build up the glow effect
     const buildUpInterval = setInterval(() => {
@@ -38,6 +46,7 @@ const HeroSection = () => {
     return () => {
       clearInterval(buildUpInterval);
       clearTimeout(fadeTimeout);
+      console.log('HeroSection cleanup');
     };
   }, []);
   

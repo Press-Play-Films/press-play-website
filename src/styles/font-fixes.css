@@ -1,5 +1,5 @@
 
-/* Simple Font fixes */
+/* Simple Font fixes with minimal overhead */
 
 /* Improve font rendering */
 html {
@@ -11,6 +11,7 @@ html {
 /* Direct font classes */
 .font-cinzel {
   font-family: 'Cinzel', serif;
+  font-display: swap; /* Ensure text is visible while font loads */
 }
 
 /* Fallback */

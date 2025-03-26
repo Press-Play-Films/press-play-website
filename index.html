@@ -7,39 +7,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Andrew Freeman - Web Developer and AI Integration Specialist" />
     
-    <!-- Maximum cache control - prevent any caching -->
+    <!-- Extreme cache busting strategy -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0" />
     <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Expires" content="0" />
     
-    <!-- Add a dynamic timestamp to force full resource reloading -->
-    <meta name="timestamp" content="<?php echo time(); ?>" />
+    <!-- Random cache-buster value for each page load -->
+    <meta name="cache-buster" content="<?php echo rand(10000,99999); ?>" />
     
-    <!-- Simplified font loading -->
+    <!-- Simple font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Simplified critical CSS -->
+    <!-- Inline critical CSS for immediate display -->
     <style>
+      /* Core system styles */
       body { 
         background-color: #0f172a; 
         color: white;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+        padding: 0;
       }
       
+      /* Font classes */
       .font-cinzel {
         font-family: 'Cinzel', serif;
+      }
+      
+      /* Loading indicator */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #0f172a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        border-top-color: #3b82f6;
+        animation: spin 1s ease-in-out infinite;
+      }
+      
+      .loading-text {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #e2e8f0;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
     </style>
     
     <title>Andrew Freeman</title>
   </head>
   <body>
+    <!-- Loading screen that disappears when app is ready -->
+    <div id="loading-screen">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Loading Andrew's Portfolio...</div>
+    </div>
+    
+    <!-- Root for React to mount -->
     <div id="root"></div>
-    <!-- Lovable script tag for enabling new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <!-- Force script reload with timestamp -->
-    <script type="module" src="/src/main.tsx?v=2025.03.27.1"></script>
+    
+    <!-- Initialization script to handle cache clearing before React loads -->
+    <script>
+      // Initialize with a unique session ID to prevent any session-based issues
+      window.sessionId = Date.now().toString() + Math.random().toString(36).substring(2, 10);
+      
+      // Aggressive cache clearing function
+      const clearBrowserCache = async () => {
+        // Clear localStorage
+        try {
+          localStorage.clear();
+          console.log('[Initializer] localStorage cleared');
+        } catch (e) {
+          console.error('[Initializer] Failed to clear localStorage:', e);
+        }
+        
+        // Clear sessionStorage
+        try {
+          sessionStorage.clear();
+          console.log('[Initializer] sessionStorage cleared');
+        } catch (e) {
+          console.error('[Initializer] Failed to clear sessionStorage:', e);
+        }
+        
+        // Clear cache API if available
+        if ('caches' in window) {
+          try {
+            const cacheNames = await caches.keys();
+            await Promise.all(
+              cacheNames.map(cacheName => caches.delete(cacheName))
+            );
+            console.log('[Initializer] Browser caches cleared');
+          } catch (error) {
+            console.error('[Initializer] Failed to clear caches:', error);
+          }
+        }
+        
+        console.log('[Initializer] Cache clearing completed');
+        return true;
+      };
+      
+      // Set a flag to confirm initialization was run
+      window.initializerRun = true;
+      
+      // Run cache clearing before loading React
+      clearBrowserCache().then(() => {
+        console.log('[Initializer] Loading application with new session ID:', window.sessionId);
+        
+        // Create script element for Lovable
+        const lovableScript = document.createElement('script');
+        lovableScript.src = "https://cdn.gpteng.co/gptengineer.js";
+        lovableScript.type = "module";
+        document.body.appendChild(lovableScript);
+        
+        // Create script element with unique timestamp
+        const mainScript = document.createElement('script');
+        mainScript.src = `/src/main.tsx?v=${Date.now()}`;
+        mainScript.type = "module";
+        document.body.appendChild(mainScript);
+        
+        // Hide loading screen when main script loads
+        mainScript.onload = () => {
+          setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+              loadingScreen.style.opacity = '0';
+              setTimeout(() => {
+                loadingScreen.style.display = 'none';
+              }, 500);
+            }
+          }, 300);
+        };
+      });
+    </script>
   </body>
 </html>

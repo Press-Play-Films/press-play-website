@@ -4,57 +4,50 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
-// Immediately force clear cache
-const forceClearCache = async () => {
-  if ('caches' in window) {
-    try {
-      const cacheNames = await caches.keys();
-      await Promise.all(
-        cacheNames.map(cacheName => caches.delete(cacheName))
-      );
-      console.log('All browser caches forcibly cleared');
-    } catch (error) {
-      console.error('Failed to clear caches:', error);
-    }
-  }
+// Log the initializer status
+console.log('[main.tsx] Application loading, initializer ran:', Boolean(window.initializerRun));
+
+// Define a permanent version ID that will change with each build
+const APP_VERSION = '2025.03.28.1'; // Updated version
+console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
+
+// Double-check that caches are cleared - belt and suspenders approach
+const ensureFreshStart = async () => {
+  // Clear any stale data
+  localStorage.removeItem('app_cache');
+  localStorage.setItem('app_version', APP_VERSION);
   
-  // Also clear localStorage completely
-  try {
-    localStorage.clear();
-    console.log('localStorage completely cleared');
-  } catch (e) {
-    console.error('Failed to clear localStorage:', e);
-  }
+  // Set a stamp for this exact run
+  sessionStorage.setItem('session_start', Date.now().toString());
   
-  // Clear sessionStorage as well
-  try {
-    sessionStorage.clear();
-    console.log('sessionStorage completely cleared');
-  } catch (e) {
-    console.error('Failed to clear sessionStorage:', e);
-  }
+  console.log('[main.tsx] Fresh start ensured');
+  return true;
 };
 
-// Apply a significantly incremented cache-busting version 
-// Force reload on each new version
-const appVersion = '2025.03.27.1'; // Major version bump
-localStorage.setItem('app_version', appVersion);
-console.log(`Current app version: ${appVersion}`);
-
-// Forcibly clear all caches before rendering
-forceClearCache().then(() => {
-  // Simple font handling approach to avoid complexity
+// Mount the application only after ensuring a fresh start
+ensureFreshStart().then(() => {
+  console.log('[main.tsx] Mounting React application');
+  
+  // Confirm fonts are available or set fallbacks
   document.documentElement.classList.add('fonts-loaded');
   
-  // Production-optimized React rendering with proper error handling
-  const root = document.getElementById("root");
-  if (root) {
-    createRoot(root).render(
+  // Find root element
+  const rootElement = document.getElementById("root");
+  if (!rootElement) {
+    console.error("[main.tsx] Root element not found. Cannot mount React application.");
+    return;
+  }
+  
+  // Create and render the React application
+  try {
+    const root = createRoot(rootElement);
+    root.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>
     );
-  } else {
-    console.error("Root element not found. Cannot mount React application.");
+    console.log('[main.tsx] React successfully mounted');
+  } catch (error) {
+    console.error('[main.tsx] Failed to render React application:', error);
   }
 });
