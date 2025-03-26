@@ -43,9 +43,10 @@ export const emailJSConfigGuide = {};
  * 6. Save the template and note the Template ID
  * 7. Set the Template ID as VITE_EMAILJS_TEMPLATE_ID environment variable
  * 
- * This setup ensures that when someone contacts you:
- * - You receive a notification with their details
- * - They receive a professional auto-reply confirming their message was received
+ * Specific to press.vip account:
+ * - You already have the service ID "service_o9ghk7h" set up
+ * - After creating your template, update the templateId in ContactForm/ContactSection components
+ * - Test the form to ensure the auto-reply is working correctly
  */
 export const autoReplyGuide = {};
 
@@ -53,8 +54,8 @@ export const autoReplyGuide = {};
  * How to Embed Images in EmailJS Templates:
  * 
  * 1. Upload Your Logo to EmailJS:
- *    - In the EmailJS dashboard, go to "Email Services" > select your service
- *    - Click on the "Content" tab and upload your image (e.g., logo.png)
+ *    - In the EmailJS dashboard, go to "Email Services" > select "press.vip" service
+ *    - Click on the "Content" tab and upload your logo image
  *    - Important: Name your file "logo.png" to match the template code
  * 
  * 2. The Template is Already Set Up:
