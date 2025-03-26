@@ -26,7 +26,7 @@ const clearAllCaches = async () => {
 };
 
 // Apply a cache-busting version to localStorage
-const appVersion = '2025.03.26.1'; // Increment this when deploying new versions
+const appVersion = '2025.03.26.2'; // Incremented version number
 const storedVersion = localStorage.getItem('app_version');
 
 // Force a clean reload if version has changed

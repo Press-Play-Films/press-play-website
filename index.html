@@ -18,36 +18,13 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     
-    <!-- Preload resources with cache-busting query params -->
-    <link rel="preload" href="/ambient-drone.mp3?v=2025.03.26.1" as="audio" />
-    <link rel="preload" href="/src/styles/index.css?v=2025.03.26.1" as="style" />
+    <!-- Preload resources -->
+    <link rel="preload" href="/ambient-drone.mp3" as="audio" />
     
-    <!-- Font preloading with cache-busting -->
+    <!-- Font preloading with non-blocking approach -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Add font-display:swap to improve font loading -->
-    <style>
-      /* Ensure font is loaded properly */
-      @font-face {
-        font-family: 'Cinzel';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url(https://fonts.gstatic.com/s/cinzel/v23/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnfYPlDX5Z.woff2) format('woff2');
-      }
-      
-      /* Temporary invisible element to trigger font loading */
-      body::before {
-        content: 'Font Preload';
-        font-family: 'Cinzel';
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        z-index: -9999;
-      }
-    </style>
     
     <title>Andrew Freeman</title>
   </head>
@@ -55,7 +32,6 @@
     <div id="root"></div>
     <!-- Lovable script tag for enabling new features -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <!-- Add version query param for cache busting -->
-    <script type="module" src="/src/main.tsx?v=2025.03.26.1"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
