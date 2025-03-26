@@ -4,11 +4,35 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
-// Font loading detection
-document.fonts.ready.then(() => {
-  console.log('Fonts are loaded and ready to use!');
-  document.documentElement.classList.add('fonts-loaded');
-});
+// Enhanced font loading detection with better error handling
+const detectFontLoading = () => {
+  try {
+    // Use Promise.race to add a timeout - prevents hanging if fonts never load
+    const fontPromise = document.fonts.ready;
+    const timeoutPromise = new Promise(resolve => setTimeout(resolve, 3000)); // 3 second timeout
+    
+    Promise.race([fontPromise, timeoutPromise])
+      .then(() => {
+        console.log('Fonts are loaded and ready to use!');
+        document.documentElement.classList.add('fonts-loaded');
+        
+        // Add this class for any font-dependent elements
+        const fontDependentElements = document.querySelectorAll('.font-dependent');
+        fontDependentElements.forEach(el => {
+          el.classList.add('font-loaded');
+        });
+      })
+      .catch(error => {
+        console.error('Error loading fonts:', error);
+        // Add the class anyway to ensure content is visible
+        document.documentElement.classList.add('fonts-loaded');
+      });
+  } catch (error) {
+    console.error('Font loading detection failed:', error);
+    // Fallback: add the class anyway to ensure content is visible
+    document.documentElement.classList.add('fonts-loaded');
+  }
+};
 
 // Clear all caches on page load
 const clearAllCaches = async () => {
@@ -26,7 +50,7 @@ const clearAllCaches = async () => {
 };
 
 // Apply a cache-busting version to localStorage
-const appVersion = '2025.03.26.2'; // Incremented version number
+const appVersion = '2025.03.26.3'; // Incremented version number again
 const storedVersion = localStorage.getItem('app_version');
 
 // Force a clean reload if version has changed
@@ -42,6 +66,9 @@ if (storedVersion !== appVersion) {
 } else {
   // Still clear caches but don't force reload
   clearAllCaches();
+  
+  // Run font detection
+  detectFontLoading();
   
   // Production-optimized React rendering with proper error handling
   const root = document.getElementById("root");

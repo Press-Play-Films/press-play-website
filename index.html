@@ -21,15 +21,51 @@
     <!-- Preload resources -->
     <link rel="preload" href="/ambient-drone.mp3" as="audio" />
     
-    <!-- Font preloading with non-blocking approach -->
+    <!-- Font loading - Multiple approaches for better cross-browser support -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Inline critical CSS to prevent font flicker -->
+    <style>
+      /* Critical CSS for font loading */
+      .font-cinzel {
+        font-family: "Times New Roman", serif;
+      }
+      
+      /* Hide content until fonts are ready */
+      .font-dependent {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      /* Class that will be added once fonts are loaded */
+      .fonts-loaded .font-dependent {
+        opacity: 1;
+      }
+      
+      /* Font loading indicator (for debugging) */
+      .font-loading-status {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        z-index: 9999;
+        font-size: 12px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        pointer-events: none;
+        opacity: 0;
+      }
+    </style>
     
     <title>Andrew Freeman</title>
   </head>
   <body>
     <div id="root"></div>
+    <!-- Font loading status indicator (for debugging) -->
+    <div class="font-loading-status"></div>
     <!-- Lovable script tag for enabling new features -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
