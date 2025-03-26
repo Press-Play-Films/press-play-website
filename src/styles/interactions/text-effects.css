@@ -19,3 +19,23 @@
   position: relative;
   z-index: 10;
 }
+
+/* Add debug outlines if needed for troubleshooting */
+.debug-mode .section-title-gradient,
+.debug-mode .section-subtitle-gradient {
+  outline: 1px solid red;
+}
+
+.debug-mode .title-glass-box,
+.debug-mode .subtitle-glass-box {
+  outline: 1px solid green;
+}
+
+/* Make sure glass boxes are properly rendered */
+.title-glass-box,
+.subtitle-glass-box {
+  position: relative;
+  z-index: 5;
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: transform, opacity; /* Optimize for animations */
+}

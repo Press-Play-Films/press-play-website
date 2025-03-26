@@ -32,6 +32,11 @@ initEmailJS(emailJsUserId);
 
 // Log initialization
 console.log(`[App] Initialized with EmailJS User ID: ${emailJsUserId === 'YOUR_USER_ID' ? 'PLACEHOLDER (email will not work)' : 'VALID'}`);
+console.log('[App] CSS variables check:', {
+  background: getComputedStyle(document.documentElement).getPropertyValue('--background'),
+  card: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+  primary: getComputedStyle(document.documentElement).getPropertyValue('--primary'),
+});
 
 // Memoize stars component to prevent unnecessary re-renders
 const BackgroundStars = memo(() => {
@@ -94,6 +99,13 @@ BackgroundStars.displayName = 'BackgroundStars';
 const App = () => {
   useEffect(() => {
     console.log('[App] Component mounted');
+    
+    // Debug CSS classes immediately after mount
+    console.log('[App] Checking critical CSS classes:', {
+      titleGradientClass: document.querySelector('.section-title-gradient') ? 'exists' : 'missing',
+      titleGlassBox: document.querySelector('.title-glass-box') ? 'exists' : 'missing',
+      sectionGradient: document.querySelector('.section-subtitle-gradient') ? 'exists' : 'missing' 
+    });
     
     return () => {
       console.log('[App] Component unmounted');
