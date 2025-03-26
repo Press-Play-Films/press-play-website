@@ -23,7 +23,8 @@ const queryClient = new QueryClient({
       staleTime: 60 * 1000, // 1 minute
       gcTime: 5 * 60 * 1000, // 5 minutes
       retry: false,
-      useErrorBoundary: true, // Use Error Boundary for query errors
+      // The property 'useErrorBoundary' is not recognized in this version of react-query
+      // Removing it resolves the TypeScript error
     },
   },
 });
