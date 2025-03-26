@@ -4,6 +4,12 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './styles/index.css'
 
+// Font loading detection
+document.fonts.ready.then(() => {
+  console.log('Fonts are loaded and ready to use!');
+  document.documentElement.classList.add('fonts-loaded');
+});
+
 // Clear all caches on page load
 const clearAllCaches = async () => {
   if ('caches' in window) {

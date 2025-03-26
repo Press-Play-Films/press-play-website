@@ -21,11 +21,10 @@ body::after {
   pointer-events: none;
 }
 
-/* Add font loading debug */
-document.fonts.ready.then(() => {
-  console.log('Fonts are loaded and ready to use!');
-  document.documentElement.classList.add('fonts-loaded');
-});
+/* Style for when fonts are loaded */
+.fonts-loaded {
+  transition: opacity 0.3s ease;
+}
 
 /* Ensure proper styling of chrome buttons */
 .chrome-button {
