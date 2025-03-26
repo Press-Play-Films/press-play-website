@@ -1,3 +1,4 @@
+
 /**
  * EmailJS Configuration Guide: To avoid re-authentication issues
  * 
@@ -157,3 +158,50 @@ export const authTroubleshootingGuide = {};
  * - Check the appropriate checkbox to allow unsubscribing from that template
  */
 export const unsubscribeGuide = {};
+
+/**
+ * Dynamic Attachments in EmailJS: Benefits and Compatibility Considerations
+ * 
+ * Dynamic attachments let you send different files based on email content variables,
+ * which can be powerful for AI companies but comes with important considerations.
+ * 
+ * Benefits for AI Companies:
+ * 1. Personalized Content Delivery: 
+ *    - Send AI-generated reports, analytics, or customized content
+ *    - Create the impression of intelligent, adaptive communications
+ * 
+ * 2. Implementation Options:
+ *    - Using EmailJS Variables: {{variable_name}} to reference user-specific files
+ *    - Using Conditional Logic: Different attachments based on user preferences/actions
+ * 
+ * Compatibility Considerations:
+ * 1. Email Client Support:
+ *    - Major email clients (Gmail, Outlook, Apple Mail) generally support attachments
+ *    - Mobile devices may handle large or complex attachments differently
+ * 
+ * 2. Potential Issues:
+ *    - Increased spam filtering: More complex emails face stricter scrutiny
+ *    - Size limitations: Many email servers reject emails larger than 10-25MB
+ *    - Rendering inconsistencies: Some email clients may not display attachments correctly
+ *    - Security warnings: Recipients may see warnings about attachments
+ * 
+ * Best Practices for AI Companies:
+ * 1. Test thoroughly across multiple email clients and devices
+ * 2. Keep attachments small (under 5MB if possible)
+ * 3. Use common, universally supported file formats (PDF, JPG, PNG)
+ * 4. Consider hosting larger files in the cloud and including download links instead
+ * 5. Include clear instructions on how to access attachments
+ * 6. Always have a fallback in case attachments fail to load
+ * 
+ * Implementation in EmailJS:
+ * 1. Upload files to the "Files" section in your EmailJS dashboard
+ * 2. Reference files using variables in your template
+ * 3. Use dynamic paths based on template variables
+ * 
+ * For modern AI companies, consider a hybrid approach:
+ * - Use static attachments for branding elements (logos, headers)
+ * - Embed lightweight dynamic content directly in HTML
+ * - Host larger AI-generated content in cloud storage with secure links
+ */
+export const dynamicAttachmentsGuide = {};
+
