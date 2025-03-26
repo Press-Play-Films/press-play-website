@@ -11,11 +11,36 @@ const HeroSection = () => {
     if (mounted.current) return;
     mounted.current = true;
     
-    console.log('HeroSection mounted - version 2025.03.29.1'); // Updated version
+    console.log('HeroSection mounted - version 2025.03.29.2'); // Updated version
     
     // Track this session in sessionStorage
     const sessionKey = `hero_section_loaded_${window.sessionId || Date.now()}`;
     sessionStorage.setItem(sessionKey, 'true');
+    
+    // Apply force gradients on mount
+    const applyGradients = () => {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .hero-title, .hero-subtitle {
+          background: linear-gradient(90deg, #FFFFFF, #E8E8E9 50%, #C4C4C8) !important;
+          -webkit-background-clip: text !important;
+          background-clip: text !important;
+          -webkit-text-fill-color: transparent !important;
+        }
+        .hero-title {
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.2) !important;
+        }
+        .hero-subtitle {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.15) !important;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+    
+    // Apply immediately and after delay to ensure they're applied
+    applyGradients();
+    setTimeout(applyGradients, 100);
+    setTimeout(applyGradients, 500);
     
     // Build up the glow effect
     const buildUpInterval = setInterval(() => {
@@ -62,7 +87,7 @@ const HeroSection = () => {
       <div className="container px-6 relative" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
           <h1 
-            className="text-5xl md:text-7xl font-cinzel font-bold force-gradient mb-6"
+            className="text-5xl md:text-7xl font-cinzel font-bold force-gradient hero-title-gradient hero-title mb-6"
             style={{
               textShadow: `0 0 ${glowIntensity * 0.3}px rgba(59, 130, 246, ${glowIntensity / 90})`,
               transition: 'text-shadow 0.3s ease-out'
@@ -71,7 +96,7 @@ const HeroSection = () => {
             Press Play
           </h1>
           <p 
-            className="text-xl md:text-2xl text-white/90 animate-fade-in force-gradient mb-10"
+            className="text-xl md:text-2xl text-white/90 animate-fade-in force-gradient hero-subtitle mb-10"
             style={{ 
               animationDelay: "0.1s",
               textShadow: `0 0 ${glowIntensity * 0.15}px rgba(59, 130, 246, ${glowIntensity / 130})` 

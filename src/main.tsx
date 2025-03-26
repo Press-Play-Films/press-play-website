@@ -6,7 +6,7 @@ import './styles/index.css'
 import { toast } from 'sonner'
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.29.1'; // Version updated to ensure complete refresh
+const APP_VERSION = '2025.03.29.2'; // Version updated to ensure complete refresh
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Force complete refresh if version in localStorage doesn't match
@@ -40,15 +40,17 @@ window.addEventListener('unhandledrejection', (event) => {
 // Mount the application
 console.log('[main.tsx] Mounting React application');
 
-// Inject style to enforce gradient visibility
+// Function to enforce gradients with CSS in document head
 const enforceGradients = () => {
+  console.log('[main.tsx] Enforcing gradients with inline styles');
   const style = document.createElement('style');
   style.innerHTML = `
-    .section-title-gradient, .force-gradient {
+    .section-title-gradient, .force-gradient, .hero-title-gradient, .hero-title, .hero-subtitle {
       background: linear-gradient(90deg, #FFFFFF, #E8E8E9 50%, #C4C4C8) !important;
       -webkit-background-clip: text !important;
       background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.15) !important;
     }
   `;
   document.head.appendChild(style);
@@ -56,7 +58,10 @@ const enforceGradients = () => {
 
 // Call immediately and after a delay to ensure styles are applied
 enforceGradients();
+setTimeout(enforceGradients, 100);
 setTimeout(enforceGradients, 500);
+setTimeout(enforceGradients, 1000);
+setTimeout(enforceGradients, 2000);
 
 // Find root element
 const rootElement = document.getElementById("root");
