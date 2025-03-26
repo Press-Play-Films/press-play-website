@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
-import { sendContactForm } from '@/utils/emailService';
+import { sendContactForm } from '@/utils/email';
 
 interface ContactFormProps {
   onSubmitSuccess?: () => void;

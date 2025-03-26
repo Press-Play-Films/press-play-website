@@ -1,9 +1,8 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { sendContactForm } from '@/utils/emailService';
+import { sendContactForm } from '@/utils/email';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
