@@ -7,6 +7,11 @@
 export const getAutoReplyMessage = (): string => {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <!-- Logo Section -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="cid:logo.png" alt="Andrew Freeman Logo" style="max-width: 150px; height: auto;" />
+      </div>
+      
       <h2 style="color: #6d28d9;">Thank you for contacting Andrew Freeman</h2>
       
       <p>I appreciate you reaching out and will review your message promptly.</p>
@@ -33,3 +38,4 @@ export const getAutoReplyMessage = (): string => {
     </div>
   `;
 };
+

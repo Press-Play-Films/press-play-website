@@ -52,21 +52,21 @@ export const autoReplyGuide = {};
 /**
  * How to Embed Images in EmailJS Templates:
  * 
- * 1. Static Attachments Method:
+ * 1. Upload Your Logo to EmailJS:
  *    - In the EmailJS dashboard, go to "Email Services" > select your service
  *    - Click on the "Content" tab and upload your image (e.g., logo.png)
- *    - In your template HTML, use the CID syntax to embed the image:
- *      <img src="cid:logo.png" alt="Logo">
+ *    - Important: Name your file "logo.png" to match the template code
  * 
- * 2. Example with company logo:
- *    <img src="cid:logo.png" alt="Logo">
+ * 2. The Template is Already Set Up:
+ *    - The auto-reply template already includes the code:
+ *      <img src="cid:logo.png" alt="Andrew Freeman Logo" style="max-width: 150px; height: auto;" />
+ *    - This will automatically display your uploaded logo in emails
  * 
  * Notes:
- * - Only images can be embedded in templates
  * - Image filenames are case-sensitive and cannot contain spaces
- * - Use the exact filename as the CID value
- * - Images must be uploaded to your EmailJS service before they can be embedded
- * - For dynamically changing images, you would need to use a different approach with file hosting
+ * - Use the exact filename as the CID value (e.g., "cid:logo.png")
+ * - The maximum recommended file size is 1MB
+ * - Supported formats: PNG, JPG, and GIF
  */
 export const imageEmbeddingGuide = {};
 
