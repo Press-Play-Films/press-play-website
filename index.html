@@ -12,9 +12,6 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     
-    <!-- Random cache-buster value for each page load -->
-    <meta name="cache-buster" content="<?php echo rand(10000,99999); ?>" />
-    
     <!-- Simple font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,6 +81,9 @@
     <!-- Root for React to mount -->
     <div id="root"></div>
     
+    <!-- Required Lovable script tag for new features -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    
     <!-- Initialization script to handle cache clearing before React loads -->
     <script>
       // Initialize with a unique session ID to prevent any session-based issues
@@ -131,13 +131,7 @@
       clearBrowserCache().then(() => {
         console.log('[Initializer] Loading application with new session ID:', window.sessionId);
         
-        // Create script element for Lovable
-        const lovableScript = document.createElement('script');
-        lovableScript.src = "https://cdn.gpteng.co/gptengineer.js";
-        lovableScript.type = "module";
-        document.body.appendChild(lovableScript);
-        
-        // Create script element with unique timestamp
+        // Create script element for main
         const mainScript = document.createElement('script');
         mainScript.src = `/src/main.tsx?v=${Date.now()}`;
         mainScript.type = "module";
@@ -157,8 +151,5 @@
         };
       });
     </script>
-    
-    <!-- Required Lovable script tag for new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
   </body>
 </html>

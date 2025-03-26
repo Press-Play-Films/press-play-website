@@ -8,7 +8,7 @@ import './styles/index.css'
 console.log('[main.tsx] Application loading, initializer ran:', Boolean(window.initializerRun));
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.28.1'; // Updated version
+const APP_VERSION = '2025.03.28.2'; // Updated version
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Double-check that caches are cleared - belt and suspenders approach
