@@ -21,7 +21,7 @@ const lastLoadTime = localStorage.getItem('last_load_time');
 const currentTime = new Date().getTime();
 if (lastLoadTime && (currentTime - parseInt(lastLoadTime)) > 86400000) {
   localStorage.setItem('last_load_time', currentTime.toString());
-  window.location.reload(true);
+  window.location.reload(); // Removed the boolean parameter to fix TypeScript error
 } else {
   localStorage.setItem('last_load_time', currentTime.toString());
 }
