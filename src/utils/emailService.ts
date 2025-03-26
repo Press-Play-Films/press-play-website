@@ -152,3 +152,22 @@ export const sendContactForm = async (
  * - They receive a professional auto-reply confirming their message was received
  */
 
+/**
+ * How to Embed Images in EmailJS Templates:
+ * 
+ * 1. Static Attachments Method:
+ *    - In the EmailJS dashboard, go to "Email Services" > select your service
+ *    - Click on the "Content" tab and upload your image (e.g., logo.png)
+ *    - In your template HTML, use the CID syntax to embed the image:
+ *      <img src="cid:logo.png" alt="Logo">
+ * 
+ * 2. Example with company logo:
+ *    <img src="cid:logo.png" alt="Logo">
+ * 
+ * Notes:
+ * - Only images can be embedded in templates
+ * - Image filenames are case-sensitive and cannot contain spaces
+ * - Use the exact filename as the CID value
+ * - Images must be uploaded to your EmailJS service before they can be embedded
+ * - For dynamically changing images, you would need to use a different approach with file hosting
+ */
