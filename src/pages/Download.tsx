@@ -16,9 +16,9 @@ const Download = () => {
   const [isLoaded, setIsLoaded] = useState(true);
   const [downloading, setDownloading] = useState(false);
   
-  // Use our new clipboard utility
+  // Fix: Ensure that we return the Promise<boolean> from copyToClipboard
   const handleCopyToClipboard = async (text: string, description: string) => {
-    await copyToClipboard(text, description);
+    return await copyToClipboard(text, description);
   };
   
   const handleOpenGitHub = () => {
