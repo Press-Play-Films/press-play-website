@@ -130,3 +130,4 @@ Vercel is another excellent option for deploying React apps:
 While Lovable doesn't directly support custom domains, you can deploy your project to a service like Netlify or Vercel (see instructions above) and connect your domain there.
 
 For more information on using custom domains with alternative deployment methods, visit our docs: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+a
