@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
@@ -14,7 +13,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.11'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.12'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -68,12 +67,12 @@ const mountApp = () => {
   }
 };
 
-// Use requestIdleCallback with proper typing
+// Handle requestIdleCallback properly
 if ('requestIdleCallback' in window) {
-  // Use type assertion to handle the requestIdleCallback properly
-  (window.requestIdleCallback as any)(() => {
+  // Simple direct call without options to avoid TypeScript errors
+  window.requestIdleCallback(() => {
     mountApp();
-  }, { timeout: 2000 });
+  });
 } else {
   // Fallback for browsers that don't support requestIdleCallback
   setTimeout(mountApp, 100);
