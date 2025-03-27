@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.17'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.18'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -68,8 +68,7 @@ const mountApp = () => {
   }
 };
 
-// Instead of using requestIdleCallback, just use setTimeout directly
-// This avoids TypeScript issues completely
+// Use setTimeout directly without any options to avoid TypeScript errors
 setTimeout(mountApp, 100);
 
 // Add dedicated cache invalidation helper for development testing
