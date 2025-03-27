@@ -21,11 +21,10 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Adding specific configuration for SWC to handle comment parsing issues
+      // Basic SWC configuration without requiring external plugins
       jsxImportSource: "react",
-      plugins: [
-        ["@swc/plugin-emotion", {}],
-      ],
+      // Only add the emotion plugin if it's available
+      plugins: process.env.NODE_ENV === 'production' ? [] : undefined,
     }),
     // Only use the componentTagger in development mode
     mode === 'development' && 
