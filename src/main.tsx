@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.21'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.22'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -68,10 +68,8 @@ const mountApp = () => {
   }
 };
 
-// Fixed: Create a separate function for setTimeout to avoid any parameters
-setTimeout(function() {
-  mountApp();
-});
+// Fixed: Create a separate function for setTimeout without passing any parameters
+setTimeout(mountApp);
 
 // Add dedicated cache invalidation helper for development testing
 if (import.meta.env.DEV) {
