@@ -1,16 +1,14 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { useMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   
-  // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -20,7 +18,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -42,7 +39,6 @@ const Header = () => {
             Andrew Freeman
           </Link>
           
-          {/* Mobile menu button */}
           <button 
             className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -51,7 +47,6 @@ const Header = () => {
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
-          {/* Desktop navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <NavLink to="/" current={location.pathname === "/"}>Home</NavLink>
             <NavLink to="/skills" current={location.pathname === "/skills"}>Skills</NavLink>
@@ -60,7 +55,6 @@ const Header = () => {
             <NavLink to="/contact" current={location.pathname === "/contact"}>Contact</NavLink>
           </nav>
           
-          {/* Mobile navigation */}
           {isMenuOpen && (
             <div className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-md pt-20 px-6 z-40">
               <nav className="flex flex-col items-center space-y-6 text-xl">
@@ -78,7 +72,6 @@ const Header = () => {
   );
 };
 
-// NavLink component for consistent styling
 const NavLink = ({ children, to, current }: { children: React.ReactNode; to: string; current: boolean }) => (
   <Link
     to={to}
