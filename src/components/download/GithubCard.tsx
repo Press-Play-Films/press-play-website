@@ -1,16 +1,23 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Github, ExternalLink, Clipboard } from 'lucide-react';
-import { toast } from "sonner";
 import DownloadCard from './DownloadCard';
 
 interface GithubCardProps {
   onOpenGitHub: () => void;
-  onCopyToClipboard: (text: string, description: string) => void;
+  onCopyToClipboard: (text: string, description: string) => Promise<boolean>;
   downloading: boolean;
 }
 
 const GithubCard = ({ onOpenGitHub, onCopyToClipboard, downloading }: GithubCardProps) => {
+  const [isCopying, setIsCopying] = useState(false);
+
+  const handleCopy = async () => {
+    setIsCopying(true);
+    await onCopyToClipboard('https://github.com/your-username/your-repo-name', 'Repository URL');
+    setTimeout(() => setIsCopying(false), 800);
+  };
+
   return (
     <DownloadCard
       icon={<Github className="w-8 h-8 mr-4 text-primary" />}
@@ -26,11 +33,12 @@ const GithubCard = ({ onOpenGitHub, onCopyToClipboard, downloading }: GithubCard
         Visit Repository
       </button>
       <button 
-        onClick={() => onCopyToClipboard('https://github.com/your-username/your-repo-name', 'Repository URL')}
-        className="chrome-button flex items-center"
+        onClick={handleCopy}
+        className={`chrome-button flex items-center ${isCopying ? 'scale-95 opacity-80' : ''}`}
+        disabled={isCopying}
       >
-        <Clipboard className="w-5 h-5 mr-2" />
-        Copy URL
+        <Clipboard className={`w-5 h-5 mr-2 ${isCopying ? 'animate-pulse' : ''}`} />
+        {isCopying ? 'Copied!' : 'Copy URL'}
       </button>
     </DownloadCard>
   );

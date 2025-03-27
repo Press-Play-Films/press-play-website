@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from "sonner";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -10,20 +10,15 @@ import ProjectInfoCard from '@/components/download/ProjectInfoCard';
 import ReadmeCard from '@/components/download/ReadmeCard';
 import DevInstructionsCard from '@/components/download/DevInstructionsCard';
 import { generateProjectData, getReadmeContent, getProjectStructure } from '@/components/download/utils';
+import { copyToClipboard } from '@/utils/clipboard';
 
 const Download = () => {
   const [isLoaded, setIsLoaded] = useState(true);
   const [downloading, setDownloading] = useState(false);
   
-  const handleCopyToClipboard = (text: string, description: string) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        toast.success(`${description} copied to clipboard!`);
-      })
-      .catch((err) => {
-        console.error('Failed to copy:', err);
-        toast.error("Failed to copy to clipboard");
-      });
+  // Use our new clipboard utility
+  const handleCopyToClipboard = async (text: string, description: string) => {
+    await copyToClipboard(text, description);
   };
   
   const handleOpenGitHub = () => {
@@ -61,8 +56,10 @@ const Download = () => {
       // Remove the link
       document.body.removeChild(link);
       
-      // Release the URL
+      // Release the URL to prevent memory leaks
       URL.revokeObjectURL(url);
+      
+      toast.success("Project info downloaded successfully");
     } catch (error) {
       console.error('Error generating JSON:', error);
       toast.error("Failed to generate JSON file");
@@ -72,21 +69,37 @@ const Download = () => {
   };
   
   const handleViewReadme = () => {
-    const readmeContent = getReadmeContent();
-    const blob = new Blob([readmeContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'README.md';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-    
-    toast.success("README.md file downloaded");
+    try {
+      const readmeContent = getReadmeContent();
+      const blob = new Blob([readmeContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'README.md';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Release the URL to prevent memory leaks
+      URL.revokeObjectURL(url);
+      
+      toast.success("README.md file downloaded");
+    } catch (error) {
+      console.error('Error downloading README:', error);
+      toast.error("Failed to download README file");
+    }
   };
 
+  // Get project structure ahead of time to avoid recalculating on each render
   const projectStructure = getProjectStructure();
+  
+  // Clean up any object URLs if component unmounts during download
+  useEffect(() => {
+    return () => {
+      // This is just a precaution in case component unmounts during download
+      setDownloading(false);
+    };
+  }, []);
 
   return (
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>

@@ -1,19 +1,27 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { FileCode, Clipboard } from 'lucide-react';
 import DownloadCard from './DownloadCard';
 
 interface DevInstructionsCardProps {
-  onCopyToClipboard: (text: string, description: string) => void;
+  onCopyToClipboard: (text: string, description: string) => Promise<boolean>;
 }
 
 const DevInstructionsCard = ({ onCopyToClipboard }: DevInstructionsCardProps) => {
+  const [isCopying, setIsCopying] = useState(false);
+
   const commands = `
 git clone [repository-url]
 cd [project-directory]
 npm install
 npm run dev
   `.trim();
+
+  const handleCopy = async () => {
+    setIsCopying(true);
+    await onCopyToClipboard(commands, 'Development commands');
+    setTimeout(() => setIsCopying(false), 800);
+  };
 
   return (
     <DownloadCard
@@ -28,11 +36,12 @@ npm run dev
         <li>Build for production: <code className="bg-black/20 px-2 py-1 rounded">npm run build</code></li>
       </ol>
       <button 
-        onClick={() => onCopyToClipboard(commands, 'Development commands')}
-        className="chrome-button flex items-center"
+        onClick={handleCopy}
+        className={`chrome-button flex items-center ${isCopying ? 'scale-95 opacity-80' : ''}`}
+        disabled={isCopying}
       >
-        <Clipboard className="w-5 h-5 mr-2" />
-        Copy Commands
+        <Clipboard className={`w-5 h-5 mr-2 ${isCopying ? 'animate-pulse' : ''}`} />
+        {isCopying ? 'Copied!' : 'Copy Commands'}
       </button>
     </DownloadCard>
   );

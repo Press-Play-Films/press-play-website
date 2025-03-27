@@ -1,8 +1,20 @@
 
 // Helper functions for the Download page
 
+// Define types for project data
+export interface ProjectData {
+  name: string;
+  version: string;
+  description: string;
+  technologies: string[];
+  pages: string[];
+  key_components: string[];
+  structure: Record<string, string>;
+  buildTimestamp: string;
+}
+
 // Generate project information JSON
-export const generateProjectData = () => {
+export const generateProjectData = (): ProjectData => {
   return {
     name: "Andrew Freeman Portfolio",
     version: "1.0.0",
@@ -32,7 +44,7 @@ export const generateProjectData = () => {
 };
 
 // README content for download
-export const getReadmeContent = () => {
+export const getReadmeContent = (): string => {
   return `# Andrew Freeman Portfolio
 
 ## Project Overview
@@ -73,7 +85,7 @@ npm run dev
 };
 
 // Default project structure text
-export const getProjectStructure = () => {
+export const getProjectStructure = (): string => {
   return `
 src/
 ├── components/
