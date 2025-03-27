@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.31'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.32'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -63,7 +63,7 @@ const mountApp = () => {
         logAppState(`Backdrop-filter support: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
       };
       
-      // Fix: removed the timeout parameter to prevent TypeScript errors
+      // Fix: using setTimeout without arguments to prevent TypeScript errors
       setTimeout(checkUIComponents);
     }
   } catch (error) {
@@ -95,6 +95,6 @@ window.addEventListener('load', () => {
   if (import.meta.env.DEV) {
     // Force final reflow to ensure styles are applied
     document.body.classList.add('force-reflow');
-    setTimeout(() => document.body.classList.remove('force-reflow'), 10);
+    setTimeout(() => document.body.classList.remove('force-reflow'));
   }
 });
