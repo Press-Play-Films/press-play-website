@@ -70,6 +70,7 @@ const mountApp = () => {
 
 // Use requestIdleCallback with the proper signature
 if ('requestIdleCallback' in window) {
+  // @ts-ignore - Temporarily ignore TypeScript error for requestIdleCallback options
   window.requestIdleCallback(() => {
     mountApp();
   }, { timeout: 2000 });
