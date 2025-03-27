@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.4'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.5'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -68,14 +68,37 @@ const mountApp = () => {
   }
 };
 
-// Properly type requestIdleCallback to fix TypeScript error
-// Create a type-safe wrapper for requestIdleCallback
+// Declare the correct RequestIdleCallback types first
+type RequestIdleCallbackHandle = number;
+interface RequestIdleCallbackOptions {
+  timeout: number;
+}
+interface RequestIdleCallbackDeadline {
+  readonly didTimeout: boolean;
+  timeRemaining: () => number;
+}
+
+// Add RequestIdleCallback types to the Window interface
+declare global {
+  interface Window {
+    requestIdleCallback: (
+      callback: (deadline: RequestIdleCallbackDeadline) => void,
+      opts?: RequestIdleCallbackOptions
+    ) => RequestIdleCallbackHandle;
+    cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void;
+  }
+}
+
+// Use requestIdleCallback with proper typing
 if ('requestIdleCallback' in window) {
-  // Cast window.requestIdleCallback to accept our arguments
-  (window.requestIdleCallback as unknown as (
-    callback: IdleRequestCallback,
-    options?: IdleRequestOptions
-  ) => number)(mountApp, { timeout: 1000 });
+  window.requestIdleCallback(
+    (deadline: RequestIdleCallbackDeadline) => {
+      if (deadline.timeRemaining() > 0 || deadline.didTimeout) {
+        mountApp();
+      }
+    },
+    { timeout: 1000 }
+  );
 } else {
   setTimeout(mountApp, 100);
 }
