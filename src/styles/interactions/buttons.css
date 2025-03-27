@@ -2,8 +2,10 @@
 /* Chrome Button with Gleam Animation - Enhanced 3D silver metallic look */
 .chrome-button {
   @apply relative overflow-hidden rounded-full px-6 py-3 font-medium !important;
-  /* Targeted transitions for specific properties to prevent flickering */
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease !important;
+  /* Use hardware acceleration and optimize transitions */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
   background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%) !important;
   box-shadow: 
     0 6px 12px -2px rgba(0, 0, 0, 0.35), 
@@ -13,34 +15,39 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
   color: #333 !important;
   z-index: 1 !important;
+  /* Isolate transitions to only the properties that change */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background 0.2s ease-out !important;
   will-change: transform, box-shadow !important;
 }
 
 .chrome-button:hover {
   background: linear-gradient(145deg, #FFFFFF, #D8D8DC) !important;
-  transform: translateY(-2px) !important;
+  transform: translateY(-2px) translateZ(0) !important;
   box-shadow: 
     0 8px 15px -2px rgba(0, 0, 0, 0.25), 
     inset 0 1px 3px rgba(255, 255, 255, 0.9),
     inset 0 -2px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Fix for hover/active conflict - maintain most of the hover styling when active */
+/* Fixed active state - more similar to hover to reduce visual jumping */
 .chrome-button:active {
   background: linear-gradient(145deg, #E8E8EC, #D0D0D4) !important;
-  transform: translateY(0) !important;
+  transform: translateY(0) translateZ(0) !important;
   box-shadow: 
     0 6px 10px -2px rgba(0, 0, 0, 0.3), 
     inset 0 1px 2px rgba(255, 255, 255, 0.7),
     inset 0 1px 4px rgba(0, 0, 0, 0.1) !important;
-  transition: transform 0.1s, box-shadow 0.1s !important;
+  /* Faster transition on press for better responsiveness */
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out !important;
 }
 
 /* Premium Chrome Button - More vibrant silver with stronger 3D effect */
 .chrome-button-premium {
   @apply relative overflow-hidden rounded-full px-6 py-3 font-medium !important;
-  /* Targeted transitions for specific properties to prevent flickering */
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease !important;
+  /* Hardware acceleration and optimized rendering */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
   background: linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%) !important;
   box-shadow: 
     0 8px 16px -4px rgba(0, 0, 0, 0.4), 
@@ -50,34 +57,38 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important;
   color: #333 !important;
   z-index: 1 !important;
+  /* Targeted transitions */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background 0.2s ease-out !important;
   will-change: transform, box-shadow !important;
 }
 
 .chrome-button-premium:hover {
   background: linear-gradient(145deg, #FFFFFF, #E8E8F2) !important;
-  transform: translateY(-3px) !important;
+  transform: translateY(-3px) translateZ(0) !important;
   box-shadow: 
     0 10px 20px -5px rgba(0, 0, 0, 0.3), 
     inset 0 1px 3px rgba(255, 255, 255, 1),
     inset 0 -2px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Fix for hover/active conflict - maintain most of the hover styling when active */
+/* More consistent active state */
 .chrome-button-premium:active {
   background: linear-gradient(145deg, #F0F0F4, #E0E0E8) !important;
-  transform: translateY(-1px) !important;
+  transform: translateY(-1px) translateZ(0) !important;
   box-shadow: 
     0 7px 15px -3px rgba(0, 0, 0, 0.35), 
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 1px 4px rgba(0, 0, 0, 0.1) !important;
-  transition: transform 0.1s, box-shadow 0.1s !important;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out !important;
 }
 
 /* Chrome tab style - Enhanced 3D silver metallic look */
 .chrome-tab {
   @apply relative overflow-hidden rounded-full px-6 py-3 font-medium !important;
-  /* Targeted transitions for specific properties to prevent flickering */
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease !important;
+  /* Hardware acceleration and optimized rendering */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
   background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%) !important;
   box-shadow: 
     0 4px 10px -2px rgba(0, 0, 0, 0.3), 
@@ -87,30 +98,32 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;
   color: #333 !important;
   z-index: 1 !important;
+  /* Targeted transitions */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background 0.2s ease-out !important;
   will-change: transform, box-shadow !important;
 }
 
 .chrome-tab:hover {
   background: linear-gradient(145deg, #FFFFFF, #D8D8DC) !important;
-  transform: translateY(-1px) !important;
+  transform: translateY(-1px) translateZ(0) !important;
   box-shadow: 
     0 6px 12px -2px rgba(0, 0, 0, 0.2), 
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -1px 1px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Fix for hover/active conflict - maintain most of the hover styling when active */
+/* More consistent active state */
 .chrome-tab:active {
   background: linear-gradient(145deg, #E8E8EC, #D0D0D4) !important;
-  transform: translateY(0) !important;
+  transform: translateY(0) translateZ(0) !important;
   box-shadow: 
     0 4px 8px -2px rgba(0, 0, 0, 0.25), 
     inset 0 1px 2px rgba(255, 255, 255, 0.6),
     inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  transition: transform 0.1s, box-shadow 0.1s !important;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out !important;
 }
 
-/* Reinforcing gleam effects */
+/* Improved gleam effects with positioning fixes to prevent layout shifts */
 .chrome-button::before,
 .chrome-button-premium::before,
 .chrome-tab::before {
@@ -126,9 +139,11 @@
     rgba(255, 255, 255, 0.7) 50%,
     rgba(255, 255, 255, 0) 100%
   ) !important;
-  transform: rotate(30deg) !important;
-  transition: transform 0s !important;
+  transform: rotate(30deg) translateZ(0) !important;
+  pointer-events: none !important; /* Prevent mouse events on pseudo-element */
   z-index: 5 !important;
+  will-change: transform, left !important;
+  transition: none !important; /* No transition until hover */
 }
 
 .chrome-button:hover::before,
