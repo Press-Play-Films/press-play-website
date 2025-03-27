@@ -10,6 +10,7 @@ import FeaturedProjectsSection from '@/components/sections/FeaturedProjectsSecti
 import AIIntegrationSection from '@/components/sections/AIIntegrationSection';
 import SalesLeadershipSection from '@/components/sections/SalesLeadershipSection';
 import AmbientAudio from '@/components/AmbientAudio';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -78,6 +79,19 @@ const Index = () => {
         <FeaturedProjectsSection />
         <AIIntegrationSection />
         <SalesLeadershipSection />
+        
+        {/* Blog CTA */}
+        <section className="py-16 relative">
+          <div className="container px-6 relative z-10">
+            <div className="max-w-3xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center">
+              <h2 className="text-3xl font-bold mb-4 section-title-gradient">Check Out My Blog</h2>
+              <p className="text-xl mb-8">Read my thoughts and insights on technology, AI, and business</p>
+              <Link to="/blog" className="chrome-button-premium">
+                Visit Blog
+              </Link>
+            </div>
+          </div>
+        </section>
         
         <Footer />
       </div>
