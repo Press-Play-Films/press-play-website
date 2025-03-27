@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.29'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.30'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -52,7 +52,7 @@ const mountApp = () => {
     
     if (import.meta.env.DEV) {
       // Only perform these checks in development
-      setTimeout(() => {
+      const checkUIComponents = () => {
         // Check for critical UI components
         const titleBox = document.querySelector('.title-glass-box');
         const chromeButtons = document.querySelectorAll('.chrome-button, .chrome-button-premium');
@@ -61,15 +61,17 @@ const mountApp = () => {
         
         // Check backdrop-filter support
         logAppState(`Backdrop-filter support: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
-      }, 300);
+      };
+      
+      setTimeout(checkUIComponents, 300);
     }
   } catch (error) {
     console.error('[main.tsx] Failed to render React application:', error);
   }
 };
 
-// Fixed: Use requestAnimationFrame instead of setTimeout to avoid TS errors
-requestAnimationFrame(() => {
+// Use standard DOM API - avoiding requestAnimationFrame to prevent TypeScript errors
+document.addEventListener('DOMContentLoaded', () => {
   mountApp();
 });
 

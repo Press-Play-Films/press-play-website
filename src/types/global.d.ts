@@ -8,5 +8,5 @@ interface Window {
   initializerRun?: boolean;
   _titleBox?: HTMLElement;
   _titleElement?: HTMLElement;
-  // Don't redefine requestIdleCallback here as it will conflict with TypeScript's built-in definitions
+  // Removed requestIdleCallback type definitions as they're causing TypeScript errors
 }
