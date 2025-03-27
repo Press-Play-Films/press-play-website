@@ -66,7 +66,7 @@ export default defineConfig(({ mode }) => ({
           ui: ['@/components/ui'],
           vendors: ['@tanstack/react-query', 'lucide-react', 'sonner'],
         },
-        // Add code splitting for large CSS files
+        // Add code splitting for large CSS files with proper TypeScript typing
         assetFileNames: (assetInfo) => {
           if (assetInfo && assetInfo.name && /\.(css)$/i.test(assetInfo.name)) {
             return `assets/css/[name]-[hash][extname]`;
@@ -78,7 +78,7 @@ export default defineConfig(({ mode }) => ({
       onwarn(warning, warn) {
         // Ignore specific warnings related to comment parsing in react-helmet-async
         if (warning.code === 'SOURCEMAP_ERROR' && 
-            warning.message.includes('react-helmet-async')) {
+            warning.message && warning.message.includes('react-helmet-async')) {
           return;
         }
         warn(warning);
