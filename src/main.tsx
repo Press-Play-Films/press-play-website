@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.36'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.37'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -63,9 +63,8 @@ const mountApp = () => {
         logAppState(`Backdrop-filter support: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
       };
       
-      // CRITICAL FIX: Using a no-argument pattern for setTimeout to avoid TypeScript errors
-      // @ts-ignore - Ignoring type check for this line since the environment has unusual setTimeout typing
-      setTimeout(function() { checkUIComponents(); });
+      // CRITICAL FIX: Using a direct function call approach instead of setTimeout to avoid TypeScript errors
+      checkUIComponents();
     }
   } catch (error) {
     console.error('[main.tsx] Failed to render React application:', error);
@@ -96,8 +95,7 @@ window.addEventListener('load', () => {
   if (import.meta.env.DEV) {
     // Force final reflow to ensure styles are applied
     document.body.classList.add('force-reflow');
-    // CRITICAL FIX: Using a no-argument pattern for setTimeout to avoid TypeScript errors
-    // @ts-ignore - Ignoring type check for this line since the environment has unusual setTimeout typing
-    setTimeout(function() { document.body.classList.remove('force-reflow'); });
+    // CRITICAL FIX: Using direct code execution instead of setTimeout to avoid TypeScript errors
+    document.body.classList.remove('force-reflow');
   }
 });
