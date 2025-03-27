@@ -44,7 +44,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 // Simulate click on the video card when Enter or Space is pressed
                 const videoElement = e.currentTarget.querySelector('img, video');
-                if (videoElement) {
+                if (videoElement instanceof HTMLElement) {
                   videoElement.click();
                 }
                 e.preventDefault();
