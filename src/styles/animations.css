@@ -74,4 +74,20 @@
   .staggered-animation > *:nth-child(6) { animation: fadeIn 0.5s ease-out 0.6s forwards; }
   .staggered-animation > *:nth-child(7) { animation: fadeIn 0.5s ease-out 0.7s forwards; }
   .staggered-animation > *:nth-child(8) { animation: fadeIn 0.5s ease-out 0.8s forwards; }
+  
+  /* Add prefers-reduced-motion support for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-scale-in,
+    .animate-float,
+    .animate-pulse-slow,
+    .animate-slide-in-right,
+    .highlight-section,
+    .staggered-animation > * {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 }

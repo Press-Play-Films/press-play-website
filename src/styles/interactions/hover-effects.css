@@ -33,9 +33,11 @@
   @apply opacity-20;
 }
 
-/* Chrome button hover effects - enhanced */
+/* Chrome button hover effects - enhanced with focus states for accessibility */
 .chrome-button, .chrome-button-premium, .chrome-tab {
   @apply transition-all duration-300 ease-out;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .chrome-button:hover, .chrome-button-premium:hover, .chrome-tab:hover {
@@ -44,6 +46,13 @@
   box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.3), 
               inset 0 1px 3px rgba(255, 255, 255, 1),
               0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Focus states for keyboard navigation accessibility */
+.chrome-button:focus-visible, .chrome-button-premium:focus-visible, .chrome-tab:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
 }
 
 .chrome-button:active, .chrome-button-premium:active, .chrome-tab:active {

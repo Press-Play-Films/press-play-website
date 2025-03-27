@@ -81,14 +81,49 @@
       @keyframes spin {
         to { transform: rotate(360deg); }
       }
+      
+      /* Skip link for accessibility */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      
+      .sr-only:focus {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        padding: 1rem;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+        background-color: #0f172a;
+        color: white;
+        z-index: 9999;
+        text-decoration: none;
+        font-weight: bold;
+        border: 2px solid #3b82f6;
+      }
     </style>
     
     <title>Andrew Freeman</title>
   </head>
   <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#root" class="sr-only">Skip to content</a>
+    
     <!-- Loading screen that disappears when app is ready -->
-    <div id="loading-screen">
-      <div class="loading-spinner"></div>
+    <div id="loading-screen" aria-live="polite">
+      <div class="loading-spinner" aria-hidden="true"></div>
       <div class="loading-text">Loading Andrew's Portfolio...</div>
     </div>
     

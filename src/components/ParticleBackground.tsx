@@ -14,10 +14,22 @@ interface Particle {
 const ParticleBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [stars, setStars] = useState<Particle[]>([]);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Create particles
-    const particleCount = 15;
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    // Listen for changes to motion preference
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    
+    mediaQuery.addEventListener('change', handleMediaChange);
+    
+    // Create particles - reduced count for better performance
+    const particleCount = prefersReducedMotion ? 8 : 15;
     const newParticles: Particle[] = [];
     
     for (let i = 0; i < particleCount; i++) {
@@ -35,8 +47,8 @@ const ParticleBackground = () => {
     
     setParticles(newParticles);
     
-    // Create stars
-    const starCount = 100;
+    // Create stars - reduced count for better performance
+    const starCount = prefersReducedMotion ? 50 : 100;
     const newStars: Particle[] = [];
     
     for (let i = 0; i < starCount; i++) {
@@ -54,83 +66,90 @@ const ParticleBackground = () => {
     
     setStars(newStars);
 
-    // Animation loop for subtle movement
-    let animationFrameId: number;
-    let lastTime = 0;
-    let frameCount = 0;
+    // Animation loop for subtle movement (skip if reduced motion is preferred)
+    if (!prefersReducedMotion) {
+      let animationFrameId: number;
+      let lastTime = 0;
+      let frameCount = 0;
 
-    const animate = (time: number) => {
-      if (lastTime === 0) lastTime = time;
-      const deltaTime = time - lastTime;
-      lastTime = time;
-      frameCount++;
+      const animate = (time: number) => {
+        if (lastTime === 0) lastTime = time;
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        frameCount++;
 
-      // Update positions every few frames for better performance
-      // and to keep movement very subtle
-      if (deltaTime > 0 && frameCount % 2 === 0) {
-        setParticles(prevParticles => 
-          prevParticles.map(particle => {
-            // Randomly change direction occasionally for more organic movement
-            if (Math.random() < 0.005) {
-              particle.speedX = (Math.random() - 0.5) * 0.08;
-              particle.speedY = (Math.random() - 0.5) * 0.08;
-            }
-            
-            let newX = particle.x + particle.speedX;
-            let newY = particle.y + particle.speedY;
-            
-            // Wrap around edges with a small buffer
-            if (newX > 105) newX = -5;
-            if (newX < -5) newX = 105;
-            if (newY > 105) newY = -5;
-            if (newY < -5) newY = 105;
-            
-            return {
-              ...particle,
-              x: newX,
-              y: newY
-            };
-          })
-        );
+        // Update positions every few frames for better performance
+        // and to keep movement very subtle
+        if (deltaTime > 0 && frameCount % 3 === 0) {
+          setParticles(prevParticles => 
+            prevParticles.map(particle => {
+              // Randomly change direction occasionally for more organic movement
+              if (Math.random() < 0.005) {
+                particle.speedX = (Math.random() - 0.5) * 0.08;
+                particle.speedY = (Math.random() - 0.5) * 0.08;
+              }
+              
+              let newX = particle.x + particle.speedX;
+              let newY = particle.y + particle.speedY;
+              
+              // Wrap around edges with a small buffer
+              if (newX > 105) newX = -5;
+              if (newX < -5) newX = 105;
+              if (newY > 105) newY = -5;
+              if (newY < -5) newY = 105;
+              
+              return {
+                ...particle,
+                x: newX,
+                y: newY
+              };
+            })
+          );
 
-        setStars(prevStars => 
-          prevStars.map(star => {
-            // Randomly change direction occasionally for more organic movement
-            if (Math.random() < 0.002) {
-              star.speedX = (Math.random() - 0.5) * 0.015;
-              star.speedY = (Math.random() - 0.5) * 0.015;
-            }
-            
-            let newX = star.x + star.speedX;
-            let newY = star.y + star.speedY;
-            
-            // Wrap around edges with a small buffer
-            if (newX > 105) newX = -5;
-            if (newX < -5) newX = 105;
-            if (newY > 105) newY = -5;
-            if (newY < -5) newY = 105;
-            
-            return {
-              ...star,
-              x: newX,
-              y: newY
-            };
-          })
-        );
-      }
+          setStars(prevStars => 
+            prevStars.map(star => {
+              // Randomly change direction occasionally for more organic movement
+              if (Math.random() < 0.002) {
+                star.speedX = (Math.random() - 0.5) * 0.015;
+                star.speedY = (Math.random() - 0.5) * 0.015;
+              }
+              
+              let newX = star.x + star.speedX;
+              let newY = star.y + star.speedY;
+              
+              // Wrap around edges with a small buffer
+              if (newX > 105) newX = -5;
+              if (newX < -5) newX = 105;
+              if (newY > 105) newY = -5;
+              if (newY < -5) newY = 105;
+              
+              return {
+                ...star,
+                x: newX,
+                y: newY
+              };
+            })
+          );
+        }
+
+        animationFrameId = requestAnimationFrame(animate);
+      };
 
       animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
+      
+      return () => {
+        cancelAnimationFrame(animationFrameId);
+        mediaQuery.removeEventListener('change', handleMediaChange);
+      };
+    }
+    
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      mediaQuery.removeEventListener('change', handleMediaChange);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 0 }} aria-hidden="true">
       {/* Particles */}
       {particles.map((particle) => (
         <div
@@ -145,8 +164,8 @@ const ParticleBackground = () => {
             filter: 'blur(8px)',
             transform: 'translate(-50%, -50%)',
             transition: 'opacity 0.5s ease',
-            animation: `pulse ${8 + particle.delay}s ease-in-out infinite`,
-            animationDelay: `${particle.delay}s`,
+            animation: prefersReducedMotion ? 'none' : `pulse ${8 + particle.delay}s ease-in-out infinite`,
+            animationDelay: prefersReducedMotion ? '0s' : `${particle.delay}s`,
             zIndex: 1,
           }}
         />
@@ -163,8 +182,8 @@ const ParticleBackground = () => {
             opacity: star.opacity,
             transform: 'translate(-50%, -50%)',
             transition: 'opacity 0.5s ease',
-            animation: `pulse 3s ease-in-out infinite`,
-            animationDelay: `${star.delay}s`,
+            animation: prefersReducedMotion ? 'none' : `pulse 3s ease-in-out infinite`,
+            animationDelay: prefersReducedMotion ? '0s' : `${star.delay}s`,
             zIndex: 0,
           }}
         />

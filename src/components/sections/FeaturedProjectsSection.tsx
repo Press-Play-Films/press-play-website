@@ -47,10 +47,10 @@ const FeaturedProjectsSection = () => {
   ), [filteredVideos]);
   
   return (
-    <section id="featured-work" className="py-20 relative">
+    <section id="featured-work" className="py-20 relative" aria-labelledby="featured-work-title">
       <div className="container px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl section-title-gradient mb-4">Featured Projects</h2>
+          <h2 id="featured-work-title" className="text-3xl md:text-4xl section-title-gradient mb-4">Featured Projects</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto section-subtitle-gradient">A selection of our professional work across various industries</p>
         </div>
         
@@ -60,13 +60,21 @@ const FeaturedProjectsSection = () => {
           showAllVideos={showAllVideos}
         />
         
-        {videoCards}
+        {filteredVideos.length === 0 ? (
+          <p className="text-center text-muted-foreground my-16">No projects found in this category.</p>
+        ) : (
+          videoCards
+        )}
         
         {!(activeCategory === 'video' && showAllVideoProduction) && (
           <div className="text-center mt-12">
-            <Link to="/portfolio" className="chrome-button text-gray-800 flex items-center gap-2 mx-auto w-fit">
+            <Link 
+              to="/portfolio" 
+              className="chrome-button text-gray-800 flex items-center gap-2 mx-auto w-fit"
+              aria-label="View full portfolio of projects"
+            >
               View Full Portfolio
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
             </Link>
           </div>
         )}
