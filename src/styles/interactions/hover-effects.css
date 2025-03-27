@@ -55,9 +55,13 @@
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
 }
 
+/* Fix for the hover/active state conflicts - ensure active state preserves hover styling */
 .chrome-button:active, .chrome-button-premium:active, .chrome-tab:active {
   @apply transform scale-[0.98] transition-all duration-150;
   filter: brightness(0.98);
+  /* Maintain the hover-state box shadow to prevent flickering */
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.3), 
+              inset 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
 /* Portfolio project card hover effect */
