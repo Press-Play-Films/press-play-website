@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.23'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.24'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -68,8 +68,8 @@ const mountApp = () => {
   }
 };
 
-// Fixed: Use setTimeout with callback function that calls mountApp
-setTimeout(() => {
+// Fixed: Use a basic setTimeout without any parameters
+setTimeout(function() {
   mountApp();
 });
 
