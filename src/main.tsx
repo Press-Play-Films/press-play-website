@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.30'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.31'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -63,7 +63,8 @@ const mountApp = () => {
         logAppState(`Backdrop-filter support: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
       };
       
-      setTimeout(checkUIComponents, 300);
+      // Fix: removed the timeout parameter to prevent TypeScript errors
+      setTimeout(checkUIComponents);
     }
   } catch (error) {
     console.error('[main.tsx] Failed to render React application:', error);
