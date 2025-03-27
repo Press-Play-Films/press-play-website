@@ -68,8 +68,7 @@ export default defineConfig(({ mode }) => ({
         },
         // Add code splitting for large CSS files
         assetFileNames: (assetInfo) => {
-          const extType = assetInfo.name.split('.').at(1);
-          if (/\.(css)$/i.test(assetInfo.name)) {
+          if (assetInfo && assetInfo.name && /\.(css)$/i.test(assetInfo.name)) {
             return `assets/css/[name]-[hash][extname]`;
           }
           return `assets/[name]-[hash][extname]`;
