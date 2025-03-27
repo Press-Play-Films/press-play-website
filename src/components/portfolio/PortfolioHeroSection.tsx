@@ -47,7 +47,10 @@ const PortfolioHeroSection = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-20 relative" aria-labelledby="portfolio-title">
+    <section 
+      className="pt-32 pb-20 md:pt-40 md:pb-20 relative" 
+      aria-labelledby="portfolio-title"
+    >
       <div className="container px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <div 

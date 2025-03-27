@@ -59,3 +59,32 @@
   @apply transform scale-[0.98] transition-all duration-150;
   filter: brightness(0.98);
 }
+
+/* Portfolio project card hover effect */
+.project-card {
+  @apply transition-all duration-300 ease-out hover:shadow-lg hover:shadow-primary/20;
+}
+
+.project-card:hover .project-card-title {
+  @apply text-primary;
+}
+
+.project-card:focus-visible {
+  @apply outline-primary outline-offset-2 outline-2;
+}
+
+/* Enhanced animation for project card images */
+.project-card-image {
+  @apply transition-transform duration-500 ease-out;
+  transform-origin: center;
+}
+
+.project-card:hover .project-card-image {
+  @apply transform scale-[1.05];
+}
+
+/* Category filter focus states */
+.category-filter-button:focus-visible {
+  @apply outline-primary outline-offset-2 outline-2;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
