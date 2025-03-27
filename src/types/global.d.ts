@@ -10,6 +10,7 @@ interface Window {
   _titleElement?: HTMLElement;
 }
 
-// Add an empty interface for setTimeout to avoid type errors
-// This is a workaround for the unusual TypeScript environment
-interface TimerHandler {}
+// Updated interface for TimerHandler with proper definition
+interface TimerHandler {
+  (this: Window): void;
+}
