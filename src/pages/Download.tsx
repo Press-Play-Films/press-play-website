@@ -3,13 +3,25 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
-import { DownloadCloud, Github, FileJson, FileCode, FileText } from 'lucide-react';
+import { DownloadCloud, Github, FileJson, FileCode, FileText, Clipboard, ExternalLink } from 'lucide-react';
+import { toast } from "sonner";
 
 const Download = () => {
   const [isLoaded, setIsLoaded] = useState(true);
   const [downloading, setDownloading] = useState(false);
   
-  const handleDownloadSourceCode = () => {
+  const handleCopyToClipboard = (text: string, description: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success(`${description} copied to clipboard!`);
+      })
+      .catch((err) => {
+        console.error('Failed to copy:', err);
+        toast.error("Failed to copy to clipboard");
+      });
+  };
+  
+  const handleOpenGitHub = () => {
     // This opens the GitHub repository in a new tab
     window.open('https://github.com/your-username/your-repo-name', '_blank');
   };
@@ -27,8 +39,22 @@ const Download = () => {
           "React", "TypeScript", "Tailwind CSS", "Vite", "shadcn/ui"
         ],
         pages: [
-          "Home", "Skills", "Portfolio", "Blog", "Contact"
+          "Home", "Skills", "Portfolio", "Blog", "Contact", "Download"
         ],
+        key_components: [
+          "Header.tsx", "Footer.tsx", "ParticleBackground.tsx",
+          "AIIntegrationSection.tsx", "SalesLeadershipSection.tsx",
+          "TechnicalExpertiseSection.tsx", "VideoProductionSection.tsx"
+        ],
+        structure: {
+          "src/": "Source code directory",
+          "src/components/": "Reusable UI components",
+          "src/pages/": "Page components",
+          "src/styles/": "CSS styling",
+          "src/utils/": "Utility functions",
+          "src/hooks/": "Custom React hooks",
+          "src/data/": "Data files"
+        },
         buildTimestamp: new Date().toISOString()
       };
       
@@ -59,13 +85,13 @@ const Download = () => {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Error generating JSON:', error);
+      toast.error("Failed to generate JSON file");
     } finally {
       setDownloading(false);
     }
   };
   
   const handleViewReadme = () => {
-    // This could either download a README file or display it in a modal
     const readmeContent = `# Andrew Freeman Portfolio
 
 ## Project Overview
@@ -113,7 +139,38 @@ npm run dev
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    
+    toast.success("README.md file downloaded");
   };
+
+  const projectStructure = `
+src/
+├── components/
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── ParticleBackground.tsx
+│   ├── competencies/
+│   │   └── [Component files]
+│   ├── sections/
+│   │   └── [Section component files]
+│   └── ui/
+│       └── [shadcn components]
+├── pages/
+│   ├── index.tsx
+│   ├── Skills.tsx
+│   ├── Portfolio.tsx
+│   ├── Blog.tsx
+│   ├── Contact.tsx
+│   └── Download.tsx
+├── styles/
+│   └── [CSS files]
+├── utils/
+│   └── [Utility functions]
+├── hooks/
+│   └── [Custom React hooks]
+└── data/
+    └── [Data files]
+`;
 
   return (
     <div className={`min-h-screen ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
@@ -123,9 +180,12 @@ npm run dev
       <div className="relative z-10 pt-32 pb-20">
         <div className="container px-6 relative z-10">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Download</h1>
-            <p className="text-xl text-muted-foreground mb-12 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              Download project files for third-party review or development
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Collaborate & Download</h1>
+            <p className="text-xl text-muted-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              Access project resources for collaboration with AI tools like ChatGPT or for third-party development
+            </p>
+            <p className="text-lg text-muted-foreground mb-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              Share these resources with AI assistants to facilitate more effective collaboration and code reviews
             </p>
             
             <div className="space-y-8">
@@ -137,13 +197,42 @@ npm run dev
                 <p className="mb-6">
                   Access the complete source code by visiting the GitHub repository. This contains all files needed to run and deploy the application.
                 </p>
+                <div className="flex flex-wrap gap-4">
+                  <button 
+                    onClick={handleOpenGitHub}
+                    className="chrome-button-premium flex items-center"
+                    disabled={downloading}
+                  >
+                    <ExternalLink className="w-5 h-5 mr-2" />
+                    Visit Repository
+                  </button>
+                  <button 
+                    onClick={() => handleCopyToClipboard('https://github.com/your-username/your-repo-name', 'Repository URL')}
+                    className="chrome-button flex items-center"
+                  >
+                    <Clipboard className="w-5 h-5 mr-2" />
+                    Copy URL
+                  </button>
+                </div>
+              </div>
+              
+              <div className="glass-card p-8 rounded-2xl">
+                <div className="flex items-center mb-4">
+                  <FileCode className="w-8 h-8 mr-4 text-primary" />
+                  <h2 className="text-2xl font-bold">Project Structure</h2>
+                </div>
+                <p className="mb-4">
+                  Share this project structure with AI assistants to help them understand the codebase organization:
+                </p>
+                <pre className="bg-black/20 p-4 rounded-lg overflow-x-auto mb-4 text-sm">
+                  {projectStructure}
+                </pre>
                 <button 
-                  onClick={handleDownloadSourceCode}
-                  className="chrome-button-premium flex items-center"
-                  disabled={downloading}
+                  onClick={() => handleCopyToClipboard(projectStructure, 'Project structure')}
+                  className="chrome-button flex items-center"
                 >
-                  <Github className="w-5 h-5 mr-2" />
-                  Go to Repository
+                  <Clipboard className="w-5 h-5 mr-2" />
+                  Copy Structure
                 </button>
               </div>
               
@@ -153,7 +242,7 @@ npm run dev
                   <h2 className="text-2xl font-bold">Project Information</h2>
                 </div>
                 <p className="mb-6">
-                  Download a JSON file containing metadata about the project structure, technologies used, and other relevant information.
+                  Download a JSON file containing metadata about the project structure, technologies used, and other relevant information. Useful for AI tools to understand the project context.
                 </p>
                 <button 
                   onClick={handleDownloadJSON}
@@ -171,7 +260,7 @@ npm run dev
                   <h2 className="text-2xl font-bold">README</h2>
                 </div>
                 <p className="mb-6">
-                  Download the README file with instructions for running the project and an overview of its structure.
+                  Download the README file with instructions for running the project and an overview of its structure. This is particularly useful for sharing with AI assistants and collaborators.
                 </p>
                 <button 
                   onClick={handleViewReadme}
@@ -189,7 +278,7 @@ npm run dev
                   <h2 className="text-2xl font-bold">Development Instructions</h2>
                 </div>
                 <p className="mb-6">
-                  Review the steps to run this project locally and make changes for third-party developers.
+                  Key commands for running this project locally:
                 </p>
                 <ol className="list-decimal list-inside space-y-2 mb-4">
                   <li>Clone the repository: <code className="bg-black/20 px-2 py-1 rounded">git clone [repository-url]</code></li>
@@ -197,6 +286,18 @@ npm run dev
                   <li>Start the development server: <code className="bg-black/20 px-2 py-1 rounded">npm run dev</code></li>
                   <li>Build for production: <code className="bg-black/20 px-2 py-1 rounded">npm run build</code></li>
                 </ol>
+                <button 
+                  onClick={() => handleCopyToClipboard(`
+git clone [repository-url]
+cd [project-directory]
+npm install
+npm run dev
+                  `.trim(), 'Development commands')}
+                  className="chrome-button flex items-center"
+                >
+                  <Clipboard className="w-5 h-5 mr-2" />
+                  Copy Commands
+                </button>
               </div>
             </div>
           </div>

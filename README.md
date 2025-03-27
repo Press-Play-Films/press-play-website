@@ -5,6 +5,28 @@
 
 **URL**: https://lovable.dev/projects/f43c1bc0-45b5-42b4-aaa3-fa041342ae04
 
+## ChatGPT Collaboration Instructions
+
+If you're sharing this code with ChatGPT, here are the most effective ways:
+
+1. **Share the GitHub repository URL**: The complete codebase is accessible at the repository link found on the Download page of the website.
+
+2. **Share specific code snippets**: Copy and paste relevant parts of the code directly into the ChatGPT conversation for targeted assistance.
+
+3. **Project structure overview**: This project is built with:
+   - Vite
+   - TypeScript
+   - React
+   - shadcn-ui
+   - Tailwind CSS
+
+4. **Key files to understand**:
+   - `src/App.tsx`: Main application structure and routing
+   - `src/components/Header.tsx`: Navigation component
+   - `src/pages/`: Individual page components
+   - `src/styles/`: CSS styling files
+   - `src/utils/`: Utility functions
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
@@ -108,4 +130,3 @@ Vercel is another excellent option for deploying React apps:
 While Lovable doesn't directly support custom domains, you can deploy your project to a service like Netlify or Vercel (see instructions above) and connect your domain there.
 
 For more information on using custom domains with alternative deployment methods, visit our docs: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
-a
