@@ -1,22 +1,30 @@
 
-/* Interactive hover effects */
+/* Interactive hover effects - optimized for better performance */
+
+/* Simple scale effect with hardware acceleration */
 .hover-scale {
   @apply transition-transform duration-300;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 .hover-scale:hover {
   @apply transform scale-105;
 }
 
+/* Optimized glow effect */
 .hover-glow {
-  @apply transition-all duration-300;
+  @apply transition-shadow duration-300;
 }
 .hover-glow:hover {
   @apply shadow-[0_0_15px_rgba(59,130,246,0.5)];
 }
 
-/* Video card hover effect */
+/* Video card hover effect - optimized for smoothness */
 .video-card {
-  @apply transition-all duration-300;
+  @apply transition-transform duration-300;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 .video-card:hover {
   @apply transform scale-[1.02];
@@ -39,11 +47,10 @@
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
-  /* Transitions optimized for performance */
-  transition: transform 0.2s ease-out, filter 0.2s ease-out, box-shadow 0.2s ease-out;
-  /* Ensure consistent outline and spacing */
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+  /* Consistent timing function for all transitions */
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              filter 0.2s ease-out, 
+              box-shadow 0.2s ease-out;
   /* Prevent content shifts */
   will-change: transform, filter;
 }
@@ -60,34 +67,30 @@
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
-  /* Prevent transition conflicts with hover */
-  transition: outline 0.2s ease, outline-offset 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Optimized active state to minimize visual differences from hover */
-.chrome-button:active, .chrome-button-premium:active, .chrome-tab:active {
-  filter: brightness(0.98);
-  transition: transform 0.1s ease-out, filter 0.1s ease-out, box-shadow 0.1s ease-out;
-}
-
-/* Portfolio project card hover effect */
+/* Portfolio project card hover effect - performance optimized */
 .project-card {
   @apply transition-all duration-300 ease-out hover:shadow-lg hover:shadow-primary/20;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
 }
 
 .project-card:hover .project-card-title {
   @apply text-primary;
 }
 
-/* Focus state for project cards - visible only with keyboard navigation */
+/* Focus state for project cards */
 .project-card:focus-visible {
   @apply outline-primary outline-offset-2 outline-2;
 }
 
-/* Enhanced animation for project card images */
+/* Enhanced animation for project card images - optimized for smooth transforms */
 .project-card-image {
   @apply transition-transform duration-500 ease-out;
   transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .project-card:hover .project-card-image {

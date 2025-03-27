@@ -14,97 +14,74 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.29.4';
+const APP_VERSION = '2025.03.29.5';
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
-// Helper to log app lifecycle
+// Helper to log app lifecycle - only in development
 const logAppState = (message) => {
-  console.log(`[APP:${APP_VERSION}] ${message}`);
+  if (import.meta.env.DEV) {
+    console.log(`[APP:${APP_VERSION}] ${message}`);
+  }
 };
 
 // Log initial state
 logAppState('Initializing application');
 
-// A longer delay to ensure all styles are properly loaded before mounting
-const mountDelay = 1000; // Increased from 600ms to 1000ms
-logAppState(`Using mount delay of ${mountDelay}ms to ensure styles are loaded`);
-
-// Force CSS recalculation by adding a delay before mounting
-setTimeout(() => {
-  // Mount the application
+// Mount function to initialize React
+const mountApp = () => {
   logAppState('Mounting React application');
-
+  
   // Find root element
   const rootElement = document.getElementById("root");
   if (!rootElement) {
     console.error("[main.tsx] Root element not found. Cannot mount React application.");
-  } else {
-    // Create and render the React application
-    try {
-      logAppState('Creating React root');
-      const root = createRoot(rootElement);
-      
-      logAppState('Rendering React application');
-      root.render(
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      );
-      logAppState('React successfully mounted');
-      
-      // Force browser to recalculate styles
-      document.body.offsetHeight;
-      
-      // Additional logging to help with debugging
-      setTimeout(() => {
-        // Check if the glass boxes are rendered
-        const titleBox = document.querySelector('.title-glass-box');
-        const subtitleBox = document.querySelector('.subtitle-glass-box');
-        
-        logAppState(`Glass boxes rendered: Title=${!!titleBox}, Subtitle=${!!subtitleBox}`);
-        
-        if (titleBox) {
-          const computedStyle = window.getComputedStyle(titleBox);
-          logAppState(`Title box styles: bg=${computedStyle.backgroundColor}, backdrop=${computedStyle.backdropFilter}, border=${computedStyle.border}, boxShadow=${computedStyle.boxShadow}`);
-        } else {
-          console.error('[main.tsx] Title glass box not found in document after mount!');
-        }
-        
-        // Force reflow
-        document.body.classList.add('force-reflow');
-        setTimeout(() => document.body.classList.remove('force-reflow'), 10);
-        
-        // Check all critical CSS classes
-        ['section-title-gradient', 'section-subtitle-gradient', 'title-glass-box', 'subtitle-glass-box', 'chrome-button', 'chrome-tab'].forEach(className => {
-          const elements = document.querySelectorAll(`.${className}`);
-          logAppState(`Found ${elements.length} elements with class ${className}`);
-        });
-        
-        // Verify backdrop-filter support
-        logAppState(`Backdrop-filter support test: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
-      }, 300);
-    } catch (error) {
-      console.error('[main.tsx] Failed to render React application:', error);
-    }
+    return;
   }
-}, mountDelay);
+  
+  try {
+    logAppState('Creating React root');
+    const root = createRoot(rootElement);
+    
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+    
+    logAppState('React successfully mounted');
+    
+    if (import.meta.env.DEV) {
+      // Only perform these checks in development
+      setTimeout(() => {
+        // Check for critical UI components
+        const titleBox = document.querySelector('.title-glass-box');
+        const chromeButtons = document.querySelectorAll('.chrome-button, .chrome-button-premium');
+        
+        logAppState(`UI components check: Title Glass Box=${!!titleBox}, Chrome Buttons=${chromeButtons.length}`);
+        
+        // Check backdrop-filter support
+        logAppState(`Backdrop-filter support: ${CSS.supports('backdrop-filter', 'blur(10px)') ? 'SUPPORTED' : 'NOT SUPPORTED'}`);
+      }, 300);
+    }
+  } catch (error) {
+    console.error('[main.tsx] Failed to render React application:', error);
+  }
+};
+
+// Use requestIdleCallback or setTimeout for non-critical mounting
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => mountApp(), { timeout: 1000 });
+} else {
+  setTimeout(mountApp, 100);
+}
 
 // Hide loading screen when window is fully loaded
 window.addEventListener('load', () => {
   logAppState('Window fully loaded');
   
-  // Additional check for styling issues
-  setTimeout(() => {
-    // Force browser to maintain styles by keeping a reference
-    const elements = {
-      chromeButtons: document.querySelectorAll('.chrome-button, .chrome-button-premium, .chrome-tab'),
-      titleElements: document.querySelectorAll('h1, h2')
-    };
-    
-    logAppState(`Final check: Found ${elements.chromeButtons.length} chrome buttons and ${elements.titleElements.length} title elements`);
-    
-    // Force reflow one more time
+  if (import.meta.env.DEV) {
+    // Force final reflow to ensure styles are applied
     document.body.classList.add('force-reflow');
     setTimeout(() => document.body.classList.remove('force-reflow'), 10);
-  }, 1000); // Increased timeout for final style check
+  }
 });

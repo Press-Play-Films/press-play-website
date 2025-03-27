@@ -9,7 +9,7 @@ import { useEffect, lazy, Suspense, memo } from "react";
 import { initEmailJS } from "@/utils/email";
 import { HelmetProvider } from 'react-helmet-async';
 
-// Lazy load pages to reduce initial bundle size
+// Lazy load pages to reduce initial bundle size with improved error handling
 const Index = lazy(() => import("./pages/index"));
 const Skills = lazy(() => import("./pages/Skills"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
@@ -25,6 +25,7 @@ const queryClient = new QueryClient({
       staleTime: 60 * 1000, // 1 minute
       gcTime: 5 * 60 * 1000, // 5 minutes
       retry: false,
+      refetchOnWindowFocus: false, // Don't refetch when window regains focus
     },
   },
 });
@@ -33,18 +34,31 @@ const queryClient = new QueryClient({
 const emailJsUserId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID';
 initEmailJS(emailJsUserId);
 
-// Log initialization
-console.log(`[App] Initialized with EmailJS User ID: ${emailJsUserId === 'YOUR_USER_ID' ? 'PLACEHOLDER (email will not work)' : 'VALID'}`);
-console.log('[App] CSS variables check:', {
-  background: getComputedStyle(document.documentElement).getPropertyValue('--background'),
-  card: getComputedStyle(document.documentElement).getPropertyValue('--card'),
-  primary: getComputedStyle(document.documentElement).getPropertyValue('--primary'),
-});
+// Log initialization only in development
+if (import.meta.env.DEV) {
+  console.log(`[App] Initialized with EmailJS User ID: ${emailJsUserId === 'YOUR_USER_ID' ? 'PLACEHOLDER (email will not work)' : 'VALID'}`);
+  console.log('[App] CSS variables check:', {
+    background: getComputedStyle(document.documentElement).getPropertyValue('--background'),
+    card: getComputedStyle(document.documentElement).getPropertyValue('--card'),
+    primary: getComputedStyle(document.documentElement).getPropertyValue('--primary'),
+  });
+}
+
+// Loading component
+const LoadingFallback = memo(() => (
+  <div className="h-screen flex items-center justify-center">
+    <div className="animate-pulse text-primary text-xl">Loading...</div>
+  </div>
+));
+LoadingFallback.displayName = 'LoadingFallback';
 
 // Memoize stars component to prevent unnecessary re-renders
 const BackgroundStars = memo(() => {
   useEffect(() => {
-    console.log('[BackgroundStars] Creating stars background');
+    if (import.meta.env.DEV) {
+      console.log('[BackgroundStars] Creating stars background');
+    }
+    
     const createStars = () => {
       const container = document.body;
       const screenWidth = window.innerWidth;
@@ -56,7 +70,10 @@ const BackgroundStars = memo(() => {
       
       // Create fewer stars for better performance
       const starCount = Math.min(80, Math.floor((screenWidth * screenHeight) / 12000));
-      console.log(`[BackgroundStars] Creating ${starCount} stars for screen size ${screenWidth}x${screenHeight}`);
+      
+      if (import.meta.env.DEV) {
+        console.log(`[BackgroundStars] Creating ${starCount} stars for screen size ${screenWidth}x${screenHeight}`);
+      }
       
       // Create stars with document fragment for better performance
       const fragment = document.createDocumentFragment();
@@ -76,11 +93,13 @@ const BackgroundStars = memo(() => {
     createStars();
     
     // Debounce resize handler to improve performance
-    let resizeTimer: number;
+    let resizeTimer;
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        console.log('[BackgroundStars] Window resized, recreating stars');
+        if (import.meta.env.DEV) {
+          console.log('[BackgroundStars] Window resized, recreating stars');
+        }
         createStars();
       }, 250);
     };
@@ -90,7 +109,9 @@ const BackgroundStars = memo(() => {
     return () => {
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', handleResize);
-      console.log('[BackgroundStars] Cleanup');
+      if (import.meta.env.DEV) {
+        console.log('[BackgroundStars] Cleanup');
+      }
     };
   }, []);
 
@@ -99,19 +120,38 @@ const BackgroundStars = memo(() => {
 
 BackgroundStars.displayName = 'BackgroundStars';
 
+// Memoize the entire Routes component to prevent unnecessary re-renders
+const AppRoutes = memo(() => (
+  <Routes>
+    <Route path="/" element={<Index />} />
+    <Route path="/skills" element={<Skills />} />
+    <Route path="/portfolio" element={<Portfolio />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/blog" element={<Blog />} />
+    <Route path="/download" element={<Download />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+));
+
+AppRoutes.displayName = 'AppRoutes';
+
 const App = () => {
   useEffect(() => {
-    console.log('[App] Component mounted');
-    
-    // Debug CSS classes immediately after mount
-    console.log('[App] Checking critical CSS classes:', {
-      titleGradientClass: document.querySelector('.section-title-gradient') ? 'exists' : 'missing',
-      titleGlassBox: document.querySelector('.title-glass-box') ? 'exists' : 'missing',
-      sectionGradient: document.querySelector('.section-subtitle-gradient') ? 'exists' : 'missing' 
-    });
+    if (import.meta.env.DEV) {
+      console.log('[App] Component mounted');
+      
+      // Debug CSS classes immediately after mount
+      console.log('[App] Checking critical CSS classes:', {
+        titleGradientClass: document.querySelector('.section-title-gradient') ? 'exists' : 'missing',
+        titleGlassBox: document.querySelector('.title-glass-box') ? 'exists' : 'missing',
+        sectionGradient: document.querySelector('.section-subtitle-gradient') ? 'exists' : 'missing' 
+      });
+    }
     
     return () => {
-      console.log('[App] Component unmounted');
+      if (import.meta.env.DEV) {
+        console.log('[App] Component unmounted');
+      }
     };
   }, []);
   
@@ -124,16 +164,8 @@ const App = () => {
             <Sonner />
             <BrowserRouter>
               <BackgroundStars />
-              <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/skills" element={<Skills />} />
-                  <Route path="/portfolio" element={<Portfolio />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/download" element={<Download />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+              <Suspense fallback={<LoadingFallback />}>
+                <AppRoutes />
               </Suspense>
             </BrowserRouter>
           </TooltipProvider>

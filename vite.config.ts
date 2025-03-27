@@ -18,6 +18,10 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Add cache optimization for development
+    hmr: {
+      overlay: true,
+    },
   },
   plugins: [
     react({
@@ -49,6 +53,10 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true, // Removes console logs in production
         drop_debugger: true,
+        passes: 2, // Multiple optimization passes
+      },
+      format: {
+        comments: false, // Remove comments from production builds
       },
     },
     rollupOptions: {
@@ -57,6 +65,14 @@ export default defineConfig(({ mode }) => ({
           react: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@/components/ui'],
           vendors: ['@tanstack/react-query', 'lucide-react', 'sonner'],
+        },
+        // Add code splitting for large CSS files
+        assetFileNames: (assetInfo) => {
+          const extType = assetInfo.name.split('.').at(1);
+          if (/\.(css)$/i.test(assetInfo.name)) {
+            return `assets/css/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
         },
       },
       // Add comment handling for external packages
