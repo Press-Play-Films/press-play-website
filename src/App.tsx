@@ -13,6 +13,7 @@ const Skills = lazy(() => import("./pages/Skills"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Blog = lazy(() => import("./pages/Blog"));
+const Download = lazy(() => import("./pages/Download"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Create queryClient only once
@@ -127,6 +128,7 @@ const App = () => {
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/download" element={<Download />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

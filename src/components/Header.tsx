@@ -54,6 +54,7 @@ const Header = () => {
             <NavLink to="/portfolio" current={location.pathname === "/portfolio"}>Portfolio</NavLink>
             <NavLink to="/blog" current={location.pathname === "/blog"}>Blog</NavLink>
             <NavLink to="/contact" current={location.pathname === "/contact"}>Contact</NavLink>
+            <NavLink to="/download" current={location.pathname === "/download"}>Download</NavLink>
           </nav>
           
           {isMenuOpen && (
@@ -64,6 +65,7 @@ const Header = () => {
                 <NavLink to="/portfolio" current={location.pathname === "/portfolio"}>Portfolio</NavLink>
                 <NavLink to="/blog" current={location.pathname === "/blog"}>Blog</NavLink>
                 <NavLink to="/contact" current={location.pathname === "/contact"}>Contact</NavLink>
+                <NavLink to="/download" current={location.pathname === "/download"}>Download</NavLink>
               </nav>
             </div>
           )}
