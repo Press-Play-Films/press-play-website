@@ -34,28 +34,48 @@ const Index = () => {
       document.body.offsetHeight;
     }, 800);
     
-    // Handle hash navigation after page load
+    // Handle hash navigation after page load with improved smooth scrolling
     if (window.location.hash) {
       setTimeout(() => {
         const id = window.location.hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Enhanced smooth scroll with easing
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Add subtle highlight animation to the target element
+          element.classList.add('highlight-section');
+          setTimeout(() => {
+            element.classList.remove('highlight-section');
+          }, 2000);
         }
-      }, 800); // Increased from 500ms
+      }, 1000); // Slightly increased from 800ms to ensure all elements are rendered
     }
     
     return () => clearTimeout(timer);
   }, []);
 
-  // Add event listener for when hash changes
+  // Add event listener for when hash changes with improved scroll behavior
   useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash) {
         const id = window.location.hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Enhanced smooth scroll
+          window.scrollTo({
+            top: element.offsetTop - 80, // Account for header height
+            behavior: 'smooth'
+          });
+          
+          // Add subtle highlight animation
+          element.classList.add('highlight-section');
+          setTimeout(() => {
+            element.classList.remove('highlight-section');
+          }, 2000);
         }
       }
     };
@@ -80,10 +100,10 @@ const Index = () => {
         <AIIntegrationSection />
         <SalesLeadershipSection />
         
-        {/* Blog CTA */}
+        {/* Blog CTA with enhanced animation */}
         <section className="py-16 relative">
           <div className="container px-6 relative z-10">
-            <div className="max-w-3xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center">
+            <div className="max-w-3xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center hover-glow transition-all duration-500">
               <h2 className="text-3xl font-bold mb-4 section-title-gradient">Check Out My Blog</h2>
               <p className="text-xl mb-8">Read my thoughts and insights on technology, AI, and business</p>
               <Link to="/blog" className="chrome-button-premium">

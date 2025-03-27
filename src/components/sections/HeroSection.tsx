@@ -12,7 +12,7 @@ const HeroSection = () => {
     if (mounted.current) return;
     mounted.current = true;
     
-    const version = '2025.03.29.4'; // Updated version number
+    const version = '2025.03.29.5'; // Updated version number
     console.log(`HeroSection mounted - version ${version}`);
     
     // Force a reflow before starting animations
@@ -131,35 +131,43 @@ const HeroSection = () => {
           </div>
           
           <div className="flex justify-center mt-12 space-x-4">
-            <Link to="/portfolio" className="chrome-button-premium inline-flex items-center" style={{
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '9999px',
-              padding: '0.75rem 1.5rem',
-              fontWeight: '500',
-              background: 'linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%)',
-              boxShadow: '0 8px 16px -4px rgba(0, 0, 0, 0.4), inset 0 1px 3px rgba(255, 255, 255, 1), inset 0 -2px 1px rgba(0, 0, 0, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.8)',
-              textShadow: '0 1px 1px rgba(255, 255, 255, 0.7)',
-              color: '#333',
-              transition: 'all 0.3s'
-            }}>
+            <Link 
+              to="/portfolio" 
+              className="chrome-button-premium inline-flex items-center animate-pulse-slow" 
+              style={{
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: '9999px',
+                padding: '0.75rem 1.5rem',
+                fontWeight: '500',
+                background: 'linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%)',
+                boxShadow: '0 8px 16px -4px rgba(0, 0, 0, 0.4), inset 0 1px 3px rgba(255, 255, 255, 1), inset 0 -2px 1px rgba(0, 0, 0, 0.2)',
+                border: '1px solid rgba(255, 255, 255, 0.8)',
+                textShadow: '0 1px 1px rgba(255, 255, 255, 0.7)',
+                color: '#333',
+                transition: 'all 0.3s'
+              }}
+            >
               View Full Portfolio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <Link to="#featured-work" className="chrome-tab inline-flex items-center" style={{
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '9999px',
-              padding: '0.75rem 1.5rem',
-              fontWeight: '500',
-              background: 'linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%)',
-              boxShadow: '0 4px 10px -2px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.6)',
-              textShadow: '0 1px 1px rgba(255, 255, 255, 0.4)',
-              color: '#333',
-              transition: 'all 0.3s'
-            }}>
+            <Link 
+              to="#featured-work" 
+              className="chrome-tab inline-flex items-center" 
+              style={{
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: '9999px',
+                padding: '0.75rem 1.5rem',
+                fontWeight: '500',
+                background: 'linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%)',
+                boxShadow: '0 4px 10px -2px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.6)',
+                textShadow: '0 1px 1px rgba(255, 255, 255, 0.4)',
+                color: '#333',
+                transition: 'all 0.3s'
+              }}
+            >
               Featured Work
             </Link>
           </div>
