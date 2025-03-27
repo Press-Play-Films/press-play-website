@@ -13,7 +13,7 @@ COPY package*.json ./
 
 # Install dependencies - with cache mounted to speed up future builds
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci
+    npm ci --production=false
 
 # Update browserslist database explicitly
 RUN npx update-browserslist-db@latest --force

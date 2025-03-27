@@ -48,6 +48,9 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    // Set a unique cacheDir for this build to avoid stale caches
+    outDir: 'dist',
+    emptyOutDir: true,
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -59,6 +62,12 @@ export default defineConfig(({ mode }) => ({
         comments: false, // Remove comments from production builds
       },
     },
+    // Add a small limit for asset inlining to reduce HTTP requests for tiny files
+    assetsInlineLimit: 4096, // 4KB
+    // Improve CSS optimization
+    cssCodeSplit: true,
+    // Improve source maps for production debugging if needed
+    sourcemap: mode === 'development',
     rollupOptions: {
       output: {
         manualChunks: {
