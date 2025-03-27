@@ -26,6 +26,7 @@ const CategoryFilter = ({ activeCategory, setActiveCategory, showAllVideos }: Ca
               : 'chrome-tab'}`}
           onClick={() => setActiveCategory('all')}
           aria-pressed={activeCategory === 'all'}
+          aria-label="Show all projects"
         >
           All
         </button>
@@ -39,6 +40,7 @@ const CategoryFilter = ({ activeCategory, setActiveCategory, showAllVideos }: Ca
             showAllVideos();
           }}
           aria-pressed={activeCategory === 'video'}
+          aria-label="Show video production projects"
         >
           Video Production
         </button>

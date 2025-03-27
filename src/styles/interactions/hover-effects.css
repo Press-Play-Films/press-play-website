@@ -73,6 +73,7 @@
   @apply text-primary;
 }
 
+/* Focus state for project cards - visible only with keyboard navigation */
 .project-card:focus-visible {
   @apply outline-primary outline-offset-2 outline-2;
 }

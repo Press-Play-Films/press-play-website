@@ -46,11 +46,17 @@ const Portfolio = () => {
       <ParticleBackground />
       <Header />
       
+      {/* Skip to content link for accessibility */}
+      <a href="#portfolio-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground">
+        Skip to portfolio content
+      </a>
+      
       {/* Hero Section */}
       <PortfolioHeroSection />
       
       {/* Portfolio Section */}
       <section 
+        id="portfolio-content"
         className="py-10 relative" 
         aria-labelledby="portfolio-projects"
       >
