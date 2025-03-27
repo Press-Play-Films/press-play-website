@@ -5,11 +5,17 @@ FROM node:20-alpine as build
 # Set working directory
 WORKDIR /app
 
+# Install required tools for browserslist update
+RUN apk add --no-cache curl
+
 # Copy package files
 COPY package*.json ./
 
 # Install dependencies
 RUN npm ci
+
+# Update browserslist database explicitly
+RUN npx update-browserslist-db@latest --force
 
 # Copy all files
 COPY . .
