@@ -1,4 +1,5 @@
 
+
 interface IdleRequestOptions {
   timeout?: number;
 }
@@ -14,3 +15,4 @@ interface Window {
   ) => number;
   // Don't redefine requestIdleCallback here as it will conflict with TypeScript's built-in definitions
 }
+
