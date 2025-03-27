@@ -13,6 +13,7 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
   color: #333 !important;
   z-index: 1 !important;
+  will-change: transform, box-shadow !important;
 }
 
 .chrome-button:hover {
@@ -49,6 +50,7 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important;
   color: #333 !important;
   z-index: 1 !important;
+  will-change: transform, box-shadow !important;
 }
 
 .chrome-button-premium:hover {
@@ -85,6 +87,7 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;
   color: #333 !important;
   z-index: 1 !important;
+  will-change: transform, box-shadow !important;
 }
 
 .chrome-tab:hover {
