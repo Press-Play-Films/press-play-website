@@ -14,7 +14,7 @@ declare global {
 }
 
 // Define a permanent version ID that will change with each build
-const APP_VERSION = '2025.03.30.3'; // Updated version ID to force cache invalidation
+const APP_VERSION = '2025.03.30.4'; // Updated version ID to force cache invalidation
 console.log(`[main.tsx] App version: ${APP_VERSION}, Session ID: ${window.sessionId || 'unknown'}`);
 
 // Helper to log app lifecycle - only in development
@@ -68,16 +68,14 @@ const mountApp = () => {
   }
 };
 
-// Fix the requestIdleCallback usage
-// TypeScript is expecting requestIdleCallback to take no arguments in this context
+// Properly type requestIdleCallback to fix TypeScript error
+// Create a type-safe wrapper for requestIdleCallback
 if ('requestIdleCallback' in window) {
-  // Define a no-argument wrapper function
-  const scheduleMount = () => {
-    mountApp();
-  };
-  
-  // Pass the wrapper function to requestIdleCallback
-  window.requestIdleCallback(scheduleMount, { timeout: 1000 });
+  // Cast window.requestIdleCallback to accept our arguments
+  (window.requestIdleCallback as unknown as (
+    callback: IdleRequestCallback,
+    options?: IdleRequestOptions
+  ) => number)(mountApp, { timeout: 1000 });
 } else {
   setTimeout(mountApp, 100);
 }
