@@ -2,7 +2,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AIToolCard from '@/components/AIToolCard';
-import { Button } from '@/components/ui/button';
 
 const AIIntegrationSection = () => {
   const aiTools = [
@@ -68,11 +67,9 @@ const AIIntegrationSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <Link to="/contact">
-            <button className="chrome-button text-black flex items-center gap-2">
-              Request an A.I. Demo
-              <ArrowRight className="h-5 w-5" />
-            </button>
+          <Link to="/contact" className="chrome-tab inline-flex items-center justify-center">
+            Request an A.I. Demo
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
       </div>

@@ -1,6 +1,8 @@
 
 /* Chrome Button with Gleam Animation - Enhanced 3D silver metallic look */
-.chrome-button {
+.chrome-button,
+.chrome-button-premium, 
+.chrome-tab {
   @apply relative overflow-hidden rounded-full px-6 py-3 font-medium !important;
   /* Hardware acceleration and render optimizations */
   transform: translateZ(0) !important;
@@ -20,9 +22,17 @@
               box-shadow 0.2s ease-out, 
               background 0.2s ease-out !important;
   will-change: transform, box-shadow !important;
+  /* Standard sizing */
+  min-width: 160px !important;
+  height: 46px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
 }
 
-.chrome-button:hover {
+.chrome-button:hover,
+.chrome-tab:hover {
   background: linear-gradient(145deg, #FFFFFF, #D8D8DC) !important;
   transform: translateY(-2px) translateZ(0) !important;
   box-shadow: 
@@ -31,7 +41,8 @@
     inset 0 -2px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
-.chrome-button:active {
+.chrome-button:active,
+.chrome-tab:active {
   background: linear-gradient(145deg, #E8E8EC, #D0D0D4) !important;
   transform: translateY(0) translateZ(0) !important;
   box-shadow: 
@@ -43,11 +54,6 @@
 
 /* Premium Chrome Button - More vibrant silver with stronger 3D effect */
 .chrome-button-premium {
-  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium !important;
-  /* Hardware acceleration and render optimizations */
-  transform: translateZ(0) !important;
-  backface-visibility: hidden !important;
-  perspective: 1000px !important;
   background: linear-gradient(145deg, #FFFFFF 0%, #E0E0E5 50%, #C0C0C8 100%) !important;
   box-shadow: 
     0 8px 16px -4px rgba(0, 0, 0, 0.4), 
@@ -55,13 +61,6 @@
     inset 0 -2px 1px rgba(0, 0, 0, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.8) !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important;
-  color: #333 !important;
-  z-index: 1 !important;
-  /* Targeted transitions for performance */
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-              box-shadow 0.2s ease-out, 
-              background 0.2s ease-out !important;
-  will-change: transform, box-shadow !important;
 }
 
 .chrome-button-premium:hover {
@@ -80,48 +79,6 @@
     0 7px 15px -3px rgba(0, 0, 0, 0.35), 
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 1px 4px rgba(0, 0, 0, 0.1) !important;
-  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out !important;
-}
-
-/* Chrome tab style - Enhanced 3D silver metallic look */
-.chrome-tab {
-  @apply relative overflow-hidden rounded-full px-6 py-3 font-medium !important;
-  /* Hardware acceleration and render optimizations */
-  transform: translateZ(0) !important;
-  backface-visibility: hidden !important;
-  perspective: 1000px !important;
-  background: linear-gradient(145deg, #F0F0F2 0%, #C4C4C8 50%, #A8A8AC 100%) !important;
-  box-shadow: 
-    0 4px 10px -2px rgba(0, 0, 0, 0.3), 
-    inset 0 1px 2px rgba(255, 255, 255, 0.8),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;
-  color: #333 !important;
-  z-index: 1 !important;
-  /* Targeted transitions for performance */
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-              box-shadow 0.2s ease-out, 
-              background 0.2s ease-out !important;
-  will-change: transform, box-shadow !important;
-}
-
-.chrome-tab:hover {
-  background: linear-gradient(145deg, #FFFFFF, #D8D8DC) !important;
-  transform: translateY(-1px) translateZ(0) !important;
-  box-shadow: 
-    0 6px 12px -2px rgba(0, 0, 0, 0.2), 
-    inset 0 1px 2px rgba(255, 255, 255, 0.8),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.05) !important;
-}
-
-.chrome-tab:active {
-  background: linear-gradient(145deg, #E8E8EC, #D0D0D4) !important;
-  transform: translateY(0) translateZ(0) !important;
-  box-shadow: 
-    0 4px 8px -2px rgba(0, 0, 0, 0.25), 
-    inset 0 1px 2px rgba(255, 255, 255, 0.6),
-    inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out !important;
 }
 
