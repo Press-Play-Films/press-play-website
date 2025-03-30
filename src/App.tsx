@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -15,7 +14,6 @@ const Skills = lazy(() => import("./pages/Skills"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Blog = lazy(() => import("./pages/Blog"));
-const Download = lazy(() => import("./pages/Download"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Create queryClient only once
@@ -128,7 +126,6 @@ const AppRoutes = memo(() => (
     <Route path="/portfolio" element={<Portfolio />} />
     <Route path="/contact" element={<Contact />} />
     <Route path="/blog" element={<Blog />} />
-    <Route path="/download" element={<Download />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 ));
