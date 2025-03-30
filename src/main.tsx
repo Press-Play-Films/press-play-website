@@ -97,7 +97,6 @@ window.addEventListener('load', function() {
     document.body.classList.add('force-reflow');
     
     // Fix for TypeScript error - remove the parameter from setTimeout
-    // @ts-ignore
     setTimeout(function() {
       document.body.classList.remove('force-reflow');
     }, 0);
