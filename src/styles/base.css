@@ -1,32 +1,9 @@
 /* -------------------------------------------------
-   Base variables — dark navy & chrome theme
+   Base variables (kept for future use, but harmless)
 ------------------------------------------------- */
 :root {
-  /* core brand colours (unchanged) */
-  --primary:              217 92% 55%;
-  --primary-foreground:   210 40% 98%;
-
-  --secondary:            217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
-
-  --muted:                217 33% 17%;
-  --muted-foreground:     215 20% 65%;
-
-  --accent:               217 91% 60%;
-  --accent-foreground:    210 40% 98%;
-
-  --destructive:          0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-
-  /* ---------- theme tweaks ---------- */
-  --background: 215 32% 11%;   /* #0d1b2a  (dark navy)  */
-  --foreground: 0 0% 85%;      /* #d9d9d9  (chrome-silver text) */
-
-  --border: 0 0% 75%;          /* lighter chrome for borders */
-  --input:  0 0% 75%;
-  --ring:   224 76% 48%;
-
   --radius: 0.75rem;
+  --border: 0 0% 75%;
 }
 
 /* -------------------------------------------------
@@ -42,8 +19,8 @@ body {
 }
 
 body {
-  /* dark navy background + chrome text */
-  @apply bg-background text-foreground font-sans;
+  /* ★ dark-navy / chrome style with **built-in** colours */
+  @apply bg-slate-900 text-slate-100 font-sans;
 }
 
 .container {
