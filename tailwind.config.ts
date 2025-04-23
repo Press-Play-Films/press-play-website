@@ -1,38 +1,39 @@
-
+/* tailwind.config.ts — clean single-export version */
+import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
-export default {
-  darkMode: ["class"],
+export default <Config>{
+  /* -------------------------------------------------
+     Core setup
+  ------------------------------------------------- */
+  darkMode: "class",                // <- string, not array (TS-safe)
   content: [
-    './index.html',
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
+    "./index.html",
     "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
+
+  /* -------------------------------------------------
+     Theme customisations
+  ------------------------------------------------- */
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
+    container: { center: true, padding: "2rem" },
+
     extend: {
-      animation: {
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "fade-in": "fadeIn 0.5s ease-in-out",
-        "slide-up": "slideUp 0.5s ease-out",
-        "slide-down": "slideDown 0.5s ease-out",
+      /* ---------- fonts ---------- */
+      fontFamily: {
+        sans: defaultTheme.fontFamily.sans,
+        trajan: ["Trajan Pro", "Cinzel", "serif"],
       },
+
+      /* ---------- colours ---------- */
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -62,53 +63,45 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+
+      /* ---------- animations ---------- */
+      animation: {
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "fade-in": "fadeIn 0.5s ease-in-out",
+        "slide-up": "slideUp 0.5s ease-out",
+        "slide-down": "slideDown 0.5s ease-out",
       },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        trajan: ["Trajan Pro", "Cinzel", "serif"],
-      },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          to:   { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          to:   { height: "0" },
         },
         fadeIn: {
-          "0%": { opacity: "0" },
+          "0%":   { opacity: "0" },
           "100%": { opacity: "1" },
         },
         slideUp: {
-          "0%": { transform: "translateY(10px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+          "0%":   { transform: "translateY(10px)",  opacity: "0" },
+          "100%": { transform: "translateY(0)",     opacity: "1" },
         },
         slideDown: {
-          "0%": { transform: "translateY(-10px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+          "0%":   { transform: "translateY(-10px)", opacity: "0" },
+          "100%": { transform: "translateY(0)",     opacity: "1" },
         },
-      }
+      },
     },
   },
+
+  /* -------------------------------------------------
+     Plugins & future flags
+  ------------------------------------------------- */
   plugins: [require("tailwindcss-animate")],
   future: {
-    hoverOnlyWhenSupported: true, // Better performance on mobile
+    hoverOnlyWhenSupported: true,   // better perf on mobile
   },
-} satisfies Config;
-module.exports = {
-  // ... other config
-  theme: {
-    extend: {
-      // ... other extensions
-      borderColor: {
-        border: "var(--border)" // or any other color value you want to use
-      }
-    }
-  }
-  // ... rest of config
-}
+};

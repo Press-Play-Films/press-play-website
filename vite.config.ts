@@ -1,111 +1,61 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { execSync } from "child_process";
 
-// Update browserslist database during build
-try {
-  console.log("Updating browserslist database...");
-  execSync("npx update-browserslist-db@latest --force", { stdio: "inherit" });
-  console.log("Browserslist database updated successfully");
-} catch (error) {
-  console.warn("Failed to update browserslist database:", error);
-}
+export default defineConfig({
+  /* ---------- plugins ---------- */
+  plugins: [react()],
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+  /* ---------- paths ---------- */
+  base: "/press-play-website/",                       // GitHub Pages sub-folder
+  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+
+  /* ---------- dev server ---------- */
   server: {
     host: "::",
     port: 8080,
-    // Add cache optimization for development
-    hmr: {
-      overlay: true,
-    },
+    hmr: { overlay: true },
   },
-  plugins: [
-    react({
-      jsxImportSource: "react",
-    }),
-    // Only use the componentTagger in development mode
-    mode === 'development' &&
-    (() => {
-      try {
-        const { componentTagger } = require("lovable-tagger");
-        return componentTagger();
-      } catch (e) {
-        console.warn("Lovable tagger not available, skipping");
-        return null;
-      }
-    })(),
-  ].filter(Boolean),  
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
+
+  /* ---------- build ---------- */
   build: {
-    // Set a unique cacheDir for this build to avoid stale caches
-    outDir: 'dist',
+    outDir: "dist",
     emptyOutDir: true,
-    minify: 'terser',
+    minify: "terser",
     terserOptions: {
-      compress: {
-        drop_console: true, // Removes console logs in production
-        drop_debugger: true,
-        passes: 2, // Multiple optimization passes
-      },
-      format: {
-        comments: false, // Remove comments from production builds
-      },
+      compress: { drop_console: true, drop_debugger: true, passes: 2 },
+      format: { comments: false },
     },
-    // Add a small limit for asset inlining to reduce HTTP requests for tiny files
-    assetsInlineLimit: 4096, // 4KB
-    // Improve CSS optimization
+    assetsInlineLimit: 4096,
     cssCodeSplit: true,
-    // Improve source maps for production debugging if needed
-    sourcemap: mode === 'development',
+    sourcemap: process.env.NODE_ENV === "development",
+
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['@/components/ui'],
-          vendors: ['@tanstack/react-query', 'lucide-react', 'sonner'],
+          react:   ["react", "react-dom", "react-router-dom"],
+          vendors: ["@tanstack/react-query", "lucide-react", "sonner"],
         },
-        // Add code splitting for large CSS files with proper TypeScript typing
-        assetFileNames: (assetInfo) => {
-          if (assetInfo && assetInfo.name && /\.(css)$/i.test(assetInfo.name)) {
-            return `assets/css/[name]-[hash][extname]`;
-          }
-          return `assets/[name]-[hash][extname]`;
-        },
+        assetFileNames: (info) =>
+          info.name && /\.css$/i.test(info.name)
+            ? "assets/css/[name]-[hash][extname]"
+            : "assets/[name]-[hash][extname]",
       },
-      // Add comment handling for external packages
       onwarn(warning, warn) {
-        // Ignore specific warnings related to comment parsing in react-helmet-async
-        if (warning.code === 'SOURCEMAP_ERROR' && 
-            warning.message && warning.message.includes('react-helmet-async')) {
-          return;
-        }
+        if (warning.code === "SOURCEMAP_ERROR") return;
         warn(warning);
       },
     },
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    // Add esbuild options to handle comment parsing in dependencies
-    esbuildOptions: {
-      jsx: 'automatic',
-      jsxImportSource: 'react',
-      // Preserve comments in development, but not in production
-      legalComments: mode === 'development' ? 'inline' : 'none',
-    }
-  },
-}));
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 
-export default defineConfig({
-  **base: "/press-play-website/",**   // <-- add this
-  plugins: [react()],
+  /* ---------- dependency optimisation ---------- */
+  optimizeDeps: {
+    include: ["react", "react-dom", "react-router-dom"],
+    esbuildOptions: {
+      jsx: "automatic",
+      jsxImportSource: "react",
+      legalComments:
+        process.env.NODE_ENV === "development" ? "inline" : "none",
+    },
+  },
 });
