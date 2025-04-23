@@ -100,3 +100,15 @@ export default {
     hoverOnlyWhenSupported: true, // Better performance on mobile
   },
 } satisfies Config;
+module.exports = {
+  // ... other config
+  theme: {
+    extend: {
+      // ... other extensions
+      borderColor: {
+        border: "var(--border)" // or any other color value you want to use
+      }
+    }
+  }
+  // ... rest of config
+}

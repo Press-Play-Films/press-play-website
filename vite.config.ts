@@ -1,6 +1,6 @@
 
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import path from "path";
 import { execSync } from "child_process";
 
@@ -25,13 +25,10 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Basic SWC configuration without requiring external plugins
       jsxImportSource: "react",
-      // Only add the emotion plugin if it's available
-      plugins: process.env.NODE_ENV === 'production' ? [] : undefined,
     }),
     // Only use the componentTagger in development mode
-    mode === 'development' && 
+    mode === 'development' &&
     (() => {
       try {
         const { componentTagger } = require("lovable-tagger");
@@ -41,7 +38,7 @@ export default defineConfig(({ mode }) => ({
         return null;
       }
     })(),
-  ].filter(Boolean),
+  ].filter(Boolean),  
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -105,3 +102,10 @@ export default defineConfig(({ mode }) => ({
     }
   },
 }));
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  **base: "/press-play-website/",**   // <-- add this
+  plugins: [react()],
+});
