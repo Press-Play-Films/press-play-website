@@ -1,54 +1,46 @@
+/* -------------------------------------------------
+   Base variables (leave these as-is)
+------------------------------------------------- */
+:root {
+  --primary:              217 92%  55%;
+  --primary-foreground:   210 40%  98%;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+  --secondary:            217 33%  17%;
+  --secondary-foreground: 210 40%  98%;
 
-@layer base {
-  :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    
-    --card: 222 47% 15%;
-    --card-foreground: 210 40% 98%;
-    
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
-    
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    
-    --accent: 217 91% 60%;
-    --accent-foreground: 210 40% 98%;
-    
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 224 76% 48%;
-    
-    --radius: 0.75rem;
-  }
+  --muted:                217 33%  17%;
+  --muted-foreground:     215 20%  65%;
 
-  * {
-    @apply border-border antialiased;
-  }
+  --accent:               217 91%  60%;
+  --accent-foreground:    210 40%  98%;
 
-  html, body {
-    @apply h-full overflow-x-hidden scroll-smooth;
-  }
+  --destructive:          0   84%  60%;
+  --destructive-foreground: 210 40%  98%;
 
-  body {
-    @apply bg-background text-foreground font-sans;
-  }
+  --border: 217 33% 17%;
+  --input:  217 33% 17%;
+  --ring:   224 76% 48%;
 
-  .container {
-    @apply px-4 md:px-6 lg:px-8 mx-auto max-w-7xl;
-  }
+  --radius: 0.75rem;
+}
+
+/* -------------------------------------------------
+   Global element resets
+------------------------------------------------- */
+* {
+  /* 👇 FIXED: use the standard border utility */
+  @apply border antialiased;
+}
+
+html,
+body {
+  @apply h-full overflow-x-hidden scroll-smooth;
+}
+
+body {
+  @apply bg-background text-foreground font-sans;
+}
+
+.container {
+  @apply px-4 md:px-6 lg:px-8 mx-auto max-w-7xl;
 }
