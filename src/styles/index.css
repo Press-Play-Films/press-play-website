@@ -1,18 +1,6 @@
 
-/* Import base styles and variables */
 @import "./base.css";
 
-/* Import component styles */
-@import "./components.css";
-
-/* Import animation styles */
-@import "./animations.css";
-
-/* Import particles and backgrounds */
-@import "./particles.css";
-
-/* Import interaction styles */
-@import "./interactions.css";
-
-/* Import font fixes */
-@import "./font-fixes.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
