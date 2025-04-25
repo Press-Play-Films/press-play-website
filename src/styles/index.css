@@ -1,6 +1,20 @@
+/* src/styles/index.css */
 
-@import "./base.css";
-
+/* 1) Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 2) Your custom resets & variables */
+@import "./base.css";
+
+/* 3) Component-level styles that still use @apply */
+@import "./components.css";
+
+/* 4) Animation, particle & interaction styles */
+@import "./animations.css";
+@import "./particles.css";
+@import "./interactions.css";
+
+/* 5) Font-fix hacks */
+@import "./font-fixes.css";
